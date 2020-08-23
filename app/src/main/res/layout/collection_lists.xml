@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/confirm_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:textColor="#fff"
+        android:text="@string/confirmBtn" />
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/item_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:layout_centerHorizontal="true"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/increase"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_weight=""
+                    android:text="+" />
+
+                <EditText
+                    android:id="@+id/editTextNumberSigned"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_alignLeft="@id/increase"
+                    android:layout_below="@id/increase"
+                    android:ems="10"
+                    android:hint="15"
+                    android:inputType="numberSigned" />
+
+                <Button
+                    android:id="@+id/minus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/editTextNumberSigned"
+                    android:layout_alignLeft="@id/increase"
+                    android:layout_weight="1"
+                    android:text="-" />
+
+                <TextView
+                    android:id="@+id/itemCode_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:text="Item Code: " />
+
+                <TextView
+                    android:id="@+id/itemCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/itemCode_txt"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:text="C001" />
+
+                <TextView
+                    android:id="@+id/description_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/itemCode_txt"
+                    android:layout_alignLeft="@id/itemCode_txt"
+                    android:layout_weight="1"
+                    android:text="Description: " />
+
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/description_text"
+                    android:layout_below="@id/itemCode"
+                    android:layout_weight="1"
+                    android:text="pencil pencil" />
+
+
+                <TextView
+                    android:id="@+id/uom_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/description_text"
+                    android:layout_alignLeft="@id/itemCode_txt"
+                    android:layout_weight="1"
+                    android:text="UOM: " />
+
+                <TextView
+                    android:id="@+id/uom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/description_text"
+                    android:layout_toRightOf="@id/uom_txt"
+                    android:layout_weight="1"
+                    android:text="box" />
+
+                <TextView
+                    android:id="@+id/reqQty_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/uom_txt"
+                    android:layout_alignLeft="@id/uom_txt"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="20dp"
+                    android:text="Requested Qty: " />
+
+                <TextView
+                    android:id="@+id/reqQty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/uom"
+                    android:layout_toRightOf="@id/reqQty_txt"
+                    android:layout_weight="1"
+                    android:text="80" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

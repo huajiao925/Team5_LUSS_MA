@@ -12,11 +12,10 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:layout_constraintTop_toTopOf="parent"
-        app:logo="@drawable/lu_full_png"
-        app:navigationIcon="@drawable/menu_logo">
+        app:logo="@drawable/logo"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
-
-    </androidx.appcompat.widget.Toolbar>
+        <!--app:navigationIcon="@drawable/menu_logo">-->
+        </androidx.appcompat.widget.Toolbar>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

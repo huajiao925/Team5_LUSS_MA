@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Team5_LUSS</string>
+    <string name="cp_title">Stationary Collection</string>
+    <string name="current_cp">"Current Collection Point: "</string>
+    <string name="collectBtn">Collection List</string>
+    <string name="changeCP_btn">Change</string>
+    <string name="update_cp">Update Collection Point</string>
+    <string name="colletionListBtn">Check Collection List</string>
+    <string name="CollectionList">Collection List</string>
+    <string name="confirmBtn">Confirm</string>
+    <string name="current_dlg">Current Delegate</string>
+    <string name="removeDlg">Remove</string>
+    <string name="assignDelegate">Assign Delegate</string>
+    <string name="details">Details</string>
+    <string name="approveBtn">Approve</string>
+    <string name="rejectBtn">Reject</string>
 </resources>
