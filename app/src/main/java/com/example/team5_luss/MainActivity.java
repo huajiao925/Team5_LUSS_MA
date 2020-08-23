@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.gson.Gson;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
@@ -26,6 +28,8 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import Model.CollectionPoint;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -35,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_main);
 
-        Button btn = findViewById(R.id.dummy);
+        Button btn = findViewById(R.id.button);
         if (btn != null){
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -65,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
                                     data=bufferedInputStream.read();
                                 }
                                  responseString = response.toString();
+                                Gson gson = new Gson();
+                                CollectionPoint[] collectionPointList = gson.fromJson(responseString,CollectionPoint[].class);
+
                             }
                             catch (Exception e) {
                                 e.printStackTrace();
