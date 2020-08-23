@@ -1,9 +1,19 @@
 package Model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class CollectionPoint {
+    @SerializedName("collectionPointID")
     public int CollectionPointID;
+
+    @SerializedName("pointName")
     public String PointName;
+
+    @SerializedName("description")
     public String Description;
+
+    @SerializedName("location")
     public String Location;
 
     public CollectionPoint(int collectionPointID, String pointName, String description, String location) {

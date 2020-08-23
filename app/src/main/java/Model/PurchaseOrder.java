@@ -1,16 +1,26 @@
 package Model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.time.LocalDateTime;
 
 public class PurchaseOrder {
 
+    @SerializedName("poid")
     public int POID;
+    @SerializedName("createdOn")
     public LocalDateTime CreatedOn;
+    @SerializedName("expectedDate")
     public LocalDateTime ExpectedDate;
+    @SerializedName("purchasedBy")
     public int PurchasedBy;
+    @SerializedName("supplierID")
     public int SupplierID;
+    @SerializedName("status")
     public PurchaseOrderStatus.POStatus Status;
+    @SerializedName("receivedDate")
     public LocalDateTime ReceivedDate;
+    @SerializedName("poNo")
     public String PONo;
 
     public LocalDateTime getCreatedOn() {

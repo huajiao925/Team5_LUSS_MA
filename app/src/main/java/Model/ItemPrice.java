@@ -1,6 +1,6 @@
 package Model;
 
-public class ItemPriceID {
+public class ItemPrice {
     public int ItemPriceID;
     public int ItemID;
     public int SupplierID;
