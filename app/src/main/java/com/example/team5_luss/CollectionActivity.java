@@ -9,8 +9,16 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class CollectionActivity extends AppCompatActivity implements CollectionPointList.SingleChoiceListner {
+
     TextView currentCP;
+    String url = "https://10.0.2.2:44312/CollectionPoint"; //set up the API url you want to call
+    String responseString; // result string
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +36,35 @@ public class CollectionActivity extends AppCompatActivity implements CollectionP
                 collectionPointList.show(getSupportFragmentManager(), "Collection Points List");
             }
         });
+
+        //call the WEB API
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String target = url;
+                    trustManager.trustAllCertificates();
+                    URL url = new URL(target);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                    conn.setRequestMethod("GET");
+                    conn.connect();
+                    InputStream in = conn.getInputStream();
+                    BufferedInputStream bufferedInputStream = new BufferedInputStream(in);
+                    StringBuffer response = new StringBuffer();
+                    int data=bufferedInputStream.read();
+                    while (data!=-1){
+                        char current = (char) data;
+                        response.append(current);
+                        data=bufferedInputStream.read();
+                    }
+                    responseString = response.toString();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     @Override
@@ -37,6 +74,5 @@ public class CollectionActivity extends AppCompatActivity implements CollectionP
 
     @Override
     public void onNegativeButtonClicked() {
-
     }
 }
