@@ -91,9 +91,18 @@ public class MainActivity extends AppCompatActivity {
 
                         conn.setRequestMethod("GET");
                         conn.connect();
-                        InputStream in = url.openStream();
+                        InputStream in = conn.getInputStream();
                         BufferedInputStream bufferedInputStream = new BufferedInputStream(in);
-                        String responseString = bufferedInputStream.toString();
+                        StringBuffer response = new StringBuffer();
+                        int data=bufferedInputStream.read();
+                        while (data!=-1){
+                            char current = (char) data;
+                            response.append(current);
+                            data=bufferedInputStream.read();
+
+                        }
+
+                        String responseString = response.toString();
                         System.out.println(responseString);
                     }
                     catch (Exception e) {
