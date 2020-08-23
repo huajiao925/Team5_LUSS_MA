@@ -28,7 +28,6 @@ import javax.net.ssl.X509TrustManager;
 
 public class MainActivity extends AppCompatActivity {
 
-
     public void trustAllCertificates() {
         try {
             TrustManager[] trustAllCerts = new TrustManager[]{

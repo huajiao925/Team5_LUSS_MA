@@ -10,6 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import java.util.List;
+
+import Model.CollectionPoint;
+
 public class CollectionPointList extends DialogFragment {
 
 
@@ -36,7 +40,10 @@ public class CollectionPointList extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        //to be replaced by real list from API
         final String[] cp_list = {"behind the tree", "under the sea", "into the woods"};
+
 
         builder.setTitle("Select the Collection Point")
                 .setSingleChoiceItems(cp_list, position, new DialogInterface.OnClickListener() {

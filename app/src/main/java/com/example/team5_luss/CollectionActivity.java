@@ -28,7 +28,6 @@ public class CollectionActivity extends AppCompatActivity implements CollectionP
                 collectionPointList.show(getSupportFragmentManager(), "Collection Points List");
             }
         });
-
     }
 
     @Override
