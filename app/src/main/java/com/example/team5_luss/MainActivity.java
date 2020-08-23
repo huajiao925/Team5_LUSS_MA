@@ -7,16 +7,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Stream;
 
 import javax.net.ssl.HostnameVerifier;
@@ -25,6 +33,8 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+
+import Model.CollectionPoint;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -103,6 +113,17 @@ public class MainActivity extends AppCompatActivity {
 
                         String responseString = response.toString();
                         System.out.println(responseString);
+
+                        /*Type listType = new TypeToken<ArrayList<CollectionPoint>>(){}.getType();
+                        List<CollectionPoint> collectionPoints = new Gson().fromJson(responseString,listType);
+                        System.out.println(collectionPoints);*/
+
+                        Gson gson = new Gson();
+                        Type type = new TypeToken<List<CollectionPoint>>(){}.getType();
+                        List<CollectionPoint> collectionPoints = (List<CollectionPoint>)gson.fromJson(response.toString(),type);
+                        System.out.println(collectionPoints);
+
+
                     }
                     catch (Exception e) {
                         e.printStackTrace();

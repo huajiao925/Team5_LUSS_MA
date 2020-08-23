@@ -1,18 +1,30 @@
 package Model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.time.LocalDateTime;
 
 public class Request {
 
+    @SerializedName("requestID")
     public int RequestID;
+    @SerializedName("requestStatus")
     public Status.EOrderStatus RequestStatus;
+    @SerializedName("requestDate")
     public LocalDateTime RequestDate;
+    @SerializedName("requestBy")
     public int RequestBy;
+    @SerializedName("modifiedBy")
     public int ModifiedBy;
+    @SerializedName("comment")
     public String Comment;
+    @SerializedName("requestType")
     public Model.RequestType.ERequestType RequestType;
+    @SerializedName("parentRequestID")
     public int ParentRequestID;
+    @SerializedName("collectionTime")
     public LocalDateTime CollectionTime;
+    @SerializedName("retrievalID")
     public int RetrievalID;
 
     public Status.EOrderStatus getRequestStatus() {

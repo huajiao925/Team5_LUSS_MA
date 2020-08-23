@@ -1,13 +1,22 @@
 package Model;
 
-public class RequestDetails {
+import com.google.gson.annotations.SerializedName;
 
+public class RequestDetails {
+    @SerializedName("requestDetailID")
     public int RequestDetailID;
+    @SerializedName("requestQty")
     public int RequestQty;
+    @SerializedName("itemID")
     public int ItemID;
+    @SerializedName("requestID")
     public int RequestID;
+    @SerializedName("fullfillQty")
     public int FullfillQty;
+    @SerializedName("receivedQty")
     public int ReceivedQty;
+    @SerializedName("isActive")
+    public boolean isActive;
 
     public int getRequestQty() {
         return RequestQty;

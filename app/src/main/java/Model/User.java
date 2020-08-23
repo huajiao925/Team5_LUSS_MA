@@ -1,16 +1,28 @@
 package Model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class User {
 
+    @SerializedName("userID")
     public  int UserID;
+    @SerializedName("firstName")
     public String FirstName;
+    @SerializedName("lastName")
     public String LastName;
+    @SerializedName("contactNumber")
     public String  ContactNumber;
+    @SerializedName("email")
     public String Email;
+    @SerializedName("password")
     public String Password;
+    @SerializedName("role")
     public String Role;
+    @SerializedName("isRepresentative")
     public boolean IsRepresentative;
+    @SerializedName("reportToID")
     public int ReportToID;
+    @SerializedName("departmentID")
     public int DepartmentID;
 
     public String getFirstName() {
