@@ -16,10 +16,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button login_btn = findViewById(R.id.cirLoginButton);
+/*        Button login_btn = findViewById(R.id.cirLoginButton);
         if (login_btn != null) {
             login_btn.setOnClickListener((View.OnClickListener) this);
-        }
+        }*/
     }
 
 
