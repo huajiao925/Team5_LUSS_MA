@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/dlg_view"
+        android:layout_width="350dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="70dp"
+        app:cardBackgroundColor="@color/colorPrimary"
+        android:layout_centerHorizontal="true"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/dlg_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="15dp"
+                android:text="@string/current_dlg"
+                android:textColor="#ffd300"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/dlg_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Lyra Li"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/dlg_fromDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2020-08-08"
+                android:layout_below="@id/dlg_name"
+                android:layout_toLeftOf="@id/dlg_to"
+                android:layout_marginRight="10dp"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/dlg_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TO"
+                android:layout_below="@id/dlg_name"
+                android:layout_centerHorizontal="true"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/dlg_toDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2020-08-19"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@id/dlg_name"
+                android:layout_toRightOf="@id/dlg_to"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/updateBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/removeDlg"
+        android:background="@color/danger"
+        android:textColor="#fff"
+        android:layout_margin="10dp"
+        android:layout_alignLeft="@id/dlg_view"
+        android:layout_alignRight="@id/dlg_view"
+        android:layout_below="@id/dlg_view"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/empList_view"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:layout_below="@id/updateBtn"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/assign_dlg_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="15dp"
+                android:text="@string/assignDelegate"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/colorPrimary"
+                android:text="Start Date: " />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/colorPrimary"
+                android:layout_below="@id/textView"
+                android:text="End Date: " />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/colorPrimary"
+                android:layout_below="@id/textView2"
+                android:text="Delegate: " />
+
+            <EditText
+                android:id="@+id/fromDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_toRightOf="@id/textView"
+                android:layout_alignTop="@id/textView"
+                android:inputType="date" />
+
+            <EditText
+                android:id="@+id/toDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_toRightOf="@id/textView2"
+                android:layout_alignTop="@id/textView2"
+                android:inputType="date" />
+
+            <Button
+                android:id="@+id/pick_dlg"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@color/common_google_signin_btn_text_dark_default"
+                android:layout_toRightOf="@id/textView3"
+                android:layout_alignTop="@id/textView3"
+                android:layout_marginBottom="30dp"
+                android:text="Check" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/confirm_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/confirmBtn"
+        android:background="@color/button"
+        android:textColor="@color/colorPrimary"
+        android:layout_margin="10dp"
+        android:layout_alignLeft="@id/empList_view"
+        android:layout_alignRight="@id/empList_view"
+        android:layout_below="@id/empList_view"
+        />
+
+</RelativeLayout>

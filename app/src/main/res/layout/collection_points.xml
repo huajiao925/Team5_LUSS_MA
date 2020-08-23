@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/collectionPoint_view"
+        android:layout_width="350dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="70dp"
+        app:cardBackgroundColor="@color/colorPrimary"
+        android:layout_centerHorizontal="true"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="15dp"
+                android:text="@string/current_cp"
+                android:textColor="#ffd300"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/current_cp_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Collection Point"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/current_cp_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="08:00 AM"
+                android:layout_below="@id/current_cp_location"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/updateBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/update_cp"
+        android:background="@color/button"
+        android:textColor="@color/colorPrimary"
+        android:layout_margin="10dp"
+        android:layout_alignLeft="@id/collectionPoint_view"
+        android:layout_alignRight="@id/collectionPoint_view"
+        android:layout_below="@id/collectionPoint_view"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/collectionList_view"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:layout_below="@id/updateBtn"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/CollectionList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="15dp"
+                android:text="@string/CollectionList"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/button"
+                android:textColor="@color/colorPrimary"
+                android:layout_below="@id/CollectionList"
+                android:layout_margin="10dp"
+                android:text="2020-12-24" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:background="@color/button"
+                android:layout_below="@id/button2"
+                android:layout_margin="10dp"
+                android:text="2020-12-25" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
