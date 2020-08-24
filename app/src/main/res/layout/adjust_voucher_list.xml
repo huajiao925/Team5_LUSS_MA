@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/leaderBoardHeader"
+        android:id="@+id/adjustStockHeader"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/leaderBoardHeader">
+        app:layout_constraintTop_toBottomOf="@id/adjustStockHeader">
 
         <TextView
             android:layout_width="0dp"
@@ -69,7 +69,7 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/leaderBoardListing"
+        android:id="@+id/adjustBoardListing"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         app:layout_constraintEnd_toEndOf="parent"
