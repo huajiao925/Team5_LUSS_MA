@@ -30,14 +30,14 @@
             >
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/dateIssueHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="Date Issue" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/dateIssue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -51,14 +51,14 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/voucherNoHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="Voucher No" />
 
             <TextView
-                android:id="@+id/textView18"
+                android:id="@+id/voucherNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -72,14 +72,14 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/itemCodeHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="Item Code" />
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/itemCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -93,14 +93,14 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/categoryHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:text="Raised By" />
+                android:text="Category" />
 
             <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -114,14 +114,14 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/descriptionHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="Description" />
 
             <TextView
-                android:id="@+id/textView24"
+                android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -135,14 +135,14 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/textView29"
+                android:id="@+id/UOMHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:text="Unit Cost" />
+                android:text="UOM" />
 
             <TextView
-                android:id="@+id/textView30"
+                android:id="@+id/UOM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -156,14 +156,14 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/textView25"
+                android:id="@+id/quantityHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="Quantity" />
 
             <TextView
-                android:id="@+id/textView26"
+                android:id="@+id/quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -177,14 +177,14 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/textView27"
+                android:id="@+id/totalValueHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="Total Value" />
 
             <TextView
-                android:id="@+id/textView28"
+                android:id="@+id/totalHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
@@ -198,14 +198,35 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/textView31"
+                android:id="@+id/reasonHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="Reason" />
 
+            <TextView
+                android:id="@+id/reason"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:textSize="20dp"
+                android:text="TextView" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:id="@+id/commentHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Comment" />
+
             <EditText
-                android:id="@+id/textView32"
+                android:id="@+id/comment"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
