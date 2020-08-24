@@ -10,6 +10,8 @@ public class User {
     public String FirstName;
     @SerializedName("lastName")
     public String LastName;
+    @SerializedName("designation")
+    public String designation;
     @SerializedName("contactNumber")
     public String  ContactNumber;
     @SerializedName("email")
@@ -35,8 +37,8 @@ public class User {
     public AdjustmentVoucher[] RequestedBy;
     @SerializedName("approvedBy")
     public AdjustmentVoucher[] ApprovedBy;
-
-    //public DelegatedManager DelegatedManager;
+    @SerializedName("delegatedManager")
+    public DelegatedManager DelegatedManager;
 
 
     public String getFirstName() {
