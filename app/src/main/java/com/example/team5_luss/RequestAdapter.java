@@ -44,6 +44,8 @@ public class RequestAdapter
             public void onClick(View view) {
                 Intent intent = new Intent(activity, RequestDetailActivity.class);
                 intent.putExtra("requestID", requestList.get(position).RequestID);
+                intent.putExtra("requestDate", CodeSetting.convertDateString(requestList.get(position).getRequestDate().toString()));
+                intent.putExtra("requestBy", requestList.get(position).RequestBy);
                 activity.startActivity(intent);
                 activity.finish();
             }
