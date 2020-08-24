@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <include layout="@layout/appbar"/>
+<!--    <include layout="@layout/appbar"/>-->
     <Button
         android:id="@+id/CollectionList"
         style="@style/Widget.AppCompat.Button.Colored"

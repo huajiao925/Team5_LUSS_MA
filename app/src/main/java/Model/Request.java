@@ -3,6 +3,7 @@ package Model;
 import com.google.gson.annotations.SerializedName;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Request {
 
@@ -11,7 +12,7 @@ public class Request {
     @SerializedName("requestStatus")
     public Status.EOrderStatus RequestStatus;
     @SerializedName("requestDate")
-    public LocalDateTime RequestDate;
+    public String RequestDate;
     @SerializedName("requestBy")
     public int RequestBy;
     @SerializedName("modifiedBy")
@@ -23,9 +24,33 @@ public class Request {
     @SerializedName("parentRequestID")
     public int ParentRequestID;
     @SerializedName("collectionTime")
-    public LocalDateTime CollectionTime;
+    public String CollectionTime;
     @SerializedName("retrievalID")
     public int RetrievalID;
+
+    @SerializedName("modifiedByUser")
+    public String ModifiedByUser;
+    @SerializedName("requestByUser")
+    public String RequestByUser;
+    @SerializedName("requestDetails")
+    public String RequestDetails;
+    @SerializedName("retrieval")
+    public String Retrieval;
+
+    //Getter and setter
+
+
+    public String getRequestDate() {
+        return RequestDate;
+    }
+
+    public void setRequestDate(String requestDate) {
+        RequestDate = requestDate;
+    }
+
+    public void setRequestID(int requestID) {
+        RequestID = requestID;
+    }
 
     public Status.EOrderStatus getRequestStatus() {
         return RequestStatus;
@@ -35,14 +60,6 @@ public class Request {
         RequestStatus = requestStatus;
     }
     public int getRequestID() {return RequestID; }
-
-    public LocalDateTime getRequestDate() {
-        return RequestDate;
-    }
-
-    public void setRequestDate(LocalDateTime requestDate) {
-        RequestDate = requestDate;
-    }
 
     public int getRequestBy() {
         return RequestBy;
@@ -84,13 +101,6 @@ public class Request {
         ParentRequestID = parentRequestID;
     }
 
-    public LocalDateTime getCollectionTime() {
-        return CollectionTime;
-    }
-
-    public void setCollectionTime(LocalDateTime collectionTime) {
-        CollectionTime = collectionTime;
-    }
 
     public int getRetrievalID() {
         return RetrievalID;
