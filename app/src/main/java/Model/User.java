@@ -25,6 +25,20 @@ public class User {
     @SerializedName("departmentID")
     public int DepartmentID;
 
+    @SerializedName("department")
+    public Department Department;
+    @SerializedName("requestMade")
+    public Request[] RequestMade;
+    @SerializedName("requestModified")
+    public Request[] RequestModified;
+    @SerializedName("requestedBy")
+    public AdjustmentVoucher[] RequestedBy;
+    @SerializedName("approvedBy")
+    public AdjustmentVoucher[] ApprovedBy;
+
+    //public DelegatedManager DelegatedManager;
+
+
     public String getFirstName() {
         return FirstName;
     }
