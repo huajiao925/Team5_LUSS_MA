@@ -5,9 +5,11 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
 import androidx.fragment.app.DialogFragment;
 
 import com.android.volley.Request;
@@ -51,6 +53,7 @@ public class CollectionPointList extends DialogFragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mLisener = (SingleChoiceListner) context;
+
     }
 
     @NonNull
@@ -84,12 +87,15 @@ public class CollectionPointList extends DialogFragment {
                     for(CollectionPoint c: collectionPointList) {
                         collectionNames.add(c.Location + " " + c.Description);
                     }
+
                 }
                 catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }).start();
+
+
 
 
         String[] cp_list = new String[collectionNames.size()];

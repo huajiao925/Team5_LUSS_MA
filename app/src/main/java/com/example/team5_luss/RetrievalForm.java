@@ -1,10 +1,12 @@
 package com.example.team5_luss;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,24 +18,45 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import Model.CollectionPoint;
 import Model.CustomAdjustmentVoucher;
+import Model.ViewModel.CustomRetrieval;
 
-public class AdjustVoucherListing extends AppCompatActivity {
+public class RetrievalForm extends AppCompatActivity {
 
-    String url = "https://10.0.2.2:44312/AdjustmentList/mobile/pendingDown"; //set up the API url you want to call
-    String responseString; // result string
-    CustomAdjustmentVoucher[] vouchers;// listing of vouchers
-    private int ON_ACTION_RETURN = 1;
+    String url = "https://10.0.2.2:44312/Retrieval/mobile/byStatus/Approved"; //set up the API url you want to call
+    String responseString;
+    CustomRetrieval[] retrievals;
+
+    Button btnConfirm;
+    TextView txtItemCode;
+    TextView txtDescription;
+    TextView txtLocation;
+    TextView txtUOM;
+    TextView txtInStockQty;
+    TextView txtRequestedQty;
+    EditText txtRetrievedQty;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.adjust_voucher_list);
-        loadAdjustmentList();
+        setContentView(R.layout.retrieval_form);
+
+        /*btnConfirm = findViewById(R.id.confirm_btn);
+        if(btnConfirm!=null){
+            btnConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    submitRetrival(List<int>Integer.parseInt(txtRetrievedQty.getText().toString()),int retrievalID, String collectionDate, int id ){
+
+                    }
+                }
+            });
+        }*/
+
+        loadRetrievalList();
     }
 
-    private void loadAdjustmentList(){
+    public void loadRetrievalList(){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -56,21 +79,15 @@ public class AdjustVoucherListing extends AppCompatActivity {
                     }
                     responseString = response.toString();
                     Gson gson = new Gson();
-                    vouchers = gson.fromJson(responseString,CustomAdjustmentVoucher[].class);
+                    retrievals = gson.fromJson(responseString, CustomRetrieval[].class);
 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            AdjustVoucherAdapter adapter = new AdjustVoucherAdapter(AdjustVoucherListing.this,R.layout.adjust_voucher_list,vouchers);
+                            RetrievalAdapter adapter = new RetrievalAdapter(RetrievalForm.this,R.layout.retrieval_form,retrievals);
                             ListView listView = findViewById(R.id.adjustBoardListing);
                             listView.setAdapter(adapter);
-                            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                    System.out.println(vouchers[i].getAdjustmentID());
-                                    goToDetailsPage(vouchers[i].getAdjustmentID());
-                                }
-                            });
+
                         }
                     });
                 }
@@ -79,21 +96,5 @@ public class AdjustVoucherListing extends AppCompatActivity {
                 }
             }
         }).start();
-    }
-
-    private void goToDetailsPage(int id){
-        Intent intent = new Intent(AdjustVoucherListing.this,AdjustVoucherDetails.class);
-        intent.putExtra("adjustmentId",id);
-        startActivityForResult(intent,ON_ACTION_RETURN);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ON_ACTION_RETURN) {
-            if (resultCode == RESULT_OK) {
-                loadAdjustmentList();
-            }
-        }
     }
 }

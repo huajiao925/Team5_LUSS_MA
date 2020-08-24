@@ -4,9 +4,13 @@ import android.app.ActionBar;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -17,6 +21,9 @@ import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 import Model.CollectionPoint;
@@ -72,24 +79,32 @@ public class CollectionActivity extends AppCompatActivity implements CollectionP
                         }
                     }
                     Gson gson = new Gson();
-                    System.out.print(inline);
+                    final String[] collectionTimes = gson.fromJson(inline, String[].class);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final ListView lv = (ListView) findViewById(R.id.lv);
+                            final List<String> collectionTimesList = new ArrayList<String>(Arrays.asList(collectionTimes));
+                            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
+                                    (CollectionActivity.this, android.R.layout.simple_list_item_1, collectionTimesList);
+                            lv.setAdapter(arrayAdapter);
+
+                            lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        //pass the time to next Activity
+                                }
+                            });
+                        }
+                    });
+
                 }
                 catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }).start();
-
-        RelativeLayout collectionTime = findViewById(R.id.collectiontimeview);
-
-
-        RelativeLayout.LayoutParams params1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params1.addRule(RelativeLayout.BELOW, R.id.CollectionList);
-        Button btn1 = new Button(this);
-        btn1.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
-        btn1.setBackgroundColor(getColor(R.color.colorBackgroundDark));
-        btn1.setText("2020-08-08");
-        collectionTime.addView(btn1,params1);
 
 
         //get dept's collection point
@@ -133,7 +148,7 @@ public class CollectionActivity extends AppCompatActivity implements CollectionP
         //save the new cpID to Department
         final int cpID = (position + 1);
 
-        //call the WEB API
+        //update dept cp
         new Thread(new Runnable() {
             @Override
             public void run() {
