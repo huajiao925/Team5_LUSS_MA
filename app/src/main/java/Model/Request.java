@@ -34,7 +34,6 @@ public class Request {
     public void setRequestStatus(Status.EOrderStatus requestStatus) {
         RequestStatus = requestStatus;
     }
-
     public int getRequestID() {return RequestID; }
 
     public LocalDateTime getRequestDate() {
