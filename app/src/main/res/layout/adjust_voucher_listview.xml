@@ -7,7 +7,7 @@
     <TextView
         android:id="@+id/itemCode"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:layout_weight="1"
         android:padding="5dp"
         android:textAlignment="center"
@@ -16,7 +16,7 @@
     <TextView
         android:id="@+id/itemCategory"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:layout_weight="1"
         android:padding="5dp"
         android:textAlignment="center"
@@ -25,7 +25,7 @@
     <TextView
         android:id="@+id/itemDescription"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:layout_weight="1"
         android:padding="5dp"
         android:textAlignment="center"
@@ -34,7 +34,7 @@
     <TextView
         android:id="@+id/itemQty"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:layout_weight="1"
         android:padding="5dp"
         android:textAlignment="center"

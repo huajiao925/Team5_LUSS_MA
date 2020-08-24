@@ -7,7 +7,7 @@
     <TextView
         android:id="@+id/AdjustStockDetailsHeader"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:gravity="center"
         android:text="Adjust Stock Details"
         android:textAlignment="center"
@@ -21,7 +21,7 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        android:layout_margin="20dp">
+        android:layout_margin="10dp">
 
         <TableRow
             android:layout_width="match_parent"
@@ -184,7 +184,7 @@
                 android:text="Total Value" />
 
             <TextView
-                android:id="@+id/totalHeader"
+                android:id="@+id/totalValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
@@ -231,7 +231,9 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:textSize="20dp"
-                android:text="TextView" />
+                android:text=" "
+                android:hint=""/>
+
         </TableRow>
     </TableLayout>
 
@@ -243,7 +245,7 @@
         <Button
             android:id="@+id/reject"
             android:layout_width="205dp"
-            android:layout_height="60dp"
+            android:layout_height="45dp"
             android:text="Reject"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -255,9 +257,9 @@
         <Button
             android:id="@+id/approve"
             android:layout_width="207dp"
-            android:layout_height="60dp"
+            android:layout_height="45dp"
             android:text="Approve"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:textStyle="bold"
             android:textColor="#ffffff"
