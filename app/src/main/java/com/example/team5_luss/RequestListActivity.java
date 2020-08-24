@@ -33,6 +33,7 @@ import java.util.Scanner;
 import Model.CollectionPoint;
 import Model.Request;
 
+
 public class RequestListActivity extends AppCompatActivity {
 
 
