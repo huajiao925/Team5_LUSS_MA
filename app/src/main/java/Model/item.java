@@ -1,15 +1,26 @@
 package Model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class item {
 
+    @SerializedName("itemID")
     public int ItemID;
+    @SerializedName("itemName")
     public String ItemName;
+    @SerializedName("uom")
     public String UOM;
+    @SerializedName("reStockQty")
     public int ReStockQty;
+    @SerializedName("inStockQty")
     public int InStockQty;
+    @SerializedName("categoryID")
     public int  CategoryID;
+    @SerializedName("itemCode")
     public String ItemCode;
+    @SerializedName("reStockLevel")
     public int ReStockLevel;
+    @SerializedName("storeItemLocation")
     public String StoreItemLocation;
 
     public String getItemName() {

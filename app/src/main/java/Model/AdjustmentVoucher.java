@@ -1,20 +1,33 @@
 package Model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.time.LocalDateTime;
 
 public class AdjustmentVoucher {
-
+    @SerializedName("adjustmentID")
     public int AdjustmentID;
+    @SerializedName("adjustQty")
     public int AdjustQty;
+    @SerializedName("adjustType")
     public String AdjustType;
+    @SerializedName("status")
     public AdjustmentVoucherStatus.AdjustmentStatus Status;
+    @SerializedName("totalCost")
     public int TotalCost;
+    @SerializedName("issuedDate")
     public LocalDateTime IssuedDate;
+    @SerializedName("voucherNo")
     public String VoucherNo;
+    @SerializedName("comment")
     public String Comment;
+    @SerializedName("reason")
     public String Reason;
+    @SerializedName("itemID")
     public int ItemID;
+    @SerializedName("approvedByID")
     public int ApprovedByID;
+    @SerializedName("requestByID")
     public int RequestByID;
 
     public int getAdjustQty() {

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rqt_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_centerHorizontal="true"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/rqtId_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:text="Request Id: " />
+
+            <TextView
+                android:id="@+id/rqtId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/rqtId_title"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:text="1" />
+
+            <TextView
+                android:id="@+id/rqtDate_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rqtId_title"
+                android:layout_marginBottom="20dp"
+                android:layout_alignLeft="@id/rqtId_title"
+                android:layout_weight="1"
+                android:text="Request Date: " />
+
+            <TextView
+                android:id="@+id/rqtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/rqtDate_title"
+                android:layout_below="@id/rqtId"
+                android:layout_weight="1"
+                android:text="2020-08-08" />
+
+            <TextView
+                android:id="@+id/rqtBy_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rqtDate_title"
+                android:layout_alignLeft="@id/rqtDate_title"
+                android:layout_marginLeft="-1dp"
+                android:layout_marginTop="-20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:text="Request By: " />
+
+            <TextView
+                android:id="@+id/rqtBy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/rqtBy_text"
+                android:layout_below="@id/rqtDate"
+                android:layout_weight="1"
+                android:text="Lyra Li" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

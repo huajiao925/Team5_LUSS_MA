@@ -1,9 +1,15 @@
 package Model;
 
-public class ItemPriceID {
+import com.google.gson.annotations.SerializedName;
+
+public class ItemPrice {
+    @SerializedName("itemPriceID")
     public int ItemPriceID;
+    @SerializedName("itemID")
     public int ItemID;
+    @SerializedName("supplierID")
     public int SupplierID;
+    @SerializedName("price")
     public int Price;
 
     public int getItemID() {

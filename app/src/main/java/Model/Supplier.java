@@ -1,12 +1,19 @@
 package Model;
 
-public class Supplier {
+import com.google.gson.annotations.SerializedName;
 
+public class Supplier {
+    @SerializedName("supplierID")
     public int SupplierID;
+    @SerializedName("address")
     public String Address;
+    @SerializedName("supplierName")
     public String SupplierName;
+    @SerializedName("contactNo")
     public String ContactNo;
+    @SerializedName("email")
     public String email;
+    @SerializedName("description")
     public String Description;
 
     public String getAddress() {

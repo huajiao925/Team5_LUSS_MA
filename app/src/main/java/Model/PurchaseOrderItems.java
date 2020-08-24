@@ -1,11 +1,18 @@
 package Model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PurchaseOrderItems {
 
+    @SerializedName("poItemID")
     public int POItemID;
+    @SerializedName("poid")
     public int POID;
+    @SerializedName("itemID")
     public int ItemID;
+    @SerializedName("orderQty")
     public int OrderQty;
+    @SerializedName("receivedQty")
     public int ReceivedQty;
 
     public int getPOID() {

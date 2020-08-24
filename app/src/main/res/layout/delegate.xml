@@ -9,7 +9,7 @@
         android:layout_width="350dp"
         android:layout_height="150dp"
         android:layout_marginTop="70dp"
-        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardBackgroundColor="@color/app_color_theme_7"
         android:layout_centerHorizontal="true"
         app:cardCornerRadius="25dp"
         app:cardElevation="10dp">
@@ -25,7 +25,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_margin="15dp"
                 android:text="@string/current_dlg"
-                android:textColor="#ffd300"
+                android:textColor="@color/whiteTextColor"
                 android:textSize="20sp" />
 
             <TextView
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="Lyra Li"
-                android:textColor="#fff"
+                android:textColor="@color/whiteTextColor"
                 android:textSize="20sp" />
 
             <TextView
@@ -45,7 +45,7 @@
                 android:layout_below="@id/dlg_name"
                 android:layout_toLeftOf="@id/dlg_to"
                 android:layout_marginRight="10dp"
-                android:textColor="#fff"
+                android:textColor="@color/whiteTextColor"
                 android:textSize="20sp" />
 
             <TextView
@@ -55,7 +55,7 @@
                 android:text="TO"
                 android:layout_below="@id/dlg_name"
                 android:layout_centerHorizontal="true"
-                android:textColor="#fff"
+                android:textColor="@color/whiteTextColor"
                 android:textSize="20sp" />
 
             <TextView
@@ -66,7 +66,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_below="@id/dlg_name"
                 android:layout_toRightOf="@id/dlg_to"
-                android:textColor="#fff"
+                android:textColor="@color/whiteTextColor"
                 android:textSize="20sp" />
 
         </RelativeLayout>
@@ -78,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/removeDlg"
-        android:background="@color/danger"
+        android:background="@color/app_color_theme_2"
         android:textColor="#fff"
         android:layout_margin="10dp"
         android:layout_alignLeft="@id/dlg_view"
@@ -107,7 +107,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_margin="15dp"
                 android:text="@string/assignDelegate"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/contentTextColor"
                 android:textSize="20sp" />
 
             <TextView
@@ -117,7 +117,7 @@
                 android:textSize="18sp"
                 android:layout_marginTop="60dp"
                 android:layout_marginLeft="20dp"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/contentTextColor"
                 android:text="Start Date: " />
 
             <TextView
@@ -127,7 +127,7 @@
                 android:textSize="18sp"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/contentTextColor"
                 android:layout_below="@id/textView"
                 android:text="End Date: " />
 
@@ -138,7 +138,7 @@
                 android:textSize="18sp"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/contentTextColor"
                 android:layout_below="@id/textView2"
                 android:text="Delegate: " />
 
@@ -164,7 +164,7 @@
                 android:id="@+id/pick_dlg"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:background="@color/common_google_signin_btn_text_dark_default"
+                android:background="@color/colorDivision"
                 android:layout_toRightOf="@id/textView3"
                 android:layout_alignTop="@id/textView3"
                 android:layout_marginBottom="30dp"
@@ -179,8 +179,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/confirmBtn"
-        android:background="@color/button"
-        android:textColor="@color/colorPrimary"
+        android:background="@color/themeColor"
+        android:textColor="@color/whiteTextColor"
         android:layout_margin="10dp"
         android:layout_alignLeft="@id/empList_view"
         android:layout_alignRight="@id/empList_view"

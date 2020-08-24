@@ -1,14 +1,17 @@
 package Model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.time.LocalDateTime;
 
 public class Retrieval {
 
+    @SerializedName("retrievalID")
     public int RetrievalID;
+    @SerializedName("status")
     public String Status;
+    @SerializedName("issueDate")
     public LocalDateTime IssueDate;
-    public int RequestID;
-    public int ModifiedBy;
 
     public String getStatus() {
         return Status;
@@ -26,19 +29,4 @@ public class Retrieval {
         IssueDate = issueDate;
     }
 
-    public int getRequestID() {
-        return RequestID;
-    }
-
-    public void setRequestID(int requestID) {
-        RequestID = requestID;
-    }
-
-    public int getModifiedBy() {
-        return ModifiedBy;
-    }
-
-    public void setModifiedBy(int modifiedBy) {
-        ModifiedBy = modifiedBy;
-    }
 }

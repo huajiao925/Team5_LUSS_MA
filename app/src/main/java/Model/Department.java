@@ -1,12 +1,20 @@
 package Model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Department {
 
+    @SerializedName("departmentID")
     public int DepartmentID;
+    @SerializedName("departmentName")
     public String DepartmentName;
+    @SerializedName("phoneNo")
     public String PhoneNo;
+    @SerializedName("fax")
     public String Fax;
+    @SerializedName("collectionPointID")
     public int CollectionPointID;
+    @SerializedName("departmentCode")
     public String DepartmentCode;
 
     public String getDepartmentName() {

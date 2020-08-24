@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
-        android:textColor="#fff"
+        android:background="@color/register_bk_color"
+        android:textColor="@color/whiteTextColor"
         android:text="@string/confirmBtn" />
 
     <androidx.cardview.widget.CardView

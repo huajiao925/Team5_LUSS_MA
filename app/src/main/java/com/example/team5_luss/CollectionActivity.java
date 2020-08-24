@@ -3,13 +3,13 @@ package com.example.team5_luss;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 public class CollectionActivity extends AppCompatActivity implements CollectionPointList.SingleChoiceListner {
+
     TextView currentCP;
 
     @Override
@@ -37,6 +37,5 @@ public class CollectionActivity extends AppCompatActivity implements CollectionP
 
     @Override
     public void onNegativeButtonClicked() {
-
     }
 }

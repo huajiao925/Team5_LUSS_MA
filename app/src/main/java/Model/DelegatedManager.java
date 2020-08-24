@@ -1,12 +1,18 @@
 package Model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.time.LocalDateTime;
 import java.util.Locale;
 
 public class DelegatedManager {
+    @SerializedName("delegateManagerID")
     public int DelegatedManagerID;
+    @SerializedName("fromDate")
     public LocalDateTime FromDate;
+    @SerializedName("toDate")
     public LocalDateTime ToDate;
+    @SerializedName("userID")
     public int UserID;
 
     public LocalDateTime getFromDate() {

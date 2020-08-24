@@ -1,10 +1,16 @@
 package Model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Cart {
 
+    @SerializedName("cartID")
     public int CartID;
+    @SerializedName("userID")
     public int UserID;
+    @SerializedName("itemID")
     public int ItemID;
+    @SerializedName("qty")
     public int Qty;
 
     public int getCartID() {

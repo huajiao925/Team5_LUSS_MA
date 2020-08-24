@@ -1,29 +1,48 @@
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
 
-    <!--normal colors-->
-    <color name="darkTextColor">#020000</color>
-    <color name="themeColor">#11CFC5</color>
-    <!--colors for light mode-->
-    <color name="contentTextColor">#020000</color>
-    <color name="register_bk_color">#11CFC5</color>
-    <color name="login_bk_color">#fff</color>
-    <color name="whiteTextColor">#fff</color>
-    <color name="primaryTextColor">#11CFC5</color>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
-    <color name="colorBackground">#FFFFFF</color>
-    <color name="colorBackgroundDark">#f2f2f2</color>
-    <color name="colorDivision">#33aaaaaa</color>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <color name="app_color_theme_1">#EF5362</color> <!-- Grapefruit -->
-    <color name="app_color_theme_2">#FE6D4B</color> <!-- Bittersweet -->
-    <color name="app_color_theme_3">#FFCF47</color> <!-- Sunflower -->
-    <color name="app_color_theme_4">#9FD661</color> <!-- Grass -->
-    <color name="app_color_theme_5">#3FD0AD</color> <!-- Mint -->
-    <color name="app_color_theme_6">#2BBDF3</color> <!-- Aqua -->
-    <color name="app_color_theme_7">#5A9AEF</color> <!-- Blue Jeans -->
-    <color name="app_color_theme_8">#AC8FEF</color> <!-- Lavender -->
-    <color name="app_color_theme_9">#EE85C1</color> <!-- Pink Rose -->
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+   <!--Login-->
+    <style name="viewParent">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="viewParent.headerText">
+        <item name="android:textColor">@color/contentTextColor</item>
+        <item name="android:textSize">@dimen/headerTextSize</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="viewParent.headerText.NoMode">
+        <item name="android:textColor">@color/darkTextColor</item>
+    </style>
+    <style name="loginButton" parent="viewParent">
+
+        <item name="android:textColor">@color/whiteTextColor</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="parent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="modifiedEditText" parent="parent">
+        <item name="android:textSize">@dimen/newsMoreTextSize</item>
+        <item name="android:backgroundTint">@color/primaryTextColor</item>
+    </style>
 </resources>
