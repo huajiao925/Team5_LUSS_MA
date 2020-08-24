@@ -35,6 +35,8 @@ public class Request {
         RequestStatus = requestStatus;
     }
 
+    public int getRequestID() {return RequestID; }
+
     public LocalDateTime getRequestDate() {
         return RequestDate;
     }
