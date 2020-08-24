@@ -64,12 +64,15 @@ public class LoginActivity extends AppCompatActivity{
 
 
     private boolean logIn(final String email, final String password){
+        //Encrypt password
+        final String hpwd = Encrypt.getMd5(password);
+
         //call the WEB API
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String target = url + "/" + email + "/" + password;
+                    String target = url + "/" + email + "/" + "ICy5YqxZB1uWSwcVLSNLcA==";
                     trustManager.trustAllCertificates();
                     URL url = new URL(target);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -96,7 +99,7 @@ public class LoginActivity extends AppCompatActivity{
         Gson gson = new Gson();
         loginUser = gson.fromJson(responseString, User.class);
 
-        if(responseString != null){
+        if(responseString != "" && loginUser != null){
             Toast.makeText(this,"Login Successful!",Toast.LENGTH_LONG).show();
             return true;
         }
@@ -107,9 +110,19 @@ public class LoginActivity extends AppCompatActivity{
 
     }
 
+
     private void startMainActivity() {
         Intent intent = new Intent(this, CollectionActivity.class);
         startActivity(intent);
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        final SharedPreferences pref = getSharedPreferences("user_credentials",MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        editor.commit();
+        finish();
     }
 }
 

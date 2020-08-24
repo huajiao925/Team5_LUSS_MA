@@ -1,9 +1,11 @@
 package com.example.team5_luss;
 
+import android.app.ActionBar;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +27,7 @@ public class CollectionActivity extends AppCompatActivity implements CollectionP
     String url = "https://10.0.2.2:44312/CollectionPoint"; //set up the API url you want to call
     String responseString; // result string
     CollectionPoint collectionPoint = new CollectionPoint();
-
+    int deptID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +45,59 @@ public class CollectionActivity extends AppCompatActivity implements CollectionP
                 collectionPointList.show(getSupportFragmentManager(), "Collection Points List");
             }
         });
+        //Shared Preferences:
+        final SharedPreferences pref = getSharedPreferences("user_credentials",MODE_PRIVATE);
+        deptID = pref.getInt("deptID",0);
 
-        //call the WEB API
+        //get all the collection Time
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String target = url + "/" + 1;
+                    String target = url + "/collectiontimes/" + deptID;
+                    trustManager.trustAllCertificates();
+                    URL url = new URL(target);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                    conn.setRequestMethod("GET");
+                    conn.connect();
+                    int responsecode = conn.getResponseCode();
+                    String inline = "";
+                    if(responsecode !=200){
+                        throw new RuntimeException(String.valueOf(responsecode));
+                    }else{
+                        Scanner sc = new Scanner(url.openStream());
+                        while (sc.hasNext()){
+                            inline += sc.nextLine();
+                        }
+                    }
+                    Gson gson = new Gson();
+                    System.out.print(inline);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+        RelativeLayout collectionTime = findViewById(R.id.collectiontimeview);
+
+
+        RelativeLayout.LayoutParams params1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params1.addRule(RelativeLayout.BELOW, R.id.CollectionList);
+        Button btn1 = new Button(this);
+        btn1.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+        btn1.setBackgroundColor(getColor(R.color.colorBackgroundDark));
+        btn1.setText("2020-08-08");
+        collectionTime.addView(btn1,params1);
+
+
+        //get dept's collection point
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String target = url + "/" + deptID;
                     trustManager.trustAllCertificates();
                     URL url = new URL(target);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -83,9 +131,6 @@ public class CollectionActivity extends AppCompatActivity implements CollectionP
         current_cp.setText(list[position]);
 
         //save the new cpID to Department
-        //Shared Preferences:
-        final SharedPreferences pref = getSharedPreferences("user_credentials",MODE_PRIVATE);
-        final int deptID = pref.getInt("deptID",0);
         final int cpID = (position + 1);
 
         //call the WEB API
@@ -93,7 +138,7 @@ public class CollectionActivity extends AppCompatActivity implements CollectionP
             @Override
             public void run() {
                 try {
-                    String target = url + "/" + 1 + "/" + cpID;
+                    String target = url + "/" + deptID + "/" + cpID;
                     trustManager.trustAllCertificates();
                     URL url = new URL(target);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -120,5 +165,15 @@ public class CollectionActivity extends AppCompatActivity implements CollectionP
 
     @Override
     public void onNegativeButtonClicked() {
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        final SharedPreferences pref = getSharedPreferences("user_credentials",MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        editor.commit();
+        finish();
     }
 }
