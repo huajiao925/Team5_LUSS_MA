@@ -38,7 +38,7 @@
                 android:text="Retrieved Qty" />
 
             <EditText
-                android:id="@+id/editTextNumberSigned"
+                android:id="@+id/retrievedQty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -52,7 +52,7 @@
                 android:id="@+id/adjust"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/editTextNumberSigned"
+                android:layout_below="@id/retrievedQty"
                 android:layout_alignLeft="@id/increase"
                 android:layout_weight="1"
                 android:text="Adjust" />
