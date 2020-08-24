@@ -10,6 +10,8 @@ public class User {
     public String FirstName;
     @SerializedName("lastName")
     public String LastName;
+    @SerializedName("designation")
+    public String designation;
     @SerializedName("contactNumber")
     public String  ContactNumber;
     @SerializedName("email")
@@ -24,10 +26,10 @@ public class User {
     public int ReportToID;
     @SerializedName("departmentID")
     public int DepartmentID;
-/*
+
     @SerializedName("department")
     public Department Department;
-   @SerializedName("requestMade")
+    @SerializedName("requestMade")
     public Request[] RequestMade;
     @SerializedName("requestModified")
     public Request[] RequestModified;
@@ -35,9 +37,9 @@ public class User {
     public AdjustmentVoucher[] RequestedBy;
     @SerializedName("approvedBy")
     public AdjustmentVoucher[] ApprovedBy;
-    @SerializedName("delegatedManager")
-    public DelegatedManager Delegatedmanager;
-    */
+
+    //public DelegatedManager DelegatedManager;
+
 
     public String getFirstName() {
         return FirstName;
@@ -110,60 +112,4 @@ public class User {
     public void setDepartmentID(int departmentID) {
         DepartmentID = departmentID;
     }
-
-    public int getUserID() {
-        return UserID;
-    }
-
-    public void setUserID(int userID) {
-        UserID = userID;
-    }
-   /*
-    public Model.Department getDepartment() {
-        return Department;
-    }
-
-    public void setDepartment(Model.Department department) {
-        Department = department;
-    }
-
-    public Request[] getRequestMade() {
-        return RequestMade;
-    }
-
-    public void setRequestMade(Request[] requestMade) {
-        RequestMade = requestMade;
-    }
-
-    public Request[] getRequestModified() {
-        return RequestModified;
-    }
-
-    public void setRequestModified(Request[] requestModified) {
-        RequestModified = requestModified;
-    }
-
-    public AdjustmentVoucher[] getRequestedBy() {
-        return RequestedBy;
-    }
-
-    public void setRequestedBy(AdjustmentVoucher[] requestedBy) {
-        RequestedBy = requestedBy;
-    }
-
-    public AdjustmentVoucher[] getApprovedBy() {
-        return ApprovedBy;
-    }
-
-    public void setApprovedBy(AdjustmentVoucher[] approvedBy) {
-        ApprovedBy = approvedBy;
-    }
-
-    public DelegatedManager getDelegatedmanager() {
-        return Delegatedmanager;
-    }
-
-    public void setDelegatedmanager(DelegatedManager delegatedmanager) {
-        Delegatedmanager = delegatedmanager;
-    }*/
 }
