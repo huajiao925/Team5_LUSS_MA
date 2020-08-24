@@ -29,21 +29,12 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/current_cp_location"
-                android:layout_width="wrap_content"
+                android:id="@+id/current_cp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:textAlignment="center"
                 android:text="Collection Point"
-                android:textColor="@color/whiteTextColor"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/current_cp_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="08:00 AM"
-                android:layout_below="@id/current_cp_location"
                 android:textColor="@color/whiteTextColor"
                 android:textSize="20sp" />
 
