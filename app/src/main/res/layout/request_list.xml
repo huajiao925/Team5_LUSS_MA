@@ -1,63 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/rqt_item"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
         android:layout_centerHorizontal="true"
-        app:cardCornerRadius="25dp"
-        app:cardElevation="10dp">
+        android:layout_margin="15dp"
+        android:text="@string/req_title"
+        android:textColor="@color/themeColor"
+        android:textSize="30sp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/rqtDate_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1"
-                android:text="Request Date: " />
-
-            <TextView
-                android:id="@+id/rqtDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/rqtDate_title"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1"
-                android:text="2020-08-08" />
-
-            <TextView
-                android:id="@+id/rqtBy_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/rqtDate_title"
-                android:layout_marginBottom="20dp"
-                android:layout_alignLeft="@id/rqtDate_title"
-                android:layout_weight="1"
-                android:text="Request By: " />
-
-
-            <TextView
-                android:id="@+id/rqtBy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/rqtBy_text"
-                android:layout_below="@id/rqtDate"
-                android:layout_weight="1"
-                android:text="Lyra Li" />
-
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
-
-</RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRequests"
+        android:layout_width="414dp"
+        android:layout_height="678dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.652"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.838"
+        tools:context="iss.workshop.myapplication.ui.requests.RequestFragment"
+        tools:listitem="@layout/request_list_item" />
+</androidx.constraintlayout.widget.ConstraintLayout>

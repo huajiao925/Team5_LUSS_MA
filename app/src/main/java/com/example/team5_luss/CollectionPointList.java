@@ -10,15 +10,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import Model.CollectionPoint;
+import Model.User;
 
 public class CollectionPointList extends DialogFragment {
 
@@ -32,57 +44,53 @@ public class CollectionPointList extends DialogFragment {
         void onPositiveButtonClicked(String[] list, int position);
         void onNegativeButtonClicked();
     }
-
     SingleChoiceListner mLisener;
+
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        try{
-            mLisener = (SingleChoiceListner) context;
-            //call the WEB API
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        String target = url;
-                        trustManager.trustAllCertificates();
-                        URL url = new URL(target);
-                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-                        conn.setRequestMethod("GET");
-                        conn.connect();
-                        InputStream in = conn.getInputStream();
-                        BufferedInputStream bufferedInputStream = new BufferedInputStream(in);
-                        StringBuffer response = new StringBuffer();
-                        int data=bufferedInputStream.read();
-                        while (data!=-1){
-                            char current = (char) data;
-                            response.append(current);
-                            data=bufferedInputStream.read();
-                        }
-                        responseString = response.toString();
-                        Gson gson = new Gson();
-                        collectionPointList = gson.fromJson(responseString,CollectionPoint[].class);
-                        for(CollectionPoint c: collectionPointList){
-                            collectionNames.add(c.Location + " " + c.Description);
-                        }
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
+        mLisener = (SingleChoiceListner) context;
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String target = url;
+                    trustManager.trustAllCertificates();
+                    URL url = new URL(target);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                    conn.setRequestMethod("GET");
+                    conn.connect();
+                    int responsecode = conn.getResponseCode();
+                    String inline = "";
+                    if(responsecode !=200){
+                        throw new RuntimeException(String.valueOf(responsecode));
+                    }else{
+                        Scanner sc = new Scanner(url.openStream());
+                        while (sc.hasNext()){
+                            inline += sc.nextLine();
+                        }
+                    }
+                    Gson gson = new Gson();
+                    collectionPointList = gson.fromJson(inline,CollectionPoint[].class);
+                    for(CollectionPoint c: collectionPointList) {
+                        collectionNames.add(c.Location + " " + c.Description);
+                    }
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
 
         String[] cp_list = new String[collectionNames.size()];
         cp_list = collectionNames.toArray(cp_list);

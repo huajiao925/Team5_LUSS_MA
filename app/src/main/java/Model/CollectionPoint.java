@@ -53,4 +53,5 @@ public class CollectionPoint {
     public void setLocation(String location) {
         Location = location;
     }
+
 }

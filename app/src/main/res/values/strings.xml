@@ -34,6 +34,12 @@
     <string name="approveBtn">Approve</string>
     <string name="rejectBtn">Reject</string>
     <string name="adjustBtn">Adjust Qty</string>
+    <!--Request-->
+    <string name="req_title">Requests </string>
+    <string name="req_detail_title">Request Detail </string>
+    <string name="req_comment">Comment </string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_collection">Collection</string>
