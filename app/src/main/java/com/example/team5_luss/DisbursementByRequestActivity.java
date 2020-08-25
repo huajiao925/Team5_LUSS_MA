@@ -53,8 +53,8 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
     //Date collectionTime;
     String collectionTime;
     ArrayList<Integer> fulfillQty = new ArrayList<Integer> ();
-    JSONArray fulfillQtyJson;
-    String collectionTimeJson;
+    //JSONArray fulfillQtyJson;
+    //String collectionTimeJson;
     CustomRequestDetail[] requestItems;
 
     final Calendar myCalendar = Calendar.getInstance();
@@ -77,7 +77,39 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
         collectionPointText.setText(collectionPoint);
         collectionTimeEdit = findViewById(R.id.collectionTime);
 
+        listView = findViewById(R.id.listViewReqItems);
+        loadRequestItems(requestID);
 
+        setDatePicker();
+
+        confirmBtn = findViewById(R.id.confirm_btn);
+        if(confirmBtn != null){
+            confirmBtn.setOnClickListener(new View.OnClickListener(){
+                public void onClick(View v){
+                    getFulfillQty(DisbursementByRequestItemAdapter.requestDetails);
+                    //fulfillQtyJson = new JSONArray(fulfillQty);
+                    collectionTime = collectionTimeEdit.getText().toString();
+                   /* DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+                    try {
+                        collectionTime = formatter.parse(collectionTimeEdit.getText().toString());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }*/
+                    //convertDateToJsonString();
+                    //confirmDisbursement(requestID,userID, collectionTimeJson, fulfillQtyJson);
+                    confirmDisbursement(requestID,userID,collectionTime,fulfillQty);
+                }
+            });
+        }
+    }
+
+//    public void convertDateToJsonString(){
+//        DateFormat dateFormat=new SimpleDateFormat();
+//        collectionTimeJson = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(collectionTime);
+//    }
+
+
+    private void setDatePicker(){
         //date picker
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -99,35 +131,7 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
             }
         });
         //end of date picker
-
-        listView = findViewById(R.id.listViewReqItems);
-        loadRequestItems(requestID);
-
-        confirmBtn = findViewById(R.id.confirmBtn);
-        if(confirmBtn != null){
-            confirmBtn.setOnClickListener(new View.OnClickListener(){
-                public void onClick(View v){
-                    getFulfillQty(DisbursementByRequestItemAdapter.requestDetails);
-                    fulfillQtyJson = new JSONArray(fulfillQty);
-                    collectionTime = collectionTimeEdit.getText().toString();
-                   /* DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
-                    try {
-                        collectionTime = formatter.parse(collectionTimeEdit.getText().toString());
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }*/
-                    //convertDateToJsonString();
-                    //confirmDisbursement(requestID,userID, collectionTimeJson, fulfillQtyJson);
-                    confirmDisbursement(requestID,userID,collectionTime,fulfillQty);
-                }
-            });
-        }
     }
-
-//    public void convertDateToJsonString(){
-//        DateFormat dateFormat=new SimpleDateFormat();
-//        collectionTimeJson = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(collectionTime);
-//    }
 
     private void updateLabel(){
         String myFormat = "yyyy-MM-dd"; //In which you need put here
@@ -177,7 +181,6 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
                                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-
                                     }
                                 });
                             }
