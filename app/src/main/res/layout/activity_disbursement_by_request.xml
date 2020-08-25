@@ -109,6 +109,7 @@
         android:layout_below="@id/collectionPoint"
         android:layout_toRightOf="@id/textView22"
         android:ems="10"
+        android:hint="yyyy-mm-dd"
         android:inputType="date" />
     </RelativeLayout>
     </androidx.cardview.widget.CardView>

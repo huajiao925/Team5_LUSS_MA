@@ -1,5 +1,6 @@
 package com.example.team5_luss;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -21,11 +22,12 @@ import Model.ViewModel.CustomRequest;
 
 public class DisbursementActivity extends AppCompatActivity {
 
-    String url = "https://10.0.2.2:44312/Request/get-request-by-status-mobile/4"; //set up the API url you want to call
+    String url = "https://10.0.2.2:44312/Request/get-request-by-status-mobile/1"; //set up the API url you want to call
     //String url = "https://10.0.2.2:44312/Request/get-approved-request";
     String responseString; // result string
     ListView listView;
     CustomRequest[] approvedRequests;
+    public static int DISBURSED = 1;
     //Request[] approvedRequests;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +82,9 @@ public class DisbursementActivity extends AppCompatActivity {
                                         intent.putExtra("deptName",approvedRequests[position].getDepartmentName());
                                         intent.putExtra("deptRep",approvedRequests[position].getDepartmentRep());
                                         intent.putExtra("collectionPoint",approvedRequests[position].getCollectionPoint());
-                                        startActivity(intent);
+                                        //startActivity(intent);
+                                        startActivityForResult(intent,DISBURSED);
                                     }
-
 
 
 
@@ -100,11 +102,16 @@ public class DisbursementActivity extends AppCompatActivity {
         e.printStackTrace();
 
     }
-
-
-
-
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == DISBURSED) {
+            if (resultCode == RESULT_OK) {
+                loadApprovedRequestList();
+            }
+        }
+    }
 
 }
