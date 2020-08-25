@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,13 +23,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.DelegatedManager;
 import Model.Request;
 
 public class DelegateActivity extends AppCompatActivity {
 
     String API_URL = "https://10.0.2.2:44312/Delegate/";
     String responseString; // result string
-    Request[] RequestList = new Request[]{};
+    DelegatedManager delegatedManager=new DelegatedManager();
     private String webServiceMessage = "Fail";
     RequestAdapter adapter;
     RecyclerView recyclerView;
@@ -57,7 +60,8 @@ public class DelegateActivity extends AppCompatActivity {
         protected String doInBackground(Void... voids) {
 
             trustManager.trustAllCertificates();
-
+            depID=1;  //To Delete
+            API_URL+="getCurrentDelegate/"+depID;
             try {
                 URL url = new URL(API_URL);
                 HttpURLConnection conn = null;
@@ -76,7 +80,7 @@ public class DelegateActivity extends AppCompatActivity {
                 }
                 responseString = response.toString();
                 Gson gson = new Gson();
-                RequestList = gson.fromJson(responseString, Request[].class);
+                delegatedManager = gson.fromJson(responseString, DelegatedManager.class);
 
 
             } catch (IOException ex) {
@@ -91,21 +95,40 @@ public class DelegateActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if (webServiceMessage.equals("Success")) {
-                requestArrList.clear();
-                requestArrList=CodeSetting.convertArrayToList(RequestList);
+             if(delegatedManager!=null)
+             {
+                 RelativeLayout activeView=findViewById(R.id.active_delegate);
+                 activeView.setVisibility(View.VISIBLE);
 
-                if (requestArrList.size() != 0) {
-                    setUpRecyclerView();
-                }
+                 TextView name=findViewById(R.id.dlg_name);
+                 if(name!=null)
+                 {
+                     name.setText(delegatedManager.User.FirstName+" "+delegatedManager.User.LastName);
+                 }
+                 TextView fromDate=findViewById(R.id.dlg_fromDate);
+                 if(fromDate!=null)
+                 {
+                     fromDate.setText(CodeSetting.convertDateString(delegatedManager.FromDate));
+                 }
+                 TextView ToDate=findViewById(R.id.dlg_toDate);
+                 if(ToDate!=null)
+                 {
+                     ToDate.setText(CodeSetting.convertDateString(delegatedManager.ToDate));
+                 }
+             }
+             else
+             {
+
+                 RelativeLayout activeView=findViewById(R.id.active_delegate);
+                 activeView.setVisibility(View.VISIBLE);
+                 RelativeLayout emptyView=findViewById(R.id.empty_delegate);
+                 emptyView.setVisibility(View.GONE);
+             }
             }
         }
 
     }
 
-    private void setUpRecyclerView() {
-        RequestAdapter adapter = new RequestAdapter(this, (ArrayList<Request>) requestArrList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
-    }
+
 
 }

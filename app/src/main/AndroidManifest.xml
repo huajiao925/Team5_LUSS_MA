@@ -30,15 +30,14 @@
         <activity
             android:name=".DelegateActivity"
             android:label="@string/title_activity_delegate">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".DisbursementActivity" />
         <activity android:name=".RequestDetailActivity" />
-        <activity android:name=".CollectionActivity" />
+        <activity android:name=".CollectionListActivity">
+
+        </activity>
+
         <activity android:name=".RequestListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

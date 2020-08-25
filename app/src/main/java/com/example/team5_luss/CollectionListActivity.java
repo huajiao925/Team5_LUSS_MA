@@ -2,6 +2,7 @@ package com.example.team5_luss;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,17 +11,12 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import Model.CollectionPoint;
-import Model.RequestDetails;
 import Model.ViewModel.CustomRetrieval;
-import Model.item;
 
 public class CollectionListActivity extends AppCompatActivity {
     RecyclerView recyclerView;

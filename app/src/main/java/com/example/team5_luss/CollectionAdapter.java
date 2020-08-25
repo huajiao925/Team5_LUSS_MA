@@ -7,16 +7,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import Model.Request;
 import Model.ViewModel.CustomRetrieval;
-import Model.item;
 
 public class CollectionAdapter  extends RecyclerView.Adapter<CollectionAdapter.CollectionViewHolder>{
 
