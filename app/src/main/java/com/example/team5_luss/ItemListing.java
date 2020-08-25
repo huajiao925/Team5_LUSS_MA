@@ -1,12 +1,11 @@
 package com.example.team5_luss;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,47 +16,25 @@ import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 import Model.CustomAdjustmentVoucher;
-import Model.ViewModel.CustomRetrieval;
+import Model.ViewModel.CustomItem;
 
-public class RetrievalForm extends AppCompatActivity {
+public class ItemListing extends AppCompatActivity {
 
-    String url = "https://10.0.2.2:44312/Retrieval/mobile/byStatus/Approved"; //set up the API url you want to call
-    String responseString;
-    CustomRetrieval[] retrievals;
-
-    Button btnConfirm;
-    TextView txtItemCode;
-    TextView txtDescription;
-    TextView txtLocation;
-    TextView txtUOM;
-    TextView txtInStockQty;
-    TextView txtRequestedQty;
-    EditText txtRetrievedQty;
+    String url = "https://10.0.2.2:44312/ItemList/mobile";//set up the API url you want to call
+    String responseString; // result string
+    CustomItem[] items;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.retrieval_form);
+        setContentView(R.layout.item_list);
 
-        /*btnConfirm = findViewById(R.id.confirm_btn);
-        if(btnConfirm!=null){
-            btnConfirm.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    submitRetrival(ArrayList <int>Integer.parseInt(txtRetrievedQty.getText().toString()),int retrievalID, String collectionDate, int id ){
-
-                    }
-                }
-            });
-        }*/
-
-        loadRetrievalList();
+        loadItemList();
     }
 
-    public void loadRetrievalList(){
+    private void  loadItemList(){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -80,15 +57,21 @@ public class RetrievalForm extends AppCompatActivity {
                     }
                     responseString = response.toString();
                     Gson gson = new Gson();
-                    retrievals = gson.fromJson(responseString, CustomRetrieval[].class);
+                    items = gson.fromJson(responseString, CustomItem[].class);
 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            RetrievalAdapter adapter = new RetrievalAdapter(RetrievalForm.this,R.layout.retrieval_form,retrievals);
-                            ListView listView = findViewById(R.id.adjustBoardListing);
+                            ItemListAdapter adapter = new ItemListAdapter(ItemListing.this,R.layout.item_list,items);
+                            ListView listView = findViewById(R.id.inventoryListing);
                             listView.setAdapter(adapter);
-
+                            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                    System.out.println(items[i].getItemID());
+                                    goToDetailsPage(items[i].getItemID());
+                                }
+                            });
                         }
                     });
                 }
@@ -98,4 +81,11 @@ public class RetrievalForm extends AppCompatActivity {
             }
         }).start();
     }
+
+    public void goToDetailsPage(int itemID){
+        Intent intent = new Intent(ItemListing.this,ItemDetails.class);
+        intent.putExtra("itemId",itemID);
+        startActivity(intent);
+    }
+
 }

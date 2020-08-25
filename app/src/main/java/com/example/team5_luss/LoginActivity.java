@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity{
                     editor.putString("uName", loginUser.FirstName);
                     editor.putInt("deptID", loginUser.DepartmentID);
                     editor.putString("role", loginUser.Role);
+                    editor.putInt("userID", loginUser.UserID);// added userID
                     //editor.putInt("cpID", loginUser.Department.CollectionPointID);
                     editor.apply(); //or editor.apply() async for large data
                     startMainActivity();

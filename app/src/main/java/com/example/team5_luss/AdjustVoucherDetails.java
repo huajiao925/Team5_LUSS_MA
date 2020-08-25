@@ -1,6 +1,7 @@
 package com.example.team5_luss;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,7 +24,7 @@ import Model.CustomAdjustmentVoucher;
 
 public class AdjustVoucherDetails extends AppCompatActivity {
     int adjustmentId;
-    int userID = 1; // tobe updated with sessionid
+    int userID ; // tobe updated with sessionid
     String url = "https://10.0.2.2:44312/AdjustmentList/mobile/"; //set up the API url you want to call
     String url_approval = "https://10.0.2.2:44312/AdjustmentList/ApprovedAdjustmentVoucher/";
     String responseString; // result string
@@ -45,6 +46,9 @@ public class AdjustVoucherDetails extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.adjust_voucher_details);
+
+        final SharedPreferences pref = getSharedPreferences("user_credentials",MODE_PRIVATE);
+        userID = pref.getInt("userID",0);
 
         Intent intent = getIntent();
         adjustmentId =intent.getIntExtra("adjustmentId",0);
@@ -189,7 +193,6 @@ public class AdjustVoucherDetails extends AppCompatActivity {
 
                     Intent intent = new Intent();
                     setResult(RESULT_OK,intent);
-                    finish();
                     finish();
 
 

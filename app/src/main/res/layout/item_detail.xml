@@ -4,21 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <Button
-        android:id="@+id/adjustBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:layout_gravity="right"
-        android:background="@color/themeColor"
-        android:text="@string/adjustBtn"
-        android:textColor="@color/whiteTextColor" />
+    <TextView
+        android:id="@+id/AdjustStockDetailsHeader"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="Adjust Stock Details"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tableHeading"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="20dp">
+        android:layout_height="500dp"
+        android:layout_margin="10dp">
 
         <TableRow
             android:layout_width="match_parent"
@@ -27,14 +30,14 @@
             >
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/itemCode_Header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:text="Item Code " />
+                android:text="Item Code" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/item_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -48,14 +51,14 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/category_Header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="Category" />
 
             <TextView
-                android:id="@+id/textView18"
+                android:id="@+id/catName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -69,14 +72,14 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/itemName_Header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="Description" />
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -90,14 +93,14 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/location_Header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="Location" />
 
             <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/item_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -111,14 +114,14 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/uom_Header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="UOM" />
 
             <TextView
-                android:id="@+id/textView24"
+                android:id="@+id/item_uom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -132,14 +135,14 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/textView29"
+                android:id="@+id/quantityHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:text="In stock" />
+                android:text="Quantity" />
 
             <TextView
-                android:id="@+id/textView30"
+                android:id="@+id/quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -153,18 +156,18 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/textView25"
+                android:id="@+id/reorderLevel_Header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="Reorder Level" />
 
             <TextView
-                android:id="@+id/textView26"
+                android:id="@+id/reorder_lvl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
                 android:paddingLeft="10dp"
+                android:textSize="20dp"
                 android:text="TextView" />
         </TableRow>
 
@@ -174,21 +177,43 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/textView27"
+                android:id="@+id/reorderQty_Header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="Reorder Qty" />
 
             <TextView
-                android:id="@+id/textView28"
-                android:layout_width="wrap_content"
+                android:id="@+id/reorder_qty"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:textSize="20dp"
                 android:text="TextView" />
         </TableRow>
 
+
     </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+
+        <Button
+            android:id="@+id/adjust"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/themeColor"
+            android:text="Adjust"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:visibility="invisible"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>

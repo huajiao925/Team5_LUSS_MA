@@ -1,6 +1,7 @@
 package com.example.team5_luss;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,15 +22,22 @@ import Model.CustomAdjustmentVoucher;
 
 public class AdjustVoucherListing extends AppCompatActivity {
 
-    String url = "https://10.0.2.2:44312/AdjustmentList/mobile/pendingDown"; //set up the API url you want to call
+    String url_down = "https://10.0.2.2:44312/AdjustmentList/mobile/pendingDown";
+    String url_up = "https://10.0.2.2:44312/AdjustmentList/mobile/pendingUp"; //set up the API url you want to call
     String responseString; // result string
     CustomAdjustmentVoucher[] vouchers;// listing of vouchers
     private int ON_ACTION_RETURN = 1;
+    String userRole;
+    String target;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.adjust_voucher_list);
+
+        final SharedPreferences pref = getSharedPreferences("user_credentials",MODE_PRIVATE);
+        userRole = pref.getString("role","");
+
         loadAdjustmentList();
     }
 
@@ -38,7 +46,12 @@ public class AdjustVoucherListing extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String target = url;
+                    if(userRole.equals("store_supervisor")){
+                         target = url_down;
+                    } else if(userRole.equals("store_manager")){
+                        target = url_up;
+                    }
+
                     trustManager.trustAllCertificates();
                     URL url = new URL(target);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();

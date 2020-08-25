@@ -1,55 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
+    <TextView
+        android:id="@+id/adjustStockHeader"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="Inventory List"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tableHeading"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/tableHeading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="2dp"
-        android:layout_centerHorizontal="true"
-        app:cardCornerRadius="25dp"
-        app:cardElevation="10dp">
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/adjustStockHeader">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp">
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-black"
+            android:padding="5dp"
+            android:text="Item Code"
+            android:textAlignment="center"
+            android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="C001" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-black"
+            android:padding="5dp"
+            android:text="Category"
+            android:textAlignment="center"
+            android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/textView4"
-                android:layout_marginLeft="15dp"
-                android:text="PenCat" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-black"
+            android:padding="5dp"
+            android:text="Description"
+            android:textAlignment="center"
+            android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/textView5"
-                android:layout_marginLeft="15dp"
-                android:text="Pencil 2B  ssssssss" />
+        <TextView
+            android:id="@+id/leaderBoardScore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-black"
+            android:padding="5dp"
+            android:text="Qty"
+            android:textAlignment="center"
+            android:textSize="15sp"/>
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="15dp"
-                android:text="200" />
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+    <ListView
+        android:id="@+id/inventoryListing"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tableHeading" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

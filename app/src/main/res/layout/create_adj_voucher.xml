@@ -116,7 +116,7 @@
                     android:text="box" />
 
                 <TextView
-                    android:id="@+id/inStockQty_txt"
+                    android:id="@+id/price_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/uom_txt"
@@ -126,34 +126,32 @@
                     android:text="Unit Price: " />
 
                 <TextView
-                    android:id="@+id/inStock"
+                    android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/uom_txt"
-                    android:layout_toRightOf="@id/inStockQty_txt"
+                    android:layout_toRightOf="@id/price_txt"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="30" />
+                    android:text="" />
 
                 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/radioBtn"
+                    android:id="@+id/adjustType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/inStockQty_txt"
-                    android:layout_alignLeft="@id/inStockQty_txt"
+                    android:layout_below="@id/price_txt"
+                    android:layout_alignLeft="@id/price_txt"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:orientation="horizontal">
-                    <RadioButton android:id="@+id/add"
+                    <RadioButton android:id="@+id/btnAdd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="add"
-                        android:onClick="onRadioButtonClicked"/>
-                    <RadioButton android:id="@+id/deduct"
+                        android:text="Add"/>
+                    <RadioButton android:id="@+id/btnDeduct"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="deduct"
-                        android:onClick="onRadioButtonClicked"/>
+                        android:text="deduct"/>
                 </RadioGroup>
 
                 <EditText
@@ -161,11 +159,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="15"
-                    android:layout_below="@id/radioBtn"
-                    android:layout_alignLeft="@id/radioBtn"
+                    android:layout_below="@id/adjustType"
+                    android:layout_alignLeft="@id/adjustType"
                     android:layout_marginTop="10dp"
-                    android:inputType="numberSigned"/>
+                    android:inputType="numberSigned"
+                    android:text="1"/>
 
                 <TextView
                     android:id="@+id/value_txt"
@@ -185,8 +183,7 @@
                     android:layout_below="@id/adjustQty"
                     android:layout_toRightOf="@id/value_txt"
                     android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:text="80" />
+                    android:layout_weight="1" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
@@ -208,18 +205,19 @@
                 >
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/reasonHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Comment: " />
+                    android:text="Reason: " />
 
                 <EditText
-                    android:id="@+id/editTextTextMultiLine"
+                    android:id="@+id/reason"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:gravity="start|top"
-                    android:inputType="textMultiLine" />
+                    android:inputType="textMultiLine"
+                    android:text=" "/>
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>

@@ -41,6 +41,8 @@ public class CustomAdjustmentVoucher {
     public String ItemName;
     @SerializedName("uom")
     public String UOM;
+    @SerializedName("itemPrice")
+    public int ItemPrice;
 
     public int getAdjustmentID() {
         return AdjustmentID;
@@ -186,5 +188,13 @@ public class CustomAdjustmentVoucher {
 
     public void setUOM(String UOM) {
         this.UOM = UOM;
+    }
+
+    public int getItemPrice() {
+        return ItemPrice;
+    }
+
+    public void setItemPrice(int itemPrice) {
+        ItemPrice = itemPrice;
     }
 }
