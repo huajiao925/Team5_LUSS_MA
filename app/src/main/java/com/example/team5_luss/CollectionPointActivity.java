@@ -28,7 +28,7 @@ import java.util.Scanner;
 
 import Model.CollectionPoint;
 
-public class CollectionActivity extends AppCompatActivity implements CollectionPointList.SingleChoiceListner {
+public class CollectionPointActivity extends AppCompatActivity implements CollectionPointList.SingleChoiceListner {
 
     TextView current_cp;
     String url = "https://10.0.2.2:44312/CollectionPoint"; //set up the API url you want to call
@@ -87,7 +87,7 @@ public class CollectionActivity extends AppCompatActivity implements CollectionP
                             final ListView lv = (ListView) findViewById(R.id.lv);
                             final List<String> collectionTimesList = new ArrayList<String>(Arrays.asList(collectionTimes));
                             final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
-                                    (CollectionActivity.this, android.R.layout.simple_list_item_1, collectionTimesList);
+                                    (CollectionPointActivity.this, android.R.layout.simple_list_item_1, collectionTimesList);
                             lv.setAdapter(arrayAdapter);
 
                             lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){

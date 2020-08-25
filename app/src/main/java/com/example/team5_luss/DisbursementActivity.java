@@ -2,8 +2,13 @@ package com.example.team5_luss;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -29,7 +34,6 @@ public class DisbursementActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.listViewDisbursement);
         loadApprovedRequestList();
-
     }
 
     public void loadApprovedRequestList(){
@@ -67,6 +71,22 @@ public class DisbursementActivity extends AppCompatActivity {
                             public void run(){
                                 DisbursementListAdapter adapter = new DisbursementListAdapter(getApplicationContext(),R.layout.disb_req_item,approvedRequests);
                                 listView.setAdapter(adapter);
+                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                                        Toast.makeText(getApplicationContext(), "RequestID "+(approvedRequests[position].getRequestID()), Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(DisbursementActivity.this,DisbursementByRequestActivity.class);
+                                        intent.putExtra("requestID",approvedRequests[position].getRequestID());
+                                        intent.putExtra("deptName",approvedRequests[position].getDepartmentName());
+                                        intent.putExtra("deptRep",approvedRequests[position].getDepartmentRep());
+                                        intent.putExtra("collectionPoint",approvedRequests[position].getCollectionPoint());
+                                        startActivity(intent);
+                                    }
+
+
+
+
+                                        });
                             }
                         });
 
@@ -78,6 +98,7 @@ public class DisbursementActivity extends AppCompatActivity {
             }).start();
     } catch (Exception e){
         e.printStackTrace();
+
     }
 
 

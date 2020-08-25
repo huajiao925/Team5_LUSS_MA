@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <androidx.cardview.widget.CardView
         android:id="@+id/item_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        app:cardCornerRadius="25dp"
         app:cardElevation="10dp">
 
         <RelativeLayout
@@ -19,7 +20,7 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/plus"
+                android:id="@+id/increase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
@@ -28,22 +29,23 @@
                 android:text="+" />
 
             <EditText
-                android:id="@+id/editTextNumberSigned"
+                android:id="@+id/fulfillQty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/increase"
+                android:layout_alignLeft="@id/increase"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="-1dp"
                 android:layout_weight="1"
-                android:layout_alignLeft="@id/plus"
-                android:layout_below="@id/plus"
                 android:ems="10"
-                android:hint="15"
                 android:inputType="numberSigned" />
 
             <Button
                 android:id="@+id/minus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/editTextNumberSigned"
-                android:layout_alignLeft="@id/plus"
+                android:layout_below="@id/fulfillQty"
+                android:layout_alignLeft="@id/increase"
                 android:layout_weight="1"
                 android:text="-" />
 
@@ -104,10 +106,28 @@
                 android:text="box" />
 
             <TextView
+                android:id="@+id/instockqyt_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/uom"
+                android:layout_alignLeft="@id/itemCode_txt"
+                android:layout_weight="1"
+                android:text="In Stock Qty: " />
+
+            <TextView
+                android:id="@+id/instockqyt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/uom"
+                android:layout_toRightOf="@id/instockqyt_txt"
+                android:layout_weight="1"
+                android:text="80" />
+
+            <TextView
                 android:id="@+id/reqQty_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/uom_txt"
+                android:layout_below="@id/instockqyt_txt"
                 android:layout_alignLeft="@id/uom_txt"
                 android:layout_weight="1"
                 android:layout_marginBottom="20dp"
@@ -117,20 +137,21 @@
                 android:id="@+id/reqQty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/uom"
+                android:layout_below="@id/instockqyt"
                 android:layout_toRightOf="@id/reqQty_txt"
                 android:layout_weight="1"
-                android:text="80" />
+                android:text="50" />
 
-            <TextView
-                android:id="@+id/accptQty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/editTextNumberSigned"
-                android:layout_alignTop="@id/editTextNumberSigned"
-                android:layout_weight="1"
-                android:text="Accpt Qty: " />
+<!--            <TextView-->
+<!--                android:id="@+id/fulfillQty_txt"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_toLeftOf="@id/fulfillQty"-->
+<!--                android:layout_alignTop="@id/fulfillQty"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="Fulfill Qty: " />-->
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-</LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

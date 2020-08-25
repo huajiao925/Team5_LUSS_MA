@@ -28,6 +28,9 @@ public class CustomRetrieval {
     @SerializedName("totalQty")
     public int TotalQty;
 
+    @SerializedName("requestedQty")
+    public int RequestedQty;
+
     public int getRetrievalID() {
         return RetrievalID;
     }
@@ -122,5 +125,13 @@ public class CustomRetrieval {
 
     public void setTotalQty(int totalQty) {
         TotalQty = totalQty;
+    }
+
+    public int getRequestedQty() {
+        return RequestedQty;
+    }
+
+    public void setRequestedQty(int requestedQty) {
+        RequestedQty = requestedQty;
     }
 }
