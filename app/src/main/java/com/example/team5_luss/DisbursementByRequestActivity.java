@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -24,6 +25,9 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
     String url = "https://10.0.2.2:44312/RequestDetails/get-by-request-mobile/"; //set up the API url you want to call
     String responseString; // result string
     ListView listView;
+    TextView deptNameText;
+    TextView deptRepText;
+    TextView collectionPointText;
     CustomRequestDetail[] requestItems;
 
     @Override
@@ -32,6 +36,17 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_disbursement_by_request);
         Intent intent = getIntent();
         int requestId = intent.getIntExtra("requestID", 0);
+        String deptName = intent.getStringExtra("deptName");
+        String deptRep = intent.getStringExtra("deptRep");
+        String collectionPoint = intent.getStringExtra("collectionPoint");
+
+        deptNameText = findViewById(R.id.deptName);
+        deptNameText.setText(deptName);
+        deptRepText = findViewById(R.id.deptRep);
+        deptRepText.setText(deptRep);
+        collectionPointText = findViewById(R.id.collectionPoint);
+        collectionPointText.setText(collectionPoint);
+
         listView = findViewById(R.id.listViewReqItems);
 
         loadRequestItems(requestId);

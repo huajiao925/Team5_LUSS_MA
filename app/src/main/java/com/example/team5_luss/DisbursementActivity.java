@@ -77,6 +77,9 @@ public class DisbursementActivity extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(), "RequestID "+(approvedRequests[position].getRequestID()), Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(DisbursementActivity.this,DisbursementByRequestActivity.class);
                                         intent.putExtra("requestID",approvedRequests[position].getRequestID());
+                                        intent.putExtra("deptName",approvedRequests[position].getDepartmentName());
+                                        intent.putExtra("deptRep",approvedRequests[position].getDepartmentRep());
+                                        intent.putExtra("collectionPoint",approvedRequests[position].getCollectionPoint());
                                         startActivity(intent);
                                     }
 
