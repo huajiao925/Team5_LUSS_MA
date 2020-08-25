@@ -70,6 +70,24 @@
                 android:textSize="20sp" />
 
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/empty_delegate">
+
+            <TextView
+                android:id="@+id/dlg_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="15dp"
+                android:text="@string/current_dlg"
+                android:textColor="@color/whiteTextColor"
+                android:textSize="20sp" />
+
+
+
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 
