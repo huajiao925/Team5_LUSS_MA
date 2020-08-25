@@ -87,7 +87,6 @@ public class CollectionPointList extends DialogFragment {
                     for(CollectionPoint c: collectionPointList) {
                         collectionNames.add(c.Location + " " + c.Description);
                     }
-
                 }
                 catch (Exception e) {
                     e.printStackTrace();

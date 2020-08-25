@@ -1,6 +1,7 @@
 package com.example.team5_luss;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -25,16 +26,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import Model.CollectionPoint;
+import Model.CustomAdjustmentVoucher;
+import Model.Request;
 
 public class CollectionPointActivity extends AppCompatActivity implements CollectionPointList.SingleChoiceListner {
 
     TextView current_cp;
     String url = "https://10.0.2.2:44312/CollectionPoint"; //set up the API url you want to call
-    String responseString; // result string
     CollectionPoint collectionPoint = new CollectionPoint();
+    Request[] collectionTimes = new Request[]{};
     int deptID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,21 +84,30 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
                         }
                     }
                     Gson gson = new Gson();
-                    final String[] collectionTimes = gson.fromJson(inline, String[].class);
+                    collectionTimes= gson.fromJson(inline, Request[].class);
 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             final ListView lv = (ListView) findViewById(R.id.lv);
-                            final List<String> collectionTimesList = new ArrayList<String>(Arrays.asList(collectionTimes));
+                            List<String> collectionTimesList = new ArrayList<String>();
+                            for(int i=0; i<collectionTimes.length; i++){
+                                String date = collectionTimes[i].CollectionTime.substring(0,10);
+                                collectionTimesList.add(date);
+                            }
+                            final List<String> f_collectionTimesList = collectionTimesList.stream().distinct().collect(Collectors.<String>toList());
+
                             final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
-                                    (CollectionPointActivity.this, android.R.layout.simple_list_item_1, collectionTimesList);
+                                    (CollectionPointActivity.this, android.R.layout.simple_list_item_1, f_collectionTimesList);
                             lv.setAdapter(arrayAdapter);
 
                             lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                         //pass the time to next Activity
+                                        Intent intent = new Intent(CollectionPointActivity.this,CollectionListActivity.class);
+                                        intent.putExtra("retrievalID",collectionTimes[i].getRetrievalID());
+                                        startActivity(intent);
                                 }
                             });
                         }

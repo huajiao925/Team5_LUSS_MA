@@ -31,6 +31,17 @@ public class CustomRetrieval {
     @SerializedName("requestedQty")
     public int RequestedQty;
 
+    @SerializedName("acceptedQty")
+    public int AcceptedQty;
+
+    public int getAcceptedQty() {
+        return AcceptedQty;
+    }
+
+    public void setAcceptedQty(int acceptedQty) {
+        AcceptedQty = acceptedQty;
+    }
+
     public int getRetrievalID() {
         return RetrievalID;
     }
