@@ -47,6 +47,7 @@ public class DisbursementByRequestItemAdapter extends ArrayAdapter<CustomRequest
             convertView.setTag(holder);
         }else{
             holder =(DisbursementByRequestItemAdapter.viewHolder) convertView.getTag();
+
         }
 
         String itemCode = (requestDetails[position].getItemCode());

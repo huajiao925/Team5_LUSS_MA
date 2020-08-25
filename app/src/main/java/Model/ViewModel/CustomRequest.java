@@ -34,6 +34,13 @@ public class CustomRequest {
     @SerializedName("modifiedByName")
     public String modifiedByName;
 
+    @SerializedName("departmentName")
+    public String departmentName;
+    @SerializedName("departmentRep")
+    public String departmentRep;
+     @SerializedName("collectionPoint")
+    public String collectionPoint;
+
     public CustomRequest() {
     }
 
@@ -131,6 +138,30 @@ public class CustomRequest {
 
     public void setModifiedByName(String modifiedByName) {
         this.modifiedByName = modifiedByName;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public String getDepartmentRep() {
+        return departmentRep;
+    }
+
+    public void setDepartmentRep(String departmentRep) {
+        this.departmentRep = departmentRep;
+    }
+
+    public String getCollectionPoint() {
+        return collectionPoint;
+    }
+
+    public void setCollectionPoint(String collectionPoint) {
+        this.collectionPoint = collectionPoint;
     }
 }
 

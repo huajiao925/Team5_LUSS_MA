@@ -70,6 +70,7 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
                                 DisbursementByRequestItemAdapter adapter = new DisbursementByRequestItemAdapter(getApplicationContext(), R.layout.disb_by_req_item, requestItems);
                                 listView.setAdapter(adapter);
 
+
                             }
                         });
 
