@@ -41,7 +41,7 @@ public class CollectionPointList extends DialogFragment {
     CollectionPoint[] collectionPointList = new CollectionPoint[]{};
     ArrayList<String> collectionNames = new ArrayList<>();
 
-    int position = 0; //default selected item
+    int position = 0; //default selected Item
     public interface SingleChoiceListner{
         void onPositiveButtonClicked(String[] list, int position);
         void onNegativeButtonClicked();

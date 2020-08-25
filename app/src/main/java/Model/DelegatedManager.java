@@ -9,28 +9,46 @@ public class DelegatedManager {
     @SerializedName("delegateManagerID")
     public int DelegatedManagerID;
     @SerializedName("fromDate")
-    public LocalDateTime FromDate;
+    public String FromDate;
     @SerializedName("toDate")
-    public LocalDateTime ToDate;
+    public String ToDate;
     @SerializedName("userID")
     public int UserID;
+    @SerializedName("user")
+    public User User;
 
-    public LocalDateTime getFromDate() {
-        return FromDate;
+
+    public Model.User getUser() {
+        return User;
     }
 
-    public void setFromDate(LocalDateTime fromDate) {
-        FromDate = fromDate;
+    public void setUser(Model.User user) {
+        User = user;
     }
 
-    public LocalDateTime getToDate() {
+    public String getToDate() {
         return ToDate;
     }
 
-    public void setToDate(LocalDateTime toDate) {
+    public void setToDate(String toDate) {
         ToDate = toDate;
     }
 
+    public String getFromDate() {
+        return FromDate;
+    }
+
+    public void setFromDate(String fromDate) {
+        FromDate = fromDate;
+    }
+
+    public int getDelegatedManagerID() {
+        return DelegatedManagerID;
+    }
+
+    public void setDelegatedManagerID(int delegatedManagerID) {
+        DelegatedManagerID = delegatedManagerID;
+    }
     public int getUserID() {
         return UserID;
     }
