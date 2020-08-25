@@ -1,35 +1,34 @@
 package com.example.team5_luss;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.gson.Gson;
 
-import java.io.BufferedInputStream;
-import java.io.InputStream;
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import Model.CollectionPoint;
-import Model.CustomAdjustmentVoucher;
 import Model.Request;
 
 public class CollectionPointActivity extends AppCompatActivity implements CollectionPointList.SingleChoiceListner {
@@ -39,6 +38,7 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
     CollectionPoint collectionPoint = new CollectionPoint();
     Request[] collectionTimes = new Request[]{};
     int deptID;
+    private String webServiceMessage = "Fail";
 
 
     @Override
@@ -60,6 +60,8 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
         //Shared Preferences:
         final SharedPreferences pref = getSharedPreferences("user_credentials",MODE_PRIVATE);
         deptID = pref.getInt("deptID",0);
+
+        new GetCollectionPoint().execute();
 
         //get all the collection Time
         new Thread(new Runnable() {
@@ -120,39 +122,6 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
             }
         }).start();
 
-
-        //get dept's collection point
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String target = url + "/" + deptID;
-                    trustManager.trustAllCertificates();
-                    URL url = new URL(target);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-                    conn.setRequestMethod("GET");
-                    conn.connect();
-                    int responsecode = conn.getResponseCode();
-                    String inline = "";
-                    if(responsecode !=200){
-                        throw new RuntimeException(String.valueOf(responsecode));
-                    }else{
-                        Scanner sc = new Scanner(url.openStream());
-                        while (sc.hasNext()){
-                            inline += sc.nextLine();
-                        }
-                    }
-                    Gson gson = new Gson();
-                    collectionPoint = gson.fromJson(inline,CollectionPoint.class);
-                    current_cp.setText(collectionPoint.Location + " " + collectionPoint.Description);
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-
     }
 
     @Override
@@ -196,13 +165,69 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
     public void onNegativeButtonClicked() {
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        final SharedPreferences pref = getSharedPreferences("user_credentials",MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.clear();
-        editor.commit();
-        finish();
+
+    public class GetCollectionPoint extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.i("onPreExecute", "onPreExecute");
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+
+            trustManager.trustAllCertificates();
+
+            try {
+                String target = url + "/" + deptID;
+                trustManager.trustAllCertificates();
+                URL url = new URL(target);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                conn.setRequestMethod("GET");
+                conn.connect();
+                int responsecode = conn.getResponseCode();
+                String inline = "";
+                if(responsecode !=200){
+                    throw new RuntimeException(String.valueOf(responsecode));
+                }else{
+                    Scanner sc = new Scanner(url.openStream());
+                    while (sc.hasNext()){
+                        inline += sc.nextLine();
+                    }
+                }
+                Gson gson = new Gson();
+                collectionPoint = gson.fromJson(inline,CollectionPoint.class);
+                current_cp.setText(collectionPoint.Location + " " + collectionPoint.Description);
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            return null;
+        }
     }
+
+
+    //MENU: inflate
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    //MENU: handle selection
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId() == R.id.logout) {
+            final SharedPreferences pref = getSharedPreferences("user_credentials", MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.clear();
+            editor.commit();
+            finish();
+        }
+        return true;
+    }
+
 }

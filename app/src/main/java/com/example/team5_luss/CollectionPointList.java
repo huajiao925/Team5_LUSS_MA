@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +27,7 @@ import com.google.gson.JsonParser;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -40,12 +43,17 @@ public class CollectionPointList extends DialogFragment {
     String responseString; // result string
     CollectionPoint[] collectionPointList = new CollectionPoint[]{};
     ArrayList<String> collectionNames = new ArrayList<>();
+    private String webServiceMessage = "Fail";
+
 
     int position = 0; //default selected Item
-    public interface SingleChoiceListner{
+
+    public interface SingleChoiceListner {
         void onPositiveButtonClicked(String[] list, int position);
+
         void onNegativeButtonClicked();
     }
+
     SingleChoiceListner mLisener;
 
 
@@ -60,42 +68,7 @@ public class CollectionPointList extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String target = url;
-                    trustManager.trustAllCertificates();
-                    URL url = new URL(target);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-                    conn.setRequestMethod("GET");
-                    conn.connect();
-                    int responsecode = conn.getResponseCode();
-                    String inline = "";
-                    if(responsecode !=200){
-                        throw new RuntimeException(String.valueOf(responsecode));
-                    }else{
-                        Scanner sc = new Scanner(url.openStream());
-                        while (sc.hasNext()){
-                            inline += sc.nextLine();
-                        }
-                    }
-                    Gson gson = new Gson();
-                    collectionPointList = gson.fromJson(inline,CollectionPoint[].class);
-                    for(CollectionPoint c: collectionPointList) {
-                        collectionNames.add(c.Location + " " + c.Description);
-                    }
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-
-
-
+        new GetCollectionPointList().execute();
 
         String[] cp_list = new String[collectionNames.size()];
         cp_list = collectionNames.toArray(cp_list);
@@ -122,5 +95,51 @@ public class CollectionPointList extends DialogFragment {
                     }
                 });
         return builder.create();
+    }
+
+
+    public class GetCollectionPointList extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.i("onPreExecute", "onPreExecute");
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+
+            trustManager.trustAllCertificates();
+
+            try {
+                String target = url;
+                trustManager.trustAllCertificates();
+                URL url = new URL(target);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                conn.setRequestMethod("GET");
+                conn.connect();
+                int responsecode = conn.getResponseCode();
+                String inline = "";
+                if (responsecode != 200) {
+                    throw new RuntimeException(String.valueOf(responsecode));
+                } else {
+                    Scanner sc = new Scanner(url.openStream());
+                    while (sc.hasNext()) {
+                        inline += sc.nextLine();
+                    }
+                }
+                Gson gson = new Gson();
+                collectionPointList = gson.fromJson(inline, CollectionPoint[].class);
+                for (CollectionPoint c : collectionPointList) {
+                    collectionNames.add(c.Location + " " + c.Description);
+                }
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            webServiceMessage = "Success";
+            return webServiceMessage;
+        }
     }
 }

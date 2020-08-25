@@ -32,7 +32,6 @@ import java.util.Scanner;
 import Model.CollectionPoint;
 import Model.RequestDetails;
 import Model.ViewModel.CustomRetrieval;
-import Model.item;
 
 public class CollectionListActivity extends AppCompatActivity {
     RecyclerView recyclerView;

@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import Model.Request;
 import Model.ViewModel.CustomRequestDetail;
 import Model.ViewModel.CustomRetrieval;
-import Model.item;
 
 public class CollectionAdapter  extends RecyclerView.Adapter<CollectionAdapter.CollectionViewHolder>{
 

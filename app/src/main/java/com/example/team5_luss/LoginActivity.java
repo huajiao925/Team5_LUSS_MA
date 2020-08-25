@@ -3,6 +3,7 @@ package com.example.team5_luss;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Scanner;
 
 import Model.User;
 
@@ -24,14 +26,15 @@ public class LoginActivity extends AppCompatActivity{
     final String url = "https://10.0.2.2:44312/Login/CheckLogin"; //set up the API url you want to call
     String responseString; // result string
     User loginUser = new User();
-
+    EditText email_Text;
+    EditText psw_Text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final EditText email_Text=(EditText) findViewById(R.id.editTextEmail);
-        final EditText psw_Text=(EditText) findViewById(R.id.editTextPassword);
+        email_Text=findViewById(R.id.editTextEmail);
+        psw_Text=findViewById(R.id.editTextPassword);
         Button login_btn = findViewById(R.id.cirLoginButton);
 
         //get Shared Preferences, if exists, start Activity
@@ -45,7 +48,9 @@ public class LoginActivity extends AppCompatActivity{
         login_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                if (logIn(email_Text.getText().toString(), psw_Text.getText().toString())) {
+                final String email = email_Text.getText().toString();
+                final String pwd = psw_Text.getText().toString();
+                if (logIn(email,pwd)) {
                     //set Shared Preferences
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("email", loginUser.Email);
@@ -67,39 +72,34 @@ public class LoginActivity extends AppCompatActivity{
         //Encrypt password
         final String hpwd = Encrypt.getMd5(password);
 
-        //call the WEB API
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String target = url + "/" + email + "/" + "ICy5YqxZB1uWSwcVLSNLcA==";
-                    trustManager.trustAllCertificates();
-                    URL url = new URL(target);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        try{
+            String target = url + "/" + email + "/" + hpwd;
+            trustManager.trustAllCertificates();
+            URL url = new URL(target);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-                    conn.setRequestMethod("GET");
-                    conn.connect();
-                    InputStream in = conn.getInputStream();
-                    BufferedInputStream bufferedInputStream = new BufferedInputStream(in);
-                    StringBuffer response = new StringBuffer();
-                    int data=bufferedInputStream.read();
-                    while (data!=-1){
-                        char current = (char) data;
-                        response.append(current);
-                        data=bufferedInputStream.read();
-                    }
-                    responseString = response.toString();
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
+            conn.setRequestMethod("GET");
+            conn.connect();
+            String inline = "";
+            int responsecode = conn.getResponseCode();
+            if(responsecode !=200){
+                throw new RuntimeException(String.valueOf(responsecode));
+            }
+            else{
+                Scanner sc = new Scanner(url.openStream());
+                while (sc.hasNext()){
+                    inline += sc.nextLine();
                 }
             }
-        }).start();
+            Gson gson = new Gson();
+            loginUser = gson.fromJson(responseString, User.class);
 
-        Gson gson = new Gson();
-        loginUser = gson.fromJson(responseString, User.class);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        if(responseString != "" && loginUser != null){
+        if(loginUser != null){
             Toast.makeText(this,"Login Successful!",Toast.LENGTH_LONG).show();
             return true;
         }
@@ -115,8 +115,8 @@ public class LoginActivity extends AppCompatActivity{
         Intent intent = new Intent(this, CollectionPointActivity.class);
         startActivity(intent);
     }
-    @Override
-    protected void onStop() {
+
+    protected void onPressBack() {
         super.onStop();
         final SharedPreferences pref = getSharedPreferences("user_credentials",MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
