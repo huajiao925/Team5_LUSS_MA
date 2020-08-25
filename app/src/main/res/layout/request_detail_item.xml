@@ -12,23 +12,23 @@ tools:layout_editor_absoluteY="81dp">
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/name1"
+        android:id="@+id/req_detail_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="Pencil blue somthing" />
 
     <TextView
-        android:id="@+id/qty1"
+        android:id="@+id/req_detail_qty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_toRightOf="@id/name1"
+        android:layout_toRightOf="@id/req_detail_item"
         android:layout_weight="1"
         android:text="5" />
 
     <TextView
-        android:id="@+id/uom1"
+        android:id="@+id/req_detail_uom"
         android:layout_width="117dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -36,7 +36,7 @@ tools:layout_editor_absoluteY="81dp">
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_toRightOf="@id/qty1"
+        android:layout_toRightOf="@id/req_detail_qty"
         android:layout_weight="1"
         android:text="box " />
 

@@ -2,7 +2,7 @@ package Model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class item {
+public class Item {
 
     @SerializedName("itemID")
     public int ItemID;

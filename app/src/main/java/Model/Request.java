@@ -29,11 +29,11 @@ public class Request {
     public int RetrievalID;
 
     @SerializedName("modifiedByUser")
-    public String ModifiedByUser;
+    public User ModifiedByUser;
     @SerializedName("requestByUser")
-    public String RequestByUser;
+    public User RequestByUser;
     @SerializedName("requestDetails")
-    public String RequestDetails;
+    public RequestDetails[] RequestDetails;
     @SerializedName("retrieval")
     public String Retrieval;
 

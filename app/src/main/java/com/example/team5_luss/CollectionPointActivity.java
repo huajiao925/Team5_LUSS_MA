@@ -1,40 +1,45 @@
 package com.example.team5_luss;
 
-import android.app.ActionBar;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.gson.Gson;
 
-import java.io.BufferedInputStream;
-import java.io.InputStream;
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import Model.CollectionPoint;
+import Model.Request;
 
 public class CollectionPointActivity extends AppCompatActivity implements CollectionPointList.SingleChoiceListner {
 
     TextView current_cp;
     String url = "https://10.0.2.2:44312/CollectionPoint"; //set up the API url you want to call
-    String responseString; // result string
     CollectionPoint collectionPoint = new CollectionPoint();
+    Request[] collectionTimes = new Request[]{};
     int deptID;
+    private String webServiceMessage = "Fail";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,8 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
         //Shared Preferences:
         final SharedPreferences pref = getSharedPreferences("user_credentials",MODE_PRIVATE);
         deptID = pref.getInt("deptID",0);
+
+        new GetCollectionPoint().execute();
 
         //get all the collection Time
         new Thread(new Runnable() {
@@ -79,59 +86,35 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
                         }
                     }
                     Gson gson = new Gson();
-                    final String[] collectionTimes = gson.fromJson(inline, String[].class);
+                    collectionTimes= gson.fromJson(inline, Request[].class);
 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             final ListView lv = (ListView) findViewById(R.id.lv);
-                            final List<String> collectionTimesList = new ArrayList<String>(Arrays.asList(collectionTimes));
+                            List<String> collectionTimesList = new ArrayList<String>();
+                            for(int i=0; i<collectionTimes.length; i++){
+                                String date = collectionTimes[i].CollectionTime.substring(0,10);
+                                collectionTimesList.add(date);
+                            }
+                            final List<String> f_collectionTimesList = collectionTimesList.stream().distinct().collect(Collectors.<String>toList());
+
                             final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
-                                    (CollectionPointActivity.this, android.R.layout.simple_list_item_1, collectionTimesList);
+                                    (CollectionPointActivity.this, android.R.layout.simple_list_item_1, f_collectionTimesList);
                             lv.setAdapter(arrayAdapter);
 
                             lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                         //pass the time to next Activity
+                                        Intent intent = new Intent(CollectionPointActivity.this,CollectionListActivity.class);
+                                        intent.putExtra("retrievalID",collectionTimes[i].getRetrievalID());
+                                        startActivity(intent);
                                 }
                             });
                         }
                     });
 
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-
-
-        //get dept's collection point
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String target = url + "/" + deptID;
-                    trustManager.trustAllCertificates();
-                    URL url = new URL(target);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-                    conn.setRequestMethod("GET");
-                    conn.connect();
-                    int responsecode = conn.getResponseCode();
-                    String inline = "";
-                    if(responsecode !=200){
-                        throw new RuntimeException(String.valueOf(responsecode));
-                    }else{
-                        Scanner sc = new Scanner(url.openStream());
-                        while (sc.hasNext()){
-                            inline += sc.nextLine();
-                        }
-                    }
-                    Gson gson = new Gson();
-                    collectionPoint = gson.fromJson(inline,CollectionPoint.class);
-                    current_cp.setText(collectionPoint.Location + " " + collectionPoint.Description);
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -182,13 +165,69 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
     public void onNegativeButtonClicked() {
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        final SharedPreferences pref = getSharedPreferences("user_credentials",MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.clear();
-        editor.commit();
-        finish();
+
+    public class GetCollectionPoint extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.i("onPreExecute", "onPreExecute");
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+
+            trustManager.trustAllCertificates();
+
+            try {
+                String target = url + "/" + deptID;
+                trustManager.trustAllCertificates();
+                URL url = new URL(target);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                conn.setRequestMethod("GET");
+                conn.connect();
+                int responsecode = conn.getResponseCode();
+                String inline = "";
+                if(responsecode !=200){
+                    throw new RuntimeException(String.valueOf(responsecode));
+                }else{
+                    Scanner sc = new Scanner(url.openStream());
+                    while (sc.hasNext()){
+                        inline += sc.nextLine();
+                    }
+                }
+                Gson gson = new Gson();
+                collectionPoint = gson.fromJson(inline,CollectionPoint.class);
+                current_cp.setText(collectionPoint.Location + " " + collectionPoint.Description);
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            return null;
+        }
     }
+
+
+    //MENU: inflate
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    //MENU: handle selection
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId() == R.id.logout) {
+            final SharedPreferences pref = getSharedPreferences("user_credentials", MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.clear();
+            editor.commit();
+            finish();
+        }
+        return true;
+    }
+
 }

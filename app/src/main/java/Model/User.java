@@ -28,15 +28,17 @@ public class User {
     public int DepartmentID;
 
     @SerializedName("department")
-    public Department Department;
+    public String Department;
     @SerializedName("requestMade")
-    public Request[] RequestMade;
+    public String RequestMade;
     @SerializedName("requestModified")
-    public Request[] RequestModified;
+    public String RequestModified;
     @SerializedName("requestedBy")
-    public AdjustmentVoucher[] RequestedBy;
+    public String RequestedBy;
     @SerializedName("approvedBy")
-    public AdjustmentVoucher[] ApprovedBy;
+    public String ApprovedBy;
+    @SerializedName("delegatedManager")
+    public String DelegatedManager;
 
     //public DelegatedManager DelegatedManager;
 
