@@ -18,7 +18,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import Model.CollectionPoint;
 import Model.User;
 
 public class LoginActivity extends AppCompatActivity{
@@ -112,7 +111,7 @@ public class LoginActivity extends AppCompatActivity{
 
 
     private void startMainActivity() {
-        Intent intent = new Intent(this, CollectionActivity.class);
+        Intent intent = new Intent(this, CollectionPointActivity.class);
         startActivity(intent);
     }
     @Override

@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <androidx.cardview.widget.CardView
         android:id="@+id/item_view"
         android:layout_width="match_parent"
@@ -18,7 +19,7 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/increase"
+                android:id="@+id/plus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
@@ -31,8 +32,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_alignLeft="@id/increase"
-                android:layout_below="@id/increase"
+                android:layout_alignLeft="@id/plus"
+                android:layout_below="@id/plus"
                 android:ems="10"
                 android:hint="15"
                 android:inputType="numberSigned" />
@@ -42,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/editTextNumberSigned"
-                android:layout_alignLeft="@id/increase"
+                android:layout_alignLeft="@id/plus"
                 android:layout_weight="1"
                 android:text="-" />
 
@@ -120,6 +121,15 @@
                 android:layout_toRightOf="@id/reqQty_txt"
                 android:layout_weight="1"
                 android:text="80" />
+
+            <TextView
+                android:id="@+id/accptQty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/editTextNumberSigned"
+                android:layout_alignTop="@id/editTextNumberSigned"
+                android:layout_weight="1"
+                android:text="Accpt Qty: " />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

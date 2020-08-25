@@ -23,6 +23,9 @@ public class item {
     @SerializedName("storeItemLocation")
     public String StoreItemLocation;
 
+    @SerializedName("itemCategory")
+    public String ItemCategory;
+
     public String getItemName() {
         return ItemName;
     }
