@@ -2,29 +2,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <group android:id="@+id/dept_rep_menu">
+    <group android:id="@+id/deptRep_menu">
     <item
         android:id="@+id/dept_rep_home"
         android:title="@string/Home"
         />
     </group>
-    <group android:id="@+id/deptMng_rep_menu">
+    <group android:id="@+id/deptMng_menu">
         <item
             android:id="@+id/dept_Mng_home"
             android:title="@string/Home"
             />
         <item
-            android:id="@+id/dept_Mng_delegate"
+            android:id="@+id/dept_delegate"
             android:title="@string/assignDelegate"
             />
     </group>
-    <group android:id="@+id/storeclerk_rep_menu">
+    <group android:id="@+id/storeclerk_menu">
         <item
             android:id="@+id/store_rep_home"
             android:title="@string/Home"
             />
     </group>
-    <group android:id="@+id/storeMng_rep_menu">
+    <group android:id="@+id/storeMng_menu">
         <item
             android:id="@+id/store_Mng_home"
             android:title="@string/Home"

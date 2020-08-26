@@ -273,10 +273,10 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
-        menu.setGroupVisible(R.id.dept_rep_menu, true);
-        menu.setGroupVisible(R.id.storeclerk_rep_menu, false);
-        menu.setGroupVisible(R.id.deptMng_rep_menu, false);
-        menu.setGroupVisible(R.id.storeMng_rep_menu, false);
+        menu.setGroupVisible(R.id.deptRep_menu, true);
+        menu.setGroupVisible(R.id.storeclerk_menu, false);
+        menu.setGroupVisible(R.id.deptMng_menu, false);
+        menu.setGroupVisible(R.id.storeMng_menu, false);
         return true;
     }
 

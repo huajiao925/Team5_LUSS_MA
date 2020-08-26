@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".LoginActivity"/>
+        <activity android:name=".DisbursementActivity"/>
         <activity android:name=".RetrievalForm"></activity>
         <activity android:name=".CollectionListActivity"></activity>
         <activity android:name=".ItemDetails"></activity>
@@ -24,7 +24,7 @@
         <activity android:name=".AdjustVoucherListing"></activity>
         <activity android:name=".AdjustVoucherCreate"></activity>
         <activity android:name=".DisbursementByRequestActivity"></activity>
-        <activity android:name=".DisbursementActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
