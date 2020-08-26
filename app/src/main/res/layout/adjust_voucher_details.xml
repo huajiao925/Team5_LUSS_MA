@@ -251,7 +251,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:textColor="#ffffff"
             android:background="@color/app_color_theme_2"
-            android:textSize="20sp"/>
+            android:textSize="15sp"/>
 
         <Button
             android:id="@+id/approve"
@@ -262,7 +262,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:textColor="#ffffff"
             android:background="@color/themeColor"
-            android:textSize="20sp"/>
+            android:textSize="15sp"/>
 
     </LinearLayout>
 

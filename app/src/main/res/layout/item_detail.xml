@@ -208,7 +208,7 @@
             android:background="@color/themeColor"
             android:text="Adjust"
             android:textColor="#ffffff"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:gravity="center"
             android:visibility="invisible"/>
 

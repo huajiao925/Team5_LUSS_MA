@@ -48,6 +48,8 @@
                 android:layout_below="@id/retrievedQty"
                 android:layout_alignLeft="@id/plus"
                 android:layout_weight="1"
+                android:background="@color/app_color_theme_2"
+                android:textColor="#fff"
                 android:text="Adjust" />
 
             <TextView

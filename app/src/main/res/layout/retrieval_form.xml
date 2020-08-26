@@ -20,6 +20,7 @@
             android:dividerHeight="1dp"
             android:text="Retrieval Form"
             android:textSize="20sp"
+            android:layout_marginLeft="10dp"
             android:textStyle="bold"/>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -31,7 +32,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textSize="15dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
             android:text="Collection Time: " />
 
         <EditText
@@ -39,7 +42,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="100dp"
             android:hint="yyyy-mm-dd"
+            android:textSize="15sp"
             android:textAlignment="center"
             android:inputType="date" />
         </LinearLayout>
@@ -51,8 +57,6 @@
             android:layout_marginTop="10dp"
             android:divider="#e5e5ff"
             android:dividerHeight="1dp" />
-
-
     </LinearLayout>
 
 
@@ -67,7 +71,7 @@
             android:text="Confirm"
             android:textColor="#ffffff"
             android:background="@color/themeColor"
-            android:textSize="20dp"/>
+            android:textSize="15sp"/>
     </RelativeLayout>
 
 
