@@ -63,8 +63,8 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        SharedPreferences pref = getSharedPreferences("user_credentials", MODE_PRIVATE);
-        userID = pref.getInt("userID", 0);
+//        SharedPreferences pref = getSharedPreferences("user_credentials", MODE_PRIVATE);
+//        userID = pref.getInt("userID", 0);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disbursement_by_request);
         Intent intent = getIntent();
