@@ -64,16 +64,27 @@ public class AdjustVoucherCreate extends AppCompatActivity {
         quantity.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(quantity.getText().toString().isEmpty()){
+                    return;
+                }
+                totalValue.setText("" + voucher.getItemPrice() * Integer.parseInt(quantity.getText().toString()));
 
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(quantity.getText().toString().isEmpty()){
+                    return;
+                }
+                totalValue.setText("" + voucher.getItemPrice() * Integer.parseInt(quantity.getText().toString()));
 
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
+                if(quantity.getText().toString().isEmpty()){
+                    return;
+                }
                 totalValue.setText("" + voucher.getItemPrice() * Integer.parseInt(quantity.getText().toString()));
             }
         });
@@ -111,8 +122,6 @@ public class AdjustVoucherCreate extends AppCompatActivity {
         uom = findViewById(R.id.uom);
         unitPrice = findViewById(R.id.price);
         totalValue = findViewById(R.id.value);
-
-
     }
 
     private void loadAdjustmentCreate(final int itemId){
