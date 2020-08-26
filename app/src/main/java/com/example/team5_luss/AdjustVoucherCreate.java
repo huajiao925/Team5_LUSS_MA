@@ -240,6 +240,10 @@ public class AdjustVoucherCreate extends AppCompatActivity {
             Intent intent = new Intent(this,DisbursementActivity.class);
             startActivity(intent);
         }
+        if(item.getItemId() == R.id.delivery) {
+            Intent intent = new Intent(this,DeliveryListActivity.class);
+            startActivity(intent);
+        }
         return true;
     }
 }

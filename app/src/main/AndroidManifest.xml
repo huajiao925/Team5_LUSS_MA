@@ -38,6 +38,8 @@
 
         <activity android:name=".RequestListActivity"></activity>
         <activity android:name=".RequestDetailActivity"></activity>
+        <activity android:name=".DeliveryListActivity"></activity>
+        <activity android:name=".DeliveryDetailActivity"></activity>
         <activity android:name=".CollectionPointActivity"/>
         <activity android:name=".DelegateActivity"/>
     </application>

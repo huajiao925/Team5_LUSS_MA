@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/dlvy_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="@string/DeliveryDetailTitle"
+        android:textAlignment="center"
+        android:textColor="@color/themeColor"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRequests"
+        android:layout_width="414dp"
+        android:layout_height="646dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/delivery_detail_item" />
+
+
+    <LinearLayout
+        android:id="@+id/groupBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/notTally"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:text="NOT TALLY"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:background="@color/app_color_theme_2"
+            android:textSize="20dp"/>
+
+        <Button
+            android:id="@+id/complete"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:text="COMPLETE"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:background="@color/themeColor"
+            android:textSize="20dp"/>
+
+    </LinearLayout>
+</LinearLayout>
