@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 
@@ -49,16 +53,13 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
     TextView deptRepText;
     TextView collectionPointText;
     EditText collectionTimeEdit;
-    EditText fulfillQtyEdit;
     Button confirmBtn;
     //pass back to api
     int requestID;
-    int userID;// inject user session
-    //Date collectionTime;
+    int userID;
     String collectionTime;
     ArrayList<Integer> fulfillQty = new ArrayList<Integer> ();
-    //JSONArray fulfillQtyJson;
-    //String collectionTimeJson;
+
     CustomRequestDetail[] requestItems;
 
     final Calendar myCalendar = Calendar.getInstance();
@@ -83,42 +84,34 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
         collectionPointText = findViewById(R.id.collectionPoint);
         collectionPointText.setText(collectionPoint);
         collectionTimeEdit = findViewById(R.id.collectionTime);
+        confirmBtn = findViewById(R.id.confirm_btn);
 
         listView = findViewById(R.id.listViewReqItems);
         loadRequestItems(requestID);
-
         setDatePicker();
+        onClickConfirmBtn();
 
-        confirmBtn = findViewById(R.id.confirm_btn);
+    }
+
+    private void onClickConfirmBtn(){
         if(confirmBtn != null){
             confirmBtn.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
                     getFulfillQty(DisbursementByRequestItemAdapter.requestDetails);
-                    //fulfillQtyJson = new JSONArray(fulfillQty);
                     collectionTime = collectionTimeEdit.getText().toString();
-                   /* DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
-                    try {
-                        collectionTime = formatter.parse(collectionTimeEdit.getText().toString());
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }*/
-                    //convertDateToJsonString();
-                    //confirmDisbursement(requestID,userID, collectionTimeJson, fulfillQtyJson);
-                    confirmDisbursement(requestID,userID,collectionTime,fulfillQty);
+                    if(collectionTime.length() == 0){
+                        CodeSetting.warningToastMsg(DisbursementByRequestActivity.this,"Collection Date must be specified");
+                    }
+                    else if(!CodeSetting.isQtyNull(fulfillQty)){
+                        CodeSetting.warningToastMsg(DisbursementByRequestActivity.this,"Fulfill quantity must be specified");
+                    }
+                    else confirmDisbursement(requestID,userID,collectionTime,fulfillQty);
                 }
             });
         }
     }
 
-//    public void convertDateToJsonString(){
-//        DateFormat dateFormat=new SimpleDateFormat();
-//        collectionTimeJson = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(collectionTime);
-//    }
-
     private void setDatePicker(){
-        //date picker
-        //final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
         @Override
@@ -127,8 +120,6 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                //view.setMinDate(System.currentTimeMillis()-1000);
-
                 updateLabel();
             }
         };
@@ -141,11 +132,8 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
                 endDate.getDatePicker().setDescendantFocusability(DatePicker.FOCUS_BLOCK_DESCENDANTS);
                 endDate.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 endDate.show();
-
-
             }
         });
-        //end of date picker
     }
 
     private void updateLabel(){

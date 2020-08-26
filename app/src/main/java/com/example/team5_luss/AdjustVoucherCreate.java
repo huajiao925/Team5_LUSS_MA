@@ -72,7 +72,6 @@ public class AdjustVoucherCreate extends AppCompatActivity {
                     return;
                 }
                 totalValue.setText("" + voucher.getItemPrice() * Integer.parseInt(quantity.getText().toString()));
-
             }
 
             @Override
@@ -115,6 +114,14 @@ public class AdjustVoucherCreate extends AppCompatActivity {
             btnConfirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if (adjustType.getCheckedRadioButtonId() == -1)
+                    {
+                        CodeSetting.warningToastMsg(AdjustVoucherCreate.this,"Adjust Type must be specified");
+                    }
+                    else if(quantity.getText().toString().isEmpty()||quantity.getText().toString().equalsIgnoreCase("0")){
+                        CodeSetting.warningToastMsg(AdjustVoucherCreate.this,"Adjust Quantity must be specified");
+                    }
+                    else
                     submitAdjustmentVoucher(type, itemId, Integer.parseInt(quantity.getText().toString()),reason.getText().toString(), userId);
                 }
             });

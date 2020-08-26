@@ -78,18 +78,17 @@ public class RetrievalForm extends AppCompatActivity {
                 public void onClick(View v) {
                     getRetrievedQty(RetrievalAdapter.retrievals);
                     collectionTime = collectionTimeEdit.getText().toString();
+                    if(collectionTime.length() == 0){
+                        CodeSetting.warningToastMsg(RetrievalForm.this,"Collection Date must be specified");
+                    }
+                    else if(!CodeSetting.isQtyNull(retrievedQty)){
+                        CodeSetting.warningToastMsg(RetrievalForm.this,"Retrieved quantity must be specified");
+                    }
                     confirmDisbursementByRetrieval(retrievedQty, retrievalID, collectionTime, userID);
                 }
             });
         }
     }
-
-    //TODO: LINK ADJUST BUTTON TO ADJUST VOUCHER
-    /*public void onClickAdjustBtn(){
-        adjustBtn = findViewById(R.id.adjustBtn);
-        Intent intent = new Intent(this, AdjustVoucherCreate.class);
-        startActivityForResult(intent, ADJUST_STOCK);
-    }*/
 
     public void getRetrievedQty(CustomRetrieval[] customRetrievals){
         for(int i = 0; i< customRetrievals.length; i++){
