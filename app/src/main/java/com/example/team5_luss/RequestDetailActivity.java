@@ -1,24 +1,16 @@
 package com.example.team5_luss;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.gson.Gson;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -28,7 +20,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.Request;
 import Model.RequestDetails;
 
 public class RequestDetailActivity extends AppCompatActivity implements View.OnClickListener {
@@ -55,7 +46,7 @@ public class RequestDetailActivity extends AppCompatActivity implements View.OnC
 
         reqIDDetail = findViewById(R.id.detail_reqID);
         requestID=getIntent().getIntExtra("requestID",0);
-        reqIDDetail.setText(getIntent().getStringExtra("requestID"));
+        reqIDDetail.setText(String.valueOf(getIntent().getIntExtra("requestID",0)));
 
         reqDateDetail = findViewById(R.id.detail_reqDate);
         reqDateDetail.setText(getIntent().getStringExtra("requestDate"));
@@ -65,7 +56,7 @@ public class RequestDetailActivity extends AppCompatActivity implements View.OnC
 
        // ArrayList<RequestDetails> requestDetailList = (ArrayList<RequestDetails>) getIntent().getSerializableExtra("requestDetailList");
         List<RequestDetails> requestDetailList = new ArrayList<RequestDetails>();
-        requestDetailList = (ArrayList<RequestDetails>)getIntent().getSerializableExtra("requestDetailList");
+      //  requestDetailList = (ArrayList<RequestDetails>)getIntent().getSerializableExtra("requestDetailList");
 
         Button btn_accept=findViewById(R.id.btnAccept);
         btn_accept.setOnClickListener(this);
