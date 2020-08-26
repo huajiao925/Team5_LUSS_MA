@@ -10,6 +10,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -146,13 +147,22 @@ public class RetrievalForm extends AppCompatActivity {
                     Gson gson = new Gson();
                     retrievals = gson.fromJson(responseString, CustomRetrieval[].class);
 
-                    retrievalID = retrievals[0].getRetrievalID();
-                    System.out.println("Reached Here");
+                    if(retrievals!=null){
+                        retrievalID = retrievals[0].getRetrievalID();
+                        System.out.println("Reached Here");
+                    }
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            RetrievalAdapter adapter = new RetrievalAdapter(RetrievalForm.this,R.layout.retrieved_items,retrievals);
-                            listView.setAdapter(adapter);
+                            if(retrievals != null){
+                                RetrievalAdapter adapter = new RetrievalAdapter(RetrievalForm.this,R.layout.retrieved_items,retrievals);
+                                listView.setAdapter(adapter);
+                            }else{
+                                Toast.makeText(RetrievalForm.this, "There is not requests to be disbursed", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent();
+                                setResult(RESULT_OK,intent);
+                                finish();
+                            }
                         }
                     });
                 }
