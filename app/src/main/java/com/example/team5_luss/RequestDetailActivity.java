@@ -1,19 +1,14 @@
 package com.example.team5_luss;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,16 +45,17 @@ public class RequestDetailActivity extends AppCompatActivity implements View.OnC
     TextView reqComment;
     int requestID;
     String comment="";
-
+    List<RequestDetails> requestDetailList = new ArrayList<RequestDetails>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.request_detail);
+        recyclerView = findViewById(R.id.rvRequestItems);
 
         reqIDDetail = findViewById(R.id.detail_reqID);
         requestID=getIntent().getIntExtra("requestID",0);
-        reqIDDetail.setText(getIntent().getStringExtra("requestID"));
+        reqIDDetail.setText(String.valueOf(getIntent().getIntExtra("requestID",0)));
 
         reqDateDetail = findViewById(R.id.detail_reqDate);
         reqDateDetail.setText(getIntent().getStringExtra("requestDate"));
@@ -67,9 +63,11 @@ public class RequestDetailActivity extends AppCompatActivity implements View.OnC
         reqByDetail = findViewById(R.id.detail_reqBy);
         reqByDetail.setText(getIntent().getStringExtra("requestBy"));
 
-       // ArrayList<RequestDetails> requestDetailList = (ArrayList<RequestDetails>) getIntent().getSerializableExtra("requestDetailList");
-        List<RequestDetails> requestDetailList = new ArrayList<RequestDetails>();
-        requestDetailList = (ArrayList<RequestDetails>)getIntent().getSerializableExtra("requestDetailList");
+        String jsonString=getIntent().getStringExtra("JRequestDetailList");
+        Gson gson = new Gson();
+        RequestDetails[] details= gson.fromJson(jsonString, RequestDetails[].class);
+        requestDetailList=CodeSetting.convertArrayToList(details);
+        setUpRecyclerView();
 
         Button btn_accept=findViewById(R.id.btnAccept);
         btn_accept.setOnClickListener(this);
@@ -142,13 +140,28 @@ public class RequestDetailActivity extends AppCompatActivity implements View.OnC
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             ShowMessage(webServiceMessage);
-
+            onBackPressed();
         }
 
     }
 
+
+
     private void ShowMessage(String msg) {
         Toast.makeText(this,msg,Toast.LENGTH_LONG).show();
+        if(msg.equals("Success"))
+        {
+            Button btnAccept=(Button)findViewById(R.id.btnAccept);
+            Button btnReject=(Button)findViewById(R.id.btnReject);
+            if(btnAccept!=null)
+            {
+                btnAccept.setVisibility(View.GONE);
+            }
+            if(btnReject!=null)
+            {
+                btnReject.setVisibility(View.GONE);
+            }
+        }
     }
 
 
@@ -159,6 +172,11 @@ public class RequestDetailActivity extends AppCompatActivity implements View.OnC
         finish();
     }
 
+    private void setUpRecyclerView() {
+        RequestItemAdapter adapter = new RequestItemAdapter(this, (ArrayList<RequestDetails>) requestDetailList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+    }
     //MENU: inflate
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -194,4 +212,5 @@ public class RequestDetailActivity extends AppCompatActivity implements View.OnC
         }
         return true;
     }
+
 }

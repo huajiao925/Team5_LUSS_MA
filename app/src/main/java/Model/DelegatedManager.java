@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Locale;
 
 public class DelegatedManager {
-    @SerializedName("delegateManagerID")
+    @SerializedName("delegatedManagerID")
     public int DelegatedManagerID;
     @SerializedName("fromDate")
     public String FromDate;
@@ -16,7 +16,8 @@ public class DelegatedManager {
     public int UserID;
     @SerializedName("user")
     public User User;
-
+    @SerializedName("users")
+    public User[] Users;
 
     public Model.User getUser() {
         return User;

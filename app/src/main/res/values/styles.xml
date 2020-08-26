@@ -45,4 +45,5 @@
         <item name="android:textSize">@dimen/newsMoreTextSize</item>
         <item name="android:backgroundTint">@color/primaryTextColor</item>
     </style>
+
 </resources>

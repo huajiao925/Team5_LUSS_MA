@@ -19,14 +19,32 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/rqtId_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:text="RequestID: " />
 
+        <TextView
+            android:id="@+id/rqtID"
+            android:layout_width="93dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="179dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="20dp"
+            android:layout_toRightOf="@id/rqtId_title"
+            android:layout_weight="1"
+            android:text="1  " />
 
         <TextView
             android:id="@+id/rqtDate_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_weight="1"
             android:text="Request Date : " />
 
@@ -47,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/rqtDate"
             android:layout_marginLeft="157dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="14dp"
             android:layout_toRightOf="@id/rqtBy_title"
             android:layout_weight="1"
             android:text="Lyra Li" />
@@ -57,7 +75,7 @@
             android:layout_width="117dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="154dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_toRightOf="@id/rqtDate_title"
             android:layout_weight="1"
             android:text="2020-08-08" />

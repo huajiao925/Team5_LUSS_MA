@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,7 +43,7 @@ import Model.Request;
 
 public class RequestListActivity extends AppCompatActivity {
 
-    String API_URL = "https://10.0.2.2:44312/request/GetRequestMBByStatusByDept/0/1";
+    String API_URL = "https://10.0.2.2:44312/request/GetRequestMBByStatusByDept/0/";
     String responseString; // result string
     Request[] RequestList = new Request[]{};
     private String webServiceMessage = "Fail";
@@ -49,13 +51,16 @@ public class RequestListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     List<Request> requestArrList = new ArrayList<Request>();
     Context context;
-
+     int depID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
         setContentView(R.layout.request_list);
         recyclerView = findViewById(R.id.rvRequests);
+        SharedPreferences sharedPreferences= getSharedPreferences("user_credentials",MODE_PRIVATE);
+        depID=sharedPreferences.getInt("deptID",0);
+
         new GetRequestAsync().execute();
     }
 
@@ -73,7 +78,7 @@ public class RequestListActivity extends AppCompatActivity {
             trustManager.trustAllCertificates();
 
             try {
-                URL url = new URL(API_URL);
+                URL url = new URL(API_URL+depID);
                 HttpURLConnection conn = null;
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
@@ -109,7 +114,19 @@ public class RequestListActivity extends AppCompatActivity {
                 requestArrList=CodeSetting.convertArrayToList(RequestList);
 
                 if (requestArrList.size() != 0) {
+                    RelativeLayout DataLayout=findViewById(R.id.list_data);
+                    DataLayout.setVisibility(View.VISIBLE);
+                    RelativeLayout noDataLayout=findViewById(R.id.no_data);
+                    noDataLayout.setVisibility(View.GONE);
                     setUpRecyclerView();
+                }
+                else
+                {
+                    RelativeLayout noDataLayout=findViewById(R.id.no_data);
+                    noDataLayout.setVisibility(View.VISIBLE);
+                    RelativeLayout DataLayout=findViewById(R.id.list_data);
+                    DataLayout.setVisibility(View.GONE);
+
                 }
             }
         }

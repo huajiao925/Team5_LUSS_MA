@@ -21,7 +21,7 @@ public class RequestDetails {
     @SerializedName("request")
     public String request;
 
-    @SerializedName("Item")
+    @SerializedName("item")
     public Item Item;
 
     public int getRequestQty() {

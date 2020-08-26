@@ -39,7 +39,7 @@
         <activity android:name=".RequestListActivity"></activity>
         <activity android:name=".RequestDetailActivity"></activity>
         <activity android:name=".CollectionPointActivity"/>
-
+        <activity android:name=".DelegateActivity"/>
     </application>
 
 </manifest>

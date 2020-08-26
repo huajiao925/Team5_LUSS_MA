@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +44,7 @@ public class RequestAdapter
     public void onBindViewHolder(@NonNull final MyViewHolder viewHolder, final int position) {
         viewHolder.rqtTextView.setText(requestList.get(position).RequestByUser.FirstName+" "+requestList.get(position).RequestByUser.LastName);
         viewHolder.rqtDateTextView.setText(CodeSetting.convertDateString(requestList.get(position).getRequestDate().toString()));
+        viewHolder.rqtTextIDView.setText(String.valueOf(requestList.get(position).RequestID));
 
         viewHolder.layoutClick.setOnClickListener(new View.OnClickListener() {
 
@@ -51,9 +54,10 @@ public class RequestAdapter
                 intent.putExtra("requestID", requestList.get(position).RequestID);
                 intent.putExtra("requestDate", CodeSetting.convertDateString(requestList.get(position).getRequestDate().toString()));
                 intent.putExtra("requestBy", requestList.get(position).RequestByUser.FirstName+" "+requestList.get(position).RequestByUser.LastName);
-               // ArrayList<RequestDetails> requestDetailsList=(ArrayList<RequestDetails>)CodeSetting.convertArrayToList(requestList.get(position).RequestDetails);
-
-              //  intent.putExtra("requestDetailList", (ArrayList<RequestDetails>)requestDetailsList);
+                ArrayList<RequestDetails> requestDetailsList=(ArrayList<RequestDetails>)CodeSetting.convertArrayToList(requestList.get(position).RequestDetails);
+                Gson gson = new Gson();
+                String JString= gson.toJson(requestDetailsList);
+                intent.putExtra("JRequestDetailList", JString);
                 activity.startActivity(intent);
                 activity.finish();
             }
@@ -68,11 +72,13 @@ public class RequestAdapter
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public TextView rqtTextView;
+        public TextView rqtTextIDView;
         public TextView rqtDateTextView;
         public LinearLayout layoutClick;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            rqtTextIDView=itemView.findViewById(R.id.rqtID);
             rqtTextView = itemView.findViewById(R.id.rqtBy);
             rqtDateTextView= itemView.findViewById(R.id.rqtDate);
             layoutClick = itemView.findViewById(R.id.rowClick);

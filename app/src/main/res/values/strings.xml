@@ -41,7 +41,7 @@
 
     <!--Delegate-->
      <string name="empty_delegate">There is no Delegate Person! </string>
-
+    <string name="checkBtn">Check</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
