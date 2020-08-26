@@ -84,11 +84,8 @@ public class CollectionAdapter  extends RecyclerView.Adapter<CollectionAdapter.C
                         item.setAcceptedQty(Integer.parseInt(holder.accptQty.getText().toString()));
                     }
 
-
                 }
             });
-
-
     }
 
 
@@ -109,7 +106,7 @@ public class CollectionAdapter  extends RecyclerView.Adapter<CollectionAdapter.C
 
         public CollectionViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemView.findViewById(R.id.increase);
+            itemView.findViewById(R.id.plus);
             itemCode = itemView.findViewById(R.id.itemCode);
             UOM = itemView.findViewById(R.id.uom);
             itemName = itemView.findViewById(R.id.description);
