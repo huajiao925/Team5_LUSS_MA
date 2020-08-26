@@ -10,7 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.gson.Gson;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -20,6 +23,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.Request;
 import Model.RequestDetails;
 
 public class RequestDetailActivity extends AppCompatActivity implements View.OnClickListener {
@@ -37,12 +41,13 @@ public class RequestDetailActivity extends AppCompatActivity implements View.OnC
     TextView reqComment;
     int requestID;
     String comment="";
-
+    List<RequestDetails> requestDetailList = new ArrayList<RequestDetails>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.request_detail);
+        recyclerView = findViewById(R.id.rvRequestItems);
 
         reqIDDetail = findViewById(R.id.detail_reqID);
         requestID=getIntent().getIntExtra("requestID",0);
@@ -54,9 +59,11 @@ public class RequestDetailActivity extends AppCompatActivity implements View.OnC
         reqByDetail = findViewById(R.id.detail_reqBy);
         reqByDetail.setText(getIntent().getStringExtra("requestBy"));
 
-       // ArrayList<RequestDetails> requestDetailList = (ArrayList<RequestDetails>) getIntent().getSerializableExtra("requestDetailList");
-        List<RequestDetails> requestDetailList = new ArrayList<RequestDetails>();
-      //  requestDetailList = (ArrayList<RequestDetails>)getIntent().getSerializableExtra("requestDetailList");
+        String jsonString=getIntent().getStringExtra("JRequestDetailList");
+        Gson gson = new Gson();
+        RequestDetails[] details= gson.fromJson(jsonString, RequestDetails[].class);
+        requestDetailList=CodeSetting.convertArrayToList(details);
+        setUpRecyclerView();
 
         Button btn_accept=findViewById(R.id.btnAccept);
         btn_accept.setOnClickListener(this);
@@ -134,8 +141,23 @@ public class RequestDetailActivity extends AppCompatActivity implements View.OnC
 
     }
 
+
+
     private void ShowMessage(String msg) {
         Toast.makeText(this,msg,Toast.LENGTH_LONG).show();
+        if(msg.equals("Success"))
+        {
+            Button btnAccept=(Button)findViewById(R.id.btnAccept);
+            Button btnReject=(Button)findViewById(R.id.btnReject);
+            if(btnAccept!=null)
+            {
+                btnAccept.setVisibility(View.GONE);
+            }
+            if(btnReject!=null)
+            {
+                btnReject.setVisibility(View.GONE);
+            }
+        }
     }
 
 
@@ -144,5 +166,11 @@ public class RequestDetailActivity extends AppCompatActivity implements View.OnC
         Intent intent = new Intent(this, RequestListActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void setUpRecyclerView() {
+        RequestItemAdapter adapter = new RequestItemAdapter(this, (ArrayList<RequestDetails>) requestDetailList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
     }
 }

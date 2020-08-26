@@ -7,41 +7,77 @@ android:layout_height="wrap_content"
 android:background="@android:color/background_light"
 tools:layout_editor_absoluteY="81dp">
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="1">
+    <TableRow>
 
-    <TextView
-        android:id="@+id/req_detail_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Pencil blue somthing" />
+        <TextView
+            android:id="@+id/req_detail_item"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:padding="3dip"
+            android:text="Pencil blue somthing" />
 
-    <TextView
-        android:id="@+id/req_detail_qty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_toRightOf="@id/req_detail_item"
-        android:layout_weight="1"
-        android:text="5" />
+        <TextView
+            android:id="@+id/req_detail_qty"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:gravity="left"
+            android:padding="3dip"
+            android:text="5" />
 
-    <TextView
-        android:id="@+id/req_detail_uom"
-        android:layout_width="117dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="111dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_toRightOf="@id/req_detail_qty"
-        android:layout_weight="1"
-        android:text="box " />
+        <TextView
+            android:text="Box"
+            android:id="@+id/req_detail_uom"
+            android:layout_width="127dp"
+            android:gravity="left"
+            android:padding="3dip" />
+    </TableRow>
+    </TableLayout>
 
 
-</RelativeLayout>
+
+<!--    <RelativeLayout-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent">-->
+
+<!--    <TextView-->
+
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:text="Pencil blue somthing" />-->
+
+<!--    <TextView-->
+
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="60dp"-->
+<!--        android:layout_marginRight="30dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:layout_toRightOf="@id/req_detail_item"-->
+<!--        android:layout_weight="1"-->
+<!--        android:text="5" />-->
+
+<!--    <TextView-->
+<!--        android:id=""-->
+<!--        android:layout_width="117dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="60dp"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:layout_toRightOf="@id/req_detail_qty"-->
+<!--        android:layout_weight="1"-->
+<!--        android:text="box " />-->
+
+
+<!--</RelativeLayout>-->
 
 
 </LinearLayout>
