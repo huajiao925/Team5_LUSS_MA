@@ -56,4 +56,5 @@
     <string name="logout">Logout</string>
     <string name="CollectionHome">Home</string>
     <string name="Home">Home</string>
+    <string name="itemlist">Inventory List</string>
 </resources>

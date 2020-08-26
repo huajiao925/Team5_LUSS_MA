@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -48,7 +49,6 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.collection_points);
-
         current_cp = findViewById(R.id.current_cp);
 
         Button updateCPBtn = findViewById(R.id.updateBtn);
@@ -165,7 +165,7 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
                 }
             }
         }).start();
-
+        Toast.makeText(this, "Collection Point Updated", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -273,10 +273,10 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
-        menu.setGroupVisible(R.id.dept_rep_menu, true);
-        menu.setGroupVisible(R.id.storeclerk_rep_menu, false);
-        menu.setGroupVisible(R.id.deptMng_rep_menu, false);
-        menu.setGroupVisible(R.id.storeMng_rep_menu, false);
+        menu.setGroupVisible(R.id.deptRep_menu, true);
+        menu.setGroupVisible(R.id.storeclerk_menu, false);
+        menu.setGroupVisible(R.id.deptMng_menu, false);
+        menu.setGroupVisible(R.id.storeMng_menu, false);
         return true;
     }
 
