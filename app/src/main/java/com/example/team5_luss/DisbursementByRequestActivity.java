@@ -115,23 +115,31 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
 
     private void setDatePicker(){
         //date picker
+        //final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
-            @Override
+        @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                //view.setMinDate(System.currentTimeMillis()-1000);
+
                 updateLabel();
             }
         };
         collectionTimeEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(DisbursementByRequestActivity.this, date, myCalendar
+                DatePickerDialog endDate = new DatePickerDialog(DisbursementByRequestActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+                endDate.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                endDate.show();
+
+
             }
         });
         //end of date picker
