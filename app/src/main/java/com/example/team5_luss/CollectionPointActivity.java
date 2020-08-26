@@ -36,6 +36,9 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
     TextView current_cp;
     String url = "https://10.0.2.2:44312/CollectionPoint"; //set up the API url you want to call
     CollectionPoint collectionPoint = new CollectionPoint();
+    CollectionPoint[] collectionPointList = new CollectionPoint[]{};
+    ArrayList<String> collectionNames = new ArrayList<>();
+    String[] cp_list = new String[collectionNames.size()];
     Request[] collectionTimes = new Request[]{};
     int deptID;
     private String webServiceMessage = "Fail";
@@ -53,6 +56,9 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
             @Override
             public void onClick(View view) {
                 DialogFragment collectionPointList = new CollectionPointList();
+                Bundle bundle = new Bundle();
+                bundle.putStringArray("cp_list", cp_list);
+                collectionPointList.setArguments(bundle);
                 collectionPointList.setCancelable(false);
                 collectionPointList.show(getSupportFragmentManager(), "Collection Points List");
             }
@@ -62,6 +68,7 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
         deptID = pref.getInt("deptID",0);
 
         new GetCollectionPoint().execute();
+        new GetCollectionPointList().execute();
 
         //get all the collection Time
         new Thread(new Runnable() {
@@ -208,26 +215,88 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
         }
     }
 
+    public class GetCollectionPointList extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.i("onPreExecute", "onPreExecute");
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+
+            trustManager.trustAllCertificates();
+            try {
+                String target = url;
+                trustManager.trustAllCertificates();
+                URL url = new URL(target);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                conn.setRequestMethod("GET");
+                conn.connect();
+                int responsecode = conn.getResponseCode();
+                String inline = "";
+                if (responsecode != 200) {
+                    throw new RuntimeException(String.valueOf(responsecode));
+                } else {
+                    Scanner sc = new Scanner(url.openStream());
+                    while (sc.hasNext()) {
+                        inline += sc.nextLine();
+                    }
+                }
+                Gson gson = new Gson();
+                collectionPointList = gson.fromJson(inline, CollectionPoint[].class);
+                for (CollectionPoint c : collectionPointList) {
+                    collectionNames.add(c.Location + " " + c.Description);
+                }
+
+
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            webServiceMessage = "Success";
+            return webServiceMessage;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            cp_list = collectionNames.toArray(cp_list);
+
+        }
+    }
 
     //MENU: inflate
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
+        menu.setGroupVisible(R.id.dept_rep_menu, true);
+        menu.setGroupVisible(R.id.storeclerk_rep_menu, false);
+        menu.setGroupVisible(R.id.deptMng_rep_menu, false);
+        menu.setGroupVisible(R.id.storeMng_rep_menu, false);
         return true;
     }
 
     //MENU: handle selection
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
+
         if(item.getItemId() == R.id.logout) {
             final SharedPreferences pref = getSharedPreferences("user_credentials", MODE_PRIVATE);
             SharedPreferences.Editor editor = pref.edit();
             editor.clear();
             editor.commit();
             finish();
+            Intent intent = new Intent(this,LoginActivity.class);
+            startActivity(intent);
+        }
+        if(item.getItemId() == R.id.dept_rep_home) {
+            Intent intent = new Intent(this,CollectionPointActivity.class);
+            startActivity(intent);
         }
         return true;
     }
-
 }
