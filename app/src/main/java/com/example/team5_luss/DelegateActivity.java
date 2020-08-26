@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
@@ -99,6 +100,13 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        if (fragment.isAdded())
+            return;
+        super.onAttachFragment(fragment);
     }
 
     private void AddDataToArrayList(List<User> allUsers) {
@@ -251,7 +259,7 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
         protected String doInBackground(Void... voids) {
 
             trustManager.trustAllCertificates();
-            depID = 1;  //To Delete
+           //depID = 1;  //To Delete
             API_URL += "getCurrentDelegate/" + depID;
             try {
                 URL url = new URL(API_URL);
@@ -298,13 +306,7 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
         if(delegatedManager!=null) {
             if (delegatedManager.DelegatedManagerID != 0) {
                 currentDelegateID = delegatedManager.getDelegatedManagerID();
-                RelativeLayout activeView = findViewById(R.id.active_delegate);
-                activeView.setVisibility(View.VISIBLE);
-
-                RelativeLayout emptyView = findViewById(R.id.empty_delegate);
-                emptyView.setVisibility(View.GONE);
-
-                btnDeleteDelegate.setVisibility(View.VISIBLE);
+                ShowCurrentDelegate();
                 TextView name = findViewById(R.id.dlg_name);
                 if (name != null) {
                     name.setText(delegatedManager.User.FirstName + " " + delegatedManager.User.LastName);
@@ -318,16 +320,36 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
                     ToDate.setText(CodeSetting.convertDateString(delegatedManager.ToDate));
                 }
             } else {
-
-                RelativeLayout activeView = findViewById(R.id.active_delegate);
-                activeView.setVisibility(View.GONE);
-                RelativeLayout emptyView = findViewById(R.id.empty_delegate);
-                emptyView.setVisibility(View.VISIBLE);
-                btnDeleteDelegate.setVisibility(View.GONE);
+                ShowEmptyDelegate();
             }
         }
     }
-
+   public  void ShowEmptyDelegate()
+    {
+        RelativeLayout activeView = findViewById(R.id.active_delegate);
+        activeView.setVisibility(View.GONE);
+        RelativeLayout emptyView = findViewById(R.id.empty_delegate);
+        emptyView.setVisibility(View.VISIBLE);
+        btnDeleteDelegate.setVisibility(View.GONE);
+    }
+    public  void ShowCurrentDelegate()
+    {
+        RelativeLayout activeView = findViewById(R.id.active_delegate);
+        activeView.setVisibility(View.VISIBLE);
+        RelativeLayout emptyView = findViewById(R.id.empty_delegate);
+        emptyView.setVisibility(View.GONE);
+        btnDeleteDelegate.setVisibility(View.VISIBLE);
+    }
+    public  void ShowConfirmBTN()
+    {
+        btnConfirmDelegate.setVisibility(View.VISIBLE);
+        btnCheckDelegate.setVisibility(View.GONE);
+    }
+    public  void ShowCheckBTN()
+    {
+        btnConfirmDelegate.setVisibility(View.GONE);
+        btnCheckDelegate.setVisibility(View.VISIBLE);
+    }
     public class CheckDelegateAsync extends AsyncTask<Void, Void, String> {
 
         @Override
@@ -340,7 +362,7 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
         protected String doInBackground(Void... voids) {
 
             trustManager.trustAllCertificates();
-            depID = 1;  //To Delete
+           // depID = 1;  //To Delete
             String check_API_URL = "https://10.0.2.2:44312/Delegate/isActiveDelegateByUserID/" + selectID+"/"+txtFromDate.getText()+"/"+txtToDate.getText();
             try {
                 URL url = new URL(check_API_URL);
@@ -373,12 +395,11 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
             super.onPostExecute(s);
             if(responseString.equals("false"))
             {
-                btnConfirmDelegate.setVisibility(View.VISIBLE);
-                btnCheckDelegate.setVisibility(View.GONE);
+                ShowConfirmBTN();
                 Toast.makeText(context, "Available for this date!", Toast.LENGTH_SHORT).show();
             }
             else {
-
+                ShowCheckBTN();
                 Toast.makeText(context, "Already assigned for this date!", Toast.LENGTH_SHORT).show();
             }
 
@@ -398,7 +419,7 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
         protected String doInBackground(Void... voids) {
 
             trustManager.trustAllCertificates();
-            depID = 1;  //To Delete
+         //   depID = 1;  //To Delete
             String save_API_URL = "https://10.0.2.2:44312/Delegate/SaveDelegatedManagerMB/" + selectID+"/"+txtFromDate.getText()+"/"+txtToDate.getText();
 
             try {
@@ -439,15 +460,14 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if (webServiceMessage.equals("Success")) {
-                txtFromDate.setText("");
-                txtToDate.setText("");
-                btnConfirmDelegate.setVisibility(View.GONE);
-                btnCheckDelegate.setVisibility(View.VISIBLE);
+                 txtFromDate.setText("");
+                 txtToDate.setText("");
                  ShowData();
+                 ShowCheckBTN();
                 Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
             }
             else {
-
+                ShowCheckBTN();
                 Toast.makeText(context, "Fail Try again", Toast.LENGTH_SHORT).show();
             }
         }
@@ -464,7 +484,7 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
         protected String doInBackground(Void... voids) {
 
             trustManager.trustAllCertificates();
-            depID = 1;  //To Delete
+           // depID = 1;  //To Delete
             String delete_API_URL = "https://10.0.2.2:44312/Delegate/DeleteDelegate/" + currentDelegateID;
 
             try {
@@ -507,7 +527,7 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if (webServiceMessage.equals("Success")) {
-                btnCheckDelegate.setVisibility(View.VISIBLE);
+                ShowCheckBTN();
                 selectID = "";
                 txtFromDate.setText("");
                 txtToDate.setText("");
@@ -515,7 +535,7 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
                 ShowData();
             }
             else {
-
+                ShowCheckBTN();
                 Toast.makeText(context, "Fail!Try Again.", Toast.LENGTH_SHORT).show();
             }
         }

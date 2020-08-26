@@ -140,7 +140,7 @@ public class RequestDetailActivity extends AppCompatActivity implements View.OnC
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             ShowMessage(webServiceMessage);
-
+            onBackPressed();
         }
 
     }
