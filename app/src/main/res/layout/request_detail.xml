@@ -18,7 +18,7 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnAccept"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -30,7 +30,7 @@
         android:text="@string/approveBtn" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btnReject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -62,17 +62,18 @@
 
             <!--Request Info-->
             <TextView
-                android:id="@+id/detail_reqID"
+                android:id="@+id/textView8"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:text="Requested ID : " />
+                android:text="Requested ID : "
+                android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/detail_reqID"
                 android:layout_width="69dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="49dp"
-                android:layout_toRightOf="@id/detail_reqID"
+                android:layout_toRightOf="@id/textView8"
                 android:layout_weight="1"
                 android:text="005" />
 
@@ -80,12 +81,13 @@
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textView10"
+                android:layout_below="@id/detail_reqID"
                 android:layout_weight="1"
-                android:text="Requested Date :  " />
+                android:text="Requested Date :  "
+                android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/detail_reqDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textView8"
@@ -101,20 +103,22 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textView7"
                 android:layout_weight="1"
-                android:text="Requested By  : " />
+                android:text="Requested By  : "
+                android:textStyle="bold"/>
 
 
             <!--Item List-->
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/detail_reqBy"
                 android:layout_width="72dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textView12"
+                android:layout_below="@id/detail_reqDate"
                 android:layout_marginLeft="47dp"
                 android:layout_marginTop="-1dp"
                 android:layout_toRightOf="@id/textView9"
                 android:layout_weight="1"
-                android:text="Lyra Li" />
+                android:text="Lyra Li"
+                />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -170,7 +174,8 @@
         <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputEmail"
                 style="@style/parent"
-                android:layout_marginTop="@dimen/loginViewsMargin">
+                android:layout_marginTop="@dimen/loginViewsMargin"
+              >
 
             <EditText
                 android:id="@+id/editTextComment"

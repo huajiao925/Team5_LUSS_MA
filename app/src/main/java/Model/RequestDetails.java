@@ -18,6 +18,12 @@ public class RequestDetails {
     @SerializedName("isActive")
     public boolean isActive;
 
+    @SerializedName("request")
+    public String request;
+
+    @SerializedName("Item")
+    public Item Item;
+
     public int getRequestQty() {
         return RequestQty;
     }

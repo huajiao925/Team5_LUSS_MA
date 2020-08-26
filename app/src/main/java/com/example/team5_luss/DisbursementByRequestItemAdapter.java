@@ -72,26 +72,25 @@ public class DisbursementByRequestItemAdapter extends ArrayAdapter<CustomRequest
         //holder.fulfillQty.setText(String.valueOf(0));
 
         final EditText fulfillQtyEdit = convertView.findViewById(R.id.fulfillQty);
+        holder.fulfillQty.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-        holder.fulfillQty.addTextChangedListener(new TextWatcher()
-        {@Override
-        public void onTextChanged(CharSequence s, int start, int before, int count){
-
-        }
+            }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                try{
+                try {
                     requestDetail.setFulfillQty(Integer.parseInt(fulfillQtyEdit.getText().toString()));
+                } catch (NumberFormatException e) {
                 }
-                catch(NumberFormatException e){}
-            }});
+            }
+        });
 
         if(inStockQty >= requestedQty){
             fulfillQtyEdit.setFilters(new InputFilter[]{ new InputFilterMinMax(0,requestDetails[position].getRequestQty())});

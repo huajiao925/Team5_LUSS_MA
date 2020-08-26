@@ -23,23 +23,49 @@ import Model.ViewModel.CustomRequest;
 public class DisbursementActivity extends AppCompatActivity {
 
     String url = "https://10.0.2.2:44312/Request/get-request-by-status-mobile/1"; //set up the API url you want to call
-    //String url = "https://10.0.2.2:44312/Request/get-approved-request";
     String responseString; // result string
-    ListView listView;
     CustomRequest[] approvedRequests;
-    public static int DISBURSED = 1;
-    //Request[] approvedRequests;
+
+    ListView listView;
+    Button retrievalBtn;
+
+    public static int DISBURSED_BY_REQUEST = 1;
+    public static int DISBURSED_BY_RETRIEVAL =2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disbursement);
 
-        listView = findViewById(R.id.listViewDisbursement);
         loadApprovedRequestList();
+        onClickRetrievalBtn();
+
     }
 
-    public void loadApprovedRequestList(){
-        try{
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == DISBURSED_BY_REQUEST || requestCode == DISBURSED_BY_RETRIEVAL) {
+            if (resultCode == RESULT_OK) {
+                loadApprovedRequestList();
+            }
+        }
+    }
+
+    public void onClickRetrievalBtn() {
+        retrievalBtn = findViewById(R.id.retrievalBtn);
+        if (retrievalBtn != null) {
+            retrievalBtn.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(DisbursementActivity.this, RetrievalForm.class);
+                    startActivityForResult(intent, DISBURSED_BY_RETRIEVAL);
+                }
+            });
+        }
+    }
+
+    public void loadApprovedRequestList() {
+        try {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -54,63 +80,44 @@ public class DisbursementActivity extends AppCompatActivity {
                         InputStream in = conn.getInputStream();
                         BufferedInputStream bufferedInputStream = new BufferedInputStream(in);
                         StringBuffer response = new StringBuffer();
-                        int data=bufferedInputStream.read();
-                        while (data!=-1){
+                        int data = bufferedInputStream.read();
+                        while (data != -1) {
                             char current = (char) data;
                             response.append(current);
-                            data=bufferedInputStream.read();
+                            data = bufferedInputStream.read();
                         }
                         responseString = response.toString();
-                        //Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
                         Gson gson = new Gson();
                         approvedRequests = gson.fromJson(responseString, CustomRequest[].class);
-                        //approvedRequests = gson.fromJson(responseString, Request[].class);
-                        //approvedRequests = gson.fromJson(String.valueOf(response.getJSONObject("request")), Request[].class);
-                        System.out.println("Reached here");
-
-                        runOnUiThread(new Runnable(){
+                        runOnUiThread(new Runnable() {
                             @Override
-                            public void run(){
-                                DisbursementListAdapter adapter = new DisbursementListAdapter(getApplicationContext(),R.layout.disb_req_item,approvedRequests);
+                            public void run() {
+                                listView = findViewById(R.id.listViewDisbursement);
+                                DisbursementListAdapter adapter = new DisbursementListAdapter(getApplicationContext(), R.layout.disb_req_item, approvedRequests);
                                 listView.setAdapter(adapter);
                                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                                        Toast.makeText(getApplicationContext(), "RequestID "+(approvedRequests[position].getRequestID()), Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(DisbursementActivity.this,DisbursementByRequestActivity.class);
-                                        intent.putExtra("requestID",approvedRequests[position].getRequestID());
-                                        intent.putExtra("deptName",approvedRequests[position].getDepartmentName());
-                                        intent.putExtra("deptRep",approvedRequests[position].getDepartmentRep());
-                                        intent.putExtra("collectionPoint",approvedRequests[position].getCollectionPoint());
+                                        Toast.makeText(getApplicationContext(), "RequestID " + (approvedRequests[position].getRequestID()), Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(DisbursementActivity.this, DisbursementByRequestActivity.class);
+                                        intent.putExtra("requestID", approvedRequests[position].getRequestID());
+                                        intent.putExtra("deptName", approvedRequests[position].getDepartmentName());
+                                        intent.putExtra("deptRep", approvedRequests[position].getDepartmentRep());
+                                        intent.putExtra("collectionPoint", approvedRequests[position].getCollectionPoint());
                                         //startActivity(intent);
-                                        startActivityForResult(intent,DISBURSED);
+                                        startActivityForResult(intent, DISBURSED_BY_REQUEST);
                                     }
-
-
-
-                                        });
+                                });
                             }
                         });
-
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }).start();
-    } catch (Exception e){
-        e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
 
-    }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == DISBURSED) {
-            if (resultCode == RESULT_OK) {
-                loadApprovedRequestList();
-            }
         }
     }
 

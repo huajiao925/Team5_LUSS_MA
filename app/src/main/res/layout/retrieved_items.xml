@@ -18,7 +18,7 @@
         android:id="@+id/item_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+
         android:layout_centerHorizontal="true"
         app:cardCornerRadius="25dp"
         app:cardElevation="10dp">
@@ -28,7 +28,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/increase"
+                android:id="@+id/retrievedQty_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -42,18 +42,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_alignLeft="@id/increase"
-                android:layout_below="@id/increase"
+                android:layout_alignLeft="@id/retrievedQty_txt"
+                android:layout_below="@id/retrievedQty_txt"
                 android:ems="10"
-                android:hint="15"
                 android:inputType="numberSigned" />
 
             <Button
-                android:id="@+id/adjust"
+                android:id="@+id/adjustBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/retrievedQty"
-                android:layout_alignLeft="@id/increase"
+                android:layout_alignLeft="@id/retrievedQty_txt"
                 android:layout_weight="1"
                 android:text="Adjust" />
 

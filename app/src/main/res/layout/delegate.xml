@@ -16,7 +16,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:id="@+id/active_delegate">
 
             <TextView
                 android:id="@+id/dlg_title"
@@ -68,6 +69,28 @@
                 android:layout_toRightOf="@id/dlg_to"
                 android:textColor="@color/whiteTextColor"
                 android:textSize="20sp" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/empty_delegate"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/dlg_empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginEnd="15dp"
+                android:text="@string/empty_delegate"
+                android:gravity="center"
+                android:textColor="@color/whiteTextColor"
+
+                android:textSize="25dp" />
+
 
         </RelativeLayout>
 

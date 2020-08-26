@@ -2,21 +2,29 @@ package com.example.team5_luss;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
+import Model.ViewModel.CustomRequestDetail;
 import Model.ViewModel.CustomRetrieval;
 
-public class RetrievalAdapter extends ArrayAdapter {
+public class RetrievalAdapter extends ArrayAdapter<CustomRetrieval> {
     private Context context;
     private LayoutInflater inflater;
-    private CustomRetrieval[] retrievals;
+    public static CustomRetrieval[] retrievals;
+
+
 
     public RetrievalAdapter(@NonNull Context context, int resource, CustomRetrieval[] retrievals) {
         super(context, resource, retrievals);
@@ -29,6 +37,7 @@ public class RetrievalAdapter extends ArrayAdapter {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         viewHolder holder;
+        final CustomRetrieval retrieval = getItem(position);
 
         if(inflater == null){
             inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
@@ -44,6 +53,7 @@ public class RetrievalAdapter extends ArrayAdapter {
             holder.uom =(TextView)convertView.findViewById(R.id.uom);
             holder.inStockQty =(TextView)convertView.findViewById(R.id.inStock);
             holder.requestedQty =(TextView)convertView.findViewById(R.id.reqQty);
+            holder.retrievedQty=(EditText)convertView.findViewById(R.id.retrievedQty);
             convertView.setTag(holder);
         }else {
             holder = (viewHolder) convertView.getTag();
@@ -63,6 +73,27 @@ public class RetrievalAdapter extends ArrayAdapter {
         holder.inStockQty.setText(String.valueOf(inStockQty));
         holder.requestedQty.setText(String.valueOf(requestedQty));
 
+        final EditText retrievedQtyEdit = convertView.findViewById(R.id.retrievedQty);
+        holder.retrievedQty.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //retrieval.setRequestedQty(Integer.parseInt(retrievedQtyEdit.getText().toString()));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    retrieval.setRequestedQty(Integer.parseInt(retrievedQtyEdit.getText().toString()));
+                } catch (NumberFormatException e) {
+                }
+            }
+        });
+
         return convertView;
 
     }
@@ -74,5 +105,6 @@ public class RetrievalAdapter extends ArrayAdapter {
         TextView uom;
         TextView inStockQty;
         TextView requestedQty;
+        EditText retrievedQty;
     }
 }
