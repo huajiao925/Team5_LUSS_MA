@@ -40,6 +40,14 @@ public class Request {
     //Getter and setter
 
 
+    public String getCollectionTime() {
+        return CollectionTime;
+    }
+
+    public void setCollectionTime(String collectionTime) {
+        CollectionTime = collectionTime;
+    }
+
     public String getRequestDate() {
         return RequestDate;
     }

@@ -3,7 +3,6 @@ package com.example.team5_luss;
 import android.app.Activity;
 import android.text.Editable;
 import android.text.InputFilter;
-import android.text.Spanned;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,17 +10,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.BreakIterator;
 import java.util.ArrayList;
 
-import Model.Request;
-import Model.ViewModel.CustomRequestDetail;
 import Model.ViewModel.CustomRetrieval;
 
 public class CollectionAdapter  extends RecyclerView.Adapter<CollectionAdapter.CollectionViewHolder>{
@@ -67,11 +61,11 @@ public class CollectionAdapter  extends RecyclerView.Adapter<CollectionAdapter.C
 
             final CustomRetrieval item = itemList.get(position);
 
-            holder.itemCode.setText(itemList.get(position).ItemCode);
-            holder.UOM.setText(itemList.get(position).UOM);
-            holder.itemName.setText(itemList.get(position).ItemName);
-            holder.requestedQty.setText(Integer.toString(itemList.get(position).RequestedQty));
-            holder.accptQty.setText(Integer.toString(itemList.get(position).RequestedQty));
+            holder.itemCode.setText(item.ItemCode);
+            holder.UOM.setText(item.UOM);
+            holder.itemName.setText(item.ItemName);
+            holder.requestedQty.setText(Integer.toString(item.RequestedQty));
+            holder.accptQty.setText(Integer.toString(item.RequestedQty));
 
             holder.accptQty.setFilters(new InputFilter[]{ new MinMaxFilter( "0" , Integer.toString(item.getRequestedQty()))});
 
@@ -121,7 +115,7 @@ public class CollectionAdapter  extends RecyclerView.Adapter<CollectionAdapter.C
 
         public CollectionViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemView.findViewById(R.id.plus);
+
             itemCode = itemView.findViewById(R.id.itemCode);
             UOM = itemView.findViewById(R.id.uom);
             itemName = itemView.findViewById(R.id.description);

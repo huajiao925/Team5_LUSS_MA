@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <Button
-        android:id="@+id/confirm_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
-        android:textColor="#fff"
-        android:text="@string/confirmBtn" />
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/item_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         app:cardCornerRadius="25dp"
         app:cardElevation="10dp">
@@ -27,39 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/plus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:layout_alignParentRight="true"
-                android:layout_weight="0"
-                android:textAlignment="center"
-                android:text="Retrieved Qty" />
-
-            <EditText
-                android:id="@+id/retrievedQty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_alignLeft="@id/plus"
-                android:layout_below="@id/plus"
-                android:ems="10"
-                android:hint="0"
-                android:textAlignment="center"
-                android:inputType="numberSigned" />
-
-            <Button
-                android:id="@+id/adjustBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/retrievedQty"
-                android:layout_alignLeft="@id/plus"
-                android:layout_weight="1"
-                android:background="@color/app_color_theme_2"
-                android:textColor="#fff"
-                android:text="Adjust" />
 
             <TextView
                 android:id="@+id/itemCode_txt"
@@ -100,29 +58,11 @@
 
 
             <TextView
-                android:id="@+id/location_txt"
+                android:id="@+id/uom_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/description_text"
                 android:layout_alignLeft="@id/itemCode_txt"
-                android:layout_weight="1"
-                android:text="Location: " />
-
-            <TextView
-                android:id="@+id/location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/description_text"
-                android:layout_toRightOf="@id/location_txt"
-                android:layout_weight="1"
-                android:text="A7" />
-
-            <TextView
-                android:id="@+id/uom_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/location_txt"
-                android:layout_alignLeft="@id/description_text"
                 android:layout_weight="1"
                 android:text="UOM: " />
 
@@ -130,50 +70,66 @@
                 android:id="@+id/uom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/location_txt"
+                android:layout_below="@id/description_text"
                 android:layout_toRightOf="@id/uom_txt"
                 android:layout_weight="1"
                 android:text="box" />
 
             <TextView
-                android:id="@+id/inStockQty_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/uom_txt"
-                android:layout_alignLeft="@id/location_txt"
-                android:layout_weight="1"
-                android:text="InStock Qty " />
-
-            <TextView
-                android:id="@+id/inStock"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/uom_txt"
-                android:layout_toRightOf="@id/inStockQty_txt"
-                android:layout_weight="1"
-                android:text="300" />
-
-            <TextView
                 android:id="@+id/reqQty_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/inStockQty_txt"
-                android:layout_alignLeft="@id/inStockQty_txt"
+                android:layout_below="@id/uom_txt"
+                android:layout_alignLeft="@id/uom_txt"
                 android:layout_weight="1"
-                android:layout_marginBottom="20dp"
                 android:text="Requested Qty: " />
 
             <TextView
                 android:id="@+id/reqQty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/inStock"
+                android:layout_below="@id/uom"
                 android:layout_toRightOf="@id/reqQty_txt"
                 android:layout_weight="1"
                 android:text="80" />
 
+            <TextView
+                android:id="@+id/fulfilQty_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/reqQty_txt"
+                android:layout_alignLeft="@id/reqQty_txt"
+                android:layout_weight="1"
+                android:text="Fulfilled Qty: " />
+
+            <TextView
+                android:id="@+id/fulfilQty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/reqQty"
+                android:layout_toRightOf="@id/accptQty_txt"
+                android:layout_weight="1"
+                android:text="80" />
+
+            <TextView
+                android:id="@+id/accptQty_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fulfilQty_txt"
+                android:layout_alignLeft="@id/reqQty_txt"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:text="Accepted Qty: " />
+
+            <TextView
+                android:id="@+id/accptQty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fulfilQty"
+                android:layout_toRightOf="@id/accptQty_txt"
+                android:layout_weight="1"
+                android:text="80" />
+
         </RelativeLayout>
-
     </androidx.cardview.widget.CardView>
-
-</RelativeLayout>
+</LinearLayout>

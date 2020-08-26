@@ -57,4 +57,7 @@
     <string name="CollectionHome">Home</string>
     <string name="Home">Home</string>
     <string name="itemlist">Inventory List</string>
+    <string name="ReceiveTitel">Delivery List</string>
+    <string name="DeliveryDetailTitle">Delivery Confirmation</string>
+    <string name="delivery">Delivery Confirmation</string>
 </resources>

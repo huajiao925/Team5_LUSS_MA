@@ -27,12 +27,20 @@ public class CustomRetrieval {
     public String CategoryName;
     @SerializedName("totalQty")
     public int TotalQty;
-
     @SerializedName("requestedQty")
     public int RequestedQty;
-
     @SerializedName("acceptedQty")
     public int AcceptedQty;
+    @SerializedName("collectionDate")
+    public String CollectionDate;
+
+    public String getCollectionDate() {
+        return CollectionDate;
+    }
+
+    public void setCollectionDate(String collectionDate) {
+        CollectionDate = collectionDate;
+    }
 
     public int getAcceptedQty() {
         return AcceptedQty;
