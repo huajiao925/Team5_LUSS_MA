@@ -106,7 +106,6 @@ public class DisbursementByRequestItemAdapter extends ArrayAdapter<CustomRequest
                     return;
                 }
             }
-
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 if(fulfillQtyEdit.getText().toString().isEmpty()){
@@ -114,7 +113,6 @@ public class DisbursementByRequestItemAdapter extends ArrayAdapter<CustomRequest
                 }
                 requestDetail.setFulfillQty(Integer.parseInt(fulfillQtyEdit.getText().toString()));
             }
-
             @Override
             public void afterTextChanged(Editable s) {
                 if(fulfillQtyEdit.getText().toString().isEmpty()){

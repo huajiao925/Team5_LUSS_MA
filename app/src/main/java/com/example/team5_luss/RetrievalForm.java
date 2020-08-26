@@ -112,9 +112,11 @@ public class RetrievalForm extends AppCompatActivity {
         collectionTimeEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(RetrievalForm.this, date, myCalendar
+                DatePickerDialog endDate = new DatePickerDialog(RetrievalForm.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+                endDate.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                endDate.show();
             }
         });
         //end of date picker
