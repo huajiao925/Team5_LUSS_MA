@@ -3,12 +3,14 @@ package com.example.team5_luss;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -108,20 +110,28 @@ public class AdjustVoucherListing extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ON_ACTION_RETURN) {
             if (resultCode == RESULT_OK) {
+                if(data.getStringExtra("authorise").equals("rejected")){
+                    Toast.makeText(AdjustVoucherListing.this, "Adjustment has been rejected", Toast.LENGTH_LONG).show();
+                }else if(data.getStringExtra("authorise").equals("approved")){
+                    Toast.makeText(AdjustVoucherListing.this, "Adjustment has been approved", Toast.LENGTH_LONG).show();
+                }
+
                 loadAdjustmentList();
             }
         }
     }
+
     //MENU: inflate
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
-        menu.setGroupVisible(R.id.deptRep_menu, false);
-        menu.setGroupVisible(R.id.storeclerk_menu, false);
-        menu.setGroupVisible(R.id.deptMng_menu, false);
-        menu.setGroupVisible(R.id.storeMng_menu, true);
-        return true;
+
+            menu.setGroupVisible(R.id.deptRep_menu, false);
+            menu.setGroupVisible(R.id.storeclerk_menu, false);
+            menu.setGroupVisible(R.id.deptMng_menu, false);
+            menu.setGroupVisible(R.id.storeMng_menu, true);
+            return true;
     }
 
     //MENU: handle selection

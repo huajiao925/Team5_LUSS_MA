@@ -247,12 +247,11 @@
             android:layout_width="205dp"
             android:layout_height="45dp"
             android:text="Reject"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:textColor="#ffffff"
             android:background="@color/app_color_theme_2"
-            android:textSize="20dp"/>
+            android:textSize="20sp"/>
 
         <Button
             android:id="@+id/approve"
@@ -261,10 +260,9 @@
             android:text="Approve"
             app:layout_constraintTop_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:textStyle="bold"
             android:textColor="#ffffff"
             android:background="@color/themeColor"
-            android:textSize="20dp"/>
+            android:textSize="20sp"/>
 
     </LinearLayout>
 

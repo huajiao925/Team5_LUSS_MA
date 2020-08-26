@@ -92,7 +92,6 @@ public class DisbursementActivity extends AppCompatActivity {
                                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                                        Toast.makeText(getApplicationContext(), "RequestID " + (approvedRequests[position].getRequestID()), Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(DisbursementActivity.this, DisbursementByRequestActivity.class);
                                         intent.putExtra("requestID", approvedRequests[position].getRequestID());
                                         intent.putExtra("deptName", approvedRequests[position].getDepartmentName());
@@ -120,6 +119,7 @@ public class DisbursementActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == DISBURSED_BY_REQUEST || requestCode == DISBURSED_BY_RETRIEVAL) {
             if (resultCode == RESULT_OK) {
+                Toast.makeText(DisbursementActivity.this, "Request has been disbursed", Toast.LENGTH_LONG).show();
                 loadApprovedRequestList();
             }
         }

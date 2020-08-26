@@ -18,13 +18,14 @@
             android:divider="#e5e5ff"
             android:dividerHeight="1dp"
             android:text="Create Adjustment Voucher"
-            android:textSize="30dp" />
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/adjust_detail_head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="60dp"
             android:layout_centerHorizontal="true"
             app:cardCornerRadius="25dp"
             app:cardElevation="10dp" >

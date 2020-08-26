@@ -53,7 +53,7 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
     Button confirmBtn;
     //pass back to api
     int requestID;
-    int userID = 1;// inject user session
+    int userID;// inject user session
     //Date collectionTime;
     String collectionTime;
     ArrayList<Integer> fulfillQty = new ArrayList<Integer> ();
@@ -66,8 +66,8 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-//        SharedPreferences pref = getSharedPreferences("user_credentials", MODE_PRIVATE);
-//        userID = pref.getInt("userID", 0);
+        SharedPreferences pref = getSharedPreferences("user_credentials", MODE_PRIVATE);
+        userID = pref.getInt("userID", 0);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disbursement_by_request);
         Intent intent = getIntent();
@@ -138,6 +138,7 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
                 DatePickerDialog endDate = new DatePickerDialog(DisbursementByRequestActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH));
+                endDate.getDatePicker().setDescendantFocusability(DatePicker.FOCUS_BLOCK_DESCENDANTS);
                 endDate.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 endDate.show();
 

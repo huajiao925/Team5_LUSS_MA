@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -158,7 +159,9 @@ public class AdjustVoucherDetails extends AppCompatActivity {
                     }
                     responseString = response.toString();
 
+                    //Toast.makeText(AdjustVoucherDetails.this, "Adjustment has been rejected", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent();
+                    intent.putExtra("authorise","rejected");
                     setResult(RESULT_OK,intent);
                     finish();
 
@@ -194,7 +197,9 @@ public class AdjustVoucherDetails extends AppCompatActivity {
                     }
                     responseString = response.toString();
 
+                    //Toast.makeText(AdjustVoucherDetails.this, "Adjustment has been approved", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent();
+                    intent.putExtra("authorise","approved");
                     setResult(RESULT_OK,intent);
                     finish();
 
