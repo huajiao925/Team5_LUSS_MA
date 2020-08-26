@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -61,6 +62,9 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        SharedPreferences pref = getSharedPreferences("user_credentials", MODE_PRIVATE);
+        userID = pref.getInt("userID", 0);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disbursement_by_request);
         Intent intent = getIntent();

@@ -2,12 +2,15 @@ package com.example.team5_luss;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -18,6 +21,7 @@ import java.util.ArrayList;
 
 import Model.ViewModel.CustomRequestDetail;
 import Model.ViewModel.CustomRetrieval;
+import Model.ViewModel.InputFilterMinMax;
 
 public class RetrievalAdapter extends ArrayAdapter<CustomRetrieval> {
     private Context context;
@@ -35,7 +39,7 @@ public class RetrievalAdapter extends ArrayAdapter<CustomRetrieval> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         viewHolder holder;
         final CustomRetrieval retrieval = getItem(position);
 
@@ -54,6 +58,7 @@ public class RetrievalAdapter extends ArrayAdapter<CustomRetrieval> {
             holder.inStockQty =(TextView)convertView.findViewById(R.id.inStock);
             holder.requestedQty =(TextView)convertView.findViewById(R.id.reqQty);
             holder.retrievedQty=(EditText)convertView.findViewById(R.id.retrievedQty);
+            holder.adjust =(Button)convertView.findViewById(R.id.adjustBtn);
             convertView.setTag(holder);
         }else {
             holder = (viewHolder) convertView.getTag();
@@ -72,6 +77,14 @@ public class RetrievalAdapter extends ArrayAdapter<CustomRetrieval> {
         holder.uom.setText(String.valueOf(uom));
         holder.inStockQty.setText(String.valueOf(inStockQty));
         holder.requestedQty.setText(String.valueOf(requestedQty));
+        holder.adjust.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,AdjustVoucherCreate.class);
+                intent.putExtra("itemId", retrievals[position].getItemID());
+                context.startActivity(intent);
+            }
+        });
 
         final EditText retrievedQtyEdit = convertView.findViewById(R.id.retrievedQty);
         holder.retrievedQty.addTextChangedListener(new TextWatcher() {
@@ -94,6 +107,12 @@ public class RetrievalAdapter extends ArrayAdapter<CustomRetrieval> {
             }
         });
 
+        if(inStockQty >= requestedQty)
+            retrievedQtyEdit.setFilters(new InputFilter[]{new InputFilterMinMax(0, retrievals[position].getTotalQty())});
+        else if(requestedQty > inStockQty){
+            retrievedQtyEdit.setFilters(new InputFilter[]{ new InputFilterMinMax(0,retrievals[position].getInStockQty())});
+        }
+
         return convertView;
 
     }
@@ -106,5 +125,6 @@ public class RetrievalAdapter extends ArrayAdapter<CustomRetrieval> {
         TextView inStockQty;
         TextView requestedQty;
         EditText retrievedQty;
+        Button adjust;
     }
 }

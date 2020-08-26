@@ -42,16 +42,6 @@ public class DisbursementActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == DISBURSED_BY_REQUEST || requestCode == DISBURSED_BY_RETRIEVAL) {
-            if (resultCode == RESULT_OK) {
-                loadApprovedRequestList();
-            }
-        }
-    }
-
     public void onClickRetrievalBtn() {
         retrievalBtn = findViewById(R.id.retrievalBtn);
         if (retrievalBtn != null) {
@@ -118,6 +108,16 @@ public class DisbursementActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
 
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == DISBURSED_BY_REQUEST || requestCode == DISBURSED_BY_RETRIEVAL) {
+            if (resultCode == RESULT_OK) {
+                loadApprovedRequestList();
+            }
         }
     }
 

@@ -3,6 +3,7 @@ package com.example.team5_luss;
 import android.app.Activity;
 import android.content.Context;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.annotation.Nullable;
 
 import Model.ViewModel.CustomRequest;
 import Model.ViewModel.CustomRequestDetail;
+import Model.ViewModel.InputFilterMinMax;
 
 public class DisbursementByRequestItemAdapter extends ArrayAdapter<CustomRequestDetail> {
     private Context context;
@@ -89,6 +91,15 @@ public class DisbursementByRequestItemAdapter extends ArrayAdapter<CustomRequest
                 }
             }
         });
+
+        if(inStockQty >= requestedQty){
+            fulfillQtyEdit.setFilters(new InputFilter[]{ new InputFilterMinMax(0,requestDetails[position].getRequestQty())});
+        } else if(requestedQty > inStockQty){
+            fulfillQtyEdit.setFilters(new InputFilter[]{ new InputFilterMinMax(0,requestDetails[position].getInStockQty())});
+        }
+
+
+
 
 
 
