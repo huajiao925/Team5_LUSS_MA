@@ -112,7 +112,6 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
 //        collectionTimeJson = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(collectionTime);
 //    }
 
-
     private void setDatePicker(){
         //date picker
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -232,6 +231,5 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
                 }
             }
         }).start();
-
     }
 }

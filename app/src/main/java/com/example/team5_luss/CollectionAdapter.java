@@ -42,12 +42,19 @@ public class CollectionAdapter  extends RecyclerView.Adapter<CollectionAdapter.C
         view.findViewById(R.id.plus).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(accptQty.getText().toString().isEmpty()) {
+                    accptQty.setText(String.valueOf(0));
+                }
                 accptQty.setText(Integer.toString(Integer.parseInt(accptQty.getText().toString())+1));
+
             }
         });
         view.findViewById(R.id.minus).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                if(accptQty.getText().toString().isEmpty()) {
+                    accptQty.setText(String.valueOf(0));
+                }
                 accptQty.setText(Integer.toString(Integer.parseInt(accptQty.getText().toString())-1));
             }
         });
@@ -72,14 +79,22 @@ public class CollectionAdapter  extends RecyclerView.Adapter<CollectionAdapter.C
             holder.accptQty.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    if(holder.accptQty.getText().toString().isEmpty()){
+                        return;
+                    }
                     item.setAcceptedQty(Integer.parseInt(holder.accptQty.getText().toString()));
                 }
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                    if(holder.accptQty.getText().toString().isEmpty()){
+                        return;
+                    }
                 }
                 @Override
                 public void afterTextChanged(Editable editable) {
+                    if(holder.accptQty.getText().toString().isEmpty()){
+                        return;
+                    }
                     if(editable.length()> 0){
                         item.setAcceptedQty(Integer.parseInt(holder.accptQty.getText().toString()));
                     }
