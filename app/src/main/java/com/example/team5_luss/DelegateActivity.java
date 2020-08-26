@@ -98,7 +98,8 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
     }
 
     private void AddDataToArrayList(List<User> allUsers) {
-
+        arrayList.clear();
+        my_dict.clear();
         for (User u : allUsers) {
             my_dict.put(u.FirstName + " " + u.LastName,String.valueOf(u.UserID));
             arrayList.add(u.FirstName + " " + u.LastName);
@@ -136,7 +137,7 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
                 ShowToDatePicker();
                 break;
             case R.id.check_button:
-                if(selectID.isEmpty() && txtFromDate.getText().equals("") && txtToDate.getText().equals("")) {
+                if(selectID.isEmpty() || txtFromDate.getText().equals("") || txtToDate.getText().equals("")) {
                     Toast.makeText(context, "Plz choose data first!", Toast.LENGTH_SHORT).show();
                 }
                 else
@@ -145,7 +146,7 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
                 }
                 break;
             case R.id.confirm_button:
-                if(selectID.isEmpty() && txtFromDate.getText().equals("") && txtToDate.getText().equals("")) {
+                if(selectID.isEmpty() || txtFromDate.getText().equals("")  || txtToDate.getText().equals("")) {
                     Toast.makeText(context, "Plz choose data first!", Toast.LENGTH_SHORT).show();
                 }
                 else
@@ -283,34 +284,44 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
             if (webServiceMessage.equals("Success")) {
                 AddDataToArrayList(CodeSetting.convertArrayToList(delegatedManager.Users));
                 findViews();
-                if (delegatedManager.DelegatedManagerID != 0) {
-                    currentDelegateID=delegatedManager.getDelegatedManagerID();
-                    RelativeLayout activeView = findViewById(R.id.active_delegate);
-                    activeView.setVisibility(View.VISIBLE);
-
-                    TextView name = findViewById(R.id.dlg_name);
-                    if (name != null) {
-                        name.setText(delegatedManager.User.FirstName + " " + delegatedManager.User.LastName);
-                    }
-                    TextView fromDate = findViewById(R.id.dlg_fromDate);
-                    if (fromDate != null) {
-                        fromDate.setText(CodeSetting.convertDateString(delegatedManager.FromDate));
-                    }
-                    TextView ToDate = findViewById(R.id.dlg_toDate);
-                    if (ToDate != null) {
-                        ToDate.setText(CodeSetting.convertDateString(delegatedManager.ToDate));
-                    }
-                } else {
-
-                    RelativeLayout activeView = findViewById(R.id.active_delegate);
-                    activeView.setVisibility(View.GONE);
-                    RelativeLayout emptyView = findViewById(R.id.empty_delegate);
-                    emptyView.setVisibility(View.VISIBLE);
-                    btnDeleteDelegate.setVisibility(View.GONE);
-                }
+                ShowData();
             }
         }
 
+    }
+    public  void ShowData()
+    {
+        if(delegatedManager!=null) {
+            if (delegatedManager.DelegatedManagerID != 0) {
+                currentDelegateID = delegatedManager.getDelegatedManagerID();
+                RelativeLayout activeView = findViewById(R.id.active_delegate);
+                activeView.setVisibility(View.VISIBLE);
+
+                RelativeLayout emptyView = findViewById(R.id.empty_delegate);
+                emptyView.setVisibility(View.GONE);
+
+                btnDeleteDelegate.setVisibility(View.VISIBLE);
+                TextView name = findViewById(R.id.dlg_name);
+                if (name != null) {
+                    name.setText(delegatedManager.User.FirstName + " " + delegatedManager.User.LastName);
+                }
+                TextView fromDate = findViewById(R.id.dlg_fromDate);
+                if (fromDate != null) {
+                    fromDate.setText(CodeSetting.convertDateString(delegatedManager.FromDate));
+                }
+                TextView ToDate = findViewById(R.id.dlg_toDate);
+                if (ToDate != null) {
+                    ToDate.setText(CodeSetting.convertDateString(delegatedManager.ToDate));
+                }
+            } else {
+
+                RelativeLayout activeView = findViewById(R.id.active_delegate);
+                activeView.setVisibility(View.GONE);
+                RelativeLayout emptyView = findViewById(R.id.empty_delegate);
+                emptyView.setVisibility(View.VISIBLE);
+                btnDeleteDelegate.setVisibility(View.GONE);
+            }
+        }
     }
 
     public class CheckDelegateAsync extends AsyncTask<Void, Void, String> {
@@ -346,7 +357,7 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
                 responseString = response.toString();
             } catch (IOException ex) {
                 ex.printStackTrace();
-                Toast.makeText(context, "Connection Error!", Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(context, "Connection Error!", Toast.LENGTH_SHORT).show();
             }
             webServiceMessage = "Success";
             return webServiceMessage;
@@ -403,13 +414,19 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
                     data = bufferedInputStream.read();
                 }
                 responseString = response.toString();
-
-
+                if(!responseString.isEmpty()) {
+                    Gson gson = new Gson();
+                    delegatedManager = gson.fromJson(responseString, DelegatedManager.class);
+                }
+                else {
+                    delegatedManager = new DelegatedManager();
+                    webServiceMessage = "fail";
+                }
 
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            webServiceMessage = "Success";
+
             return webServiceMessage;
 
         }
@@ -417,18 +434,17 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            if (responseString.equals("Success")) {
-
-                btnConfirmDelegate.setVisibility(View.GONE);
-                btnCheckDelegate.setVisibility(View.VISIBLE);
-                selectID="";
+            if (webServiceMessage.equals("Success")) {
                 txtFromDate.setText("");
                 txtToDate.setText("");
-                Toast.makeText(context, "Assign Successfully!", Toast.LENGTH_SHORT).show();
+                btnConfirmDelegate.setVisibility(View.GONE);
+                btnCheckDelegate.setVisibility(View.VISIBLE);
+                 ShowData();
+                Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
             }
             else {
 
-                Toast.makeText(context, "Already assigned for this date!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Fail Try again", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -464,6 +480,14 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
                     data = bufferedInputStream.read();
                 }
                 responseString = response.toString();
+                if(responseString.isEmpty()) {
+                    Gson gson = new Gson();
+                    delegatedManager = gson.fromJson(responseString, DelegatedManager.class);
+                }
+                else
+                {
+                    delegatedManager=new DelegatedManager();
+                }
 
 
 
@@ -478,15 +502,13 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            if (responseString.equals("Success")) {
-
-                btnConfirmDelegate.setVisibility(View.GONE);
+            if (webServiceMessage.equals("Success")) {
                 btnCheckDelegate.setVisibility(View.VISIBLE);
-                selectID="";
+                selectID = "";
                 txtFromDate.setText("");
                 txtToDate.setText("");
                 Toast.makeText(context, "Remove Successfully!", Toast.LENGTH_SHORT).show();
-                new GetCurrentDelegateAsync().execute();
+                ShowData();
             }
             else {
 
