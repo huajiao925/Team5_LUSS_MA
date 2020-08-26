@@ -3,12 +3,15 @@ package com.example.team5_luss;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +22,13 @@ import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import Model.CustomAdjustmentVoucher;
+import Model.Item;
 import Model.ViewModel.CustomItem;
 
 public class ItemListing extends AppCompatActivity {
@@ -29,13 +37,44 @@ public class ItemListing extends AppCompatActivity {
     String responseString; // result string
     CustomItem[] items;
 
+    List<CustomItem> inventory = new ArrayList<CustomItem>();
+    SearchView searchView;
+    ListView listView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.item_list);
 
+        searchView = (SearchView) findViewById(R.id.searchView);
+
         loadItemList();
     }
+
+
+    public void setSearchView(final ItemListAdapter adapter){
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                /*if(inventory.contains(query.toLowerCase())){
+                    adapter.getFilter().filter(query);
+                }else{
+                    Toast.makeText(ItemListing.this, "No Match found", Toast.LENGTH_LONG).show();
+                }*/
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText.toLowerCase());
+                return true;
+            }
+        });
+    }
+
+
+
 
     private void  loadItemList(){
         new Thread(new Runnable() {
@@ -65,9 +104,13 @@ public class ItemListing extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ItemListAdapter adapter = new ItemListAdapter(ItemListing.this,R.layout.item_list,items);
-                            ListView listView = findViewById(R.id.inventoryListing);
+                            //List<CustomItem> i = CodeSetting.convertArrayToList(items);
+                            Collections.addAll(inventory,items);
+                            ItemListAdapter adapter = new ItemListAdapter(ItemListing.this,R.layout.item_list,inventory);
+                            listView = findViewById(R.id.inventoryListing);
                             listView.setAdapter(adapter);
+                            listView.setTextFilterEnabled(true);
+                            setSearchView(adapter);
                             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -127,4 +170,26 @@ public class ItemListing extends AppCompatActivity {
         return true;
     }
 
+
+    /*private void setSearchView(){
+        searchView.setIconifiedByDefault(false);
+        searchView.setOnQueryTextListener(this);
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setQueryHint("Search Here");
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        if (TextUtils.isEmpty(s)) {
+            listView.clearTextFilter();
+        } else {
+            listView.setFilterText(s);
+        }
+        return true;
+    }*/
 }

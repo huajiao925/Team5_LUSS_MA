@@ -202,14 +202,13 @@
 
 
         <Button
-            android:id="@+id/adjust"
+            android:id="@+id/adjustBtn"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@color/themeColor"
             android:text="Adjust"
             android:textColor="#ffffff"
-            android:textSize="20dp"
-            android:textStyle="bold"
+            android:textSize="20sp"
             android:gravity="center"
             android:visibility="invisible"/>
 

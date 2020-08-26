@@ -20,7 +20,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import Model.CustomAdjustmentVoucher;
 import Model.ViewModel.CustomItem;
 
 public class ItemDetails extends AppCompatActivity {
@@ -29,7 +28,7 @@ public class ItemDetails extends AppCompatActivity {
     private int ON_ACTION_RETURN = 1;
     String url = "https://10.0.2.2:44312/ItemList/mobile/GetItemByID/";
     String responseString;
-    String userRole = "store_clerk";
+    String userRole;
     Button btnAdjust;
     TextView itemCode;
     TextView category;
@@ -46,15 +45,15 @@ public class ItemDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.item_detail);
 
-        //final SharedPreferences pref = getSharedPreferences("user_credentials",MODE_PRIVATE);
-        //userRole = pref.getString("role","");
+        final SharedPreferences pref = getSharedPreferences("user_credentials",MODE_PRIVATE);
+        userRole = pref.getString("role","");
 
         final Intent intent = getIntent();
         itemId = intent.getIntExtra("itemId",0);
         loadItemDetails(itemId);
 
         if(userRole.equals("store_clerk")){
-            btnAdjust = findViewById(R.id.adjust);
+            btnAdjust = findViewById(R.id.adjustBtn);
             if(btnAdjust!=null){
                 btnAdjust.setVisibility(View.VISIBLE);
                 btnAdjust.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +66,7 @@ public class ItemDetails extends AppCompatActivity {
                 });
             }
         } else if(userRole.equals("store_manager") || userRole.equals("store_supervisor")){
-            btnAdjust = findViewById(R.id.adjust);
+            btnAdjust = findViewById(R.id.adjustBtn);
             if(btnAdjust!=null){
                 btnAdjust.setVisibility(View.INVISIBLE);
             }
