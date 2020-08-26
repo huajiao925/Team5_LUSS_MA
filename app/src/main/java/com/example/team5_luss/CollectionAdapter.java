@@ -3,6 +3,7 @@ package com.example.team5_luss;
 import android.app.Activity;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.BreakIterator;
 import java.util.ArrayList;
 
+import Model.Request;
+import Model.ViewModel.CustomRequestDetail;
 import Model.ViewModel.CustomRetrieval;
 
 public class CollectionAdapter  extends RecyclerView.Adapter<CollectionAdapter.CollectionViewHolder>{
@@ -36,12 +42,19 @@ public class CollectionAdapter  extends RecyclerView.Adapter<CollectionAdapter.C
         view.findViewById(R.id.plus).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(accptQty.getText().toString().isEmpty()) {
+                    accptQty.setText(String.valueOf(0));
+                }
                 accptQty.setText(Integer.toString(Integer.parseInt(accptQty.getText().toString())+1));
+
             }
         });
         view.findViewById(R.id.minus).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                if(accptQty.getText().toString().isEmpty()) {
+                    accptQty.setText(String.valueOf(0));
+                }
                 accptQty.setText(Integer.toString(Integer.parseInt(accptQty.getText().toString())-1));
             }
         });
@@ -66,23 +79,28 @@ public class CollectionAdapter  extends RecyclerView.Adapter<CollectionAdapter.C
             holder.accptQty.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    if(holder.accptQty.getText().toString().isEmpty()){
+                        return;
+                    }
                     item.setAcceptedQty(Integer.parseInt(holder.accptQty.getText().toString()));
                 }
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                    if(holder.accptQty.getText().toString().isEmpty()){
+                        return;
+                    }
                 }
                 @Override
                 public void afterTextChanged(Editable editable) {
+                    if(holder.accptQty.getText().toString().isEmpty()){
+                        return;
+                    }
                     if(editable.length()> 0){
                         item.setAcceptedQty(Integer.parseInt(holder.accptQty.getText().toString()));
                     }
 
-
                 }
             });
-
-
     }
 
 
@@ -103,7 +121,7 @@ public class CollectionAdapter  extends RecyclerView.Adapter<CollectionAdapter.C
 
         public CollectionViewHolder(@NonNull View itemView) {
             super(itemView);
-          //  itemView.findViewById(R.id.increase);
+            itemView.findViewById(R.id.plus);
             itemCode = itemView.findViewById(R.id.itemCode);
             UOM = itemView.findViewById(R.id.uom);
             itemName = itemView.findViewById(R.id.description);
@@ -114,4 +132,6 @@ public class CollectionAdapter  extends RecyclerView.Adapter<CollectionAdapter.C
 
         }
     }
+
+
 }

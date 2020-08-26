@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -61,6 +65,9 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+//        SharedPreferences pref = getSharedPreferences("user_credentials", MODE_PRIVATE);
+//        userID = pref.getInt("userID", 0);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disbursement_by_request);
         Intent intent = getIntent();
@@ -108,26 +115,33 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
 //        collectionTimeJson = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(collectionTime);
 //    }
 
-
     private void setDatePicker(){
         //date picker
+        //final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
-            @Override
+        @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                //view.setMinDate(System.currentTimeMillis()-1000);
+
                 updateLabel();
             }
         };
         collectionTimeEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(DisbursementByRequestActivity.this, date, myCalendar
+                DatePickerDialog endDate = new DatePickerDialog(DisbursementByRequestActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+                endDate.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                endDate.show();
+
+
             }
         });
         //end of date picker
@@ -228,6 +242,41 @@ public class DisbursementByRequestActivity extends AppCompatActivity {
                 }
             }
         }).start();
+    }
 
+    //MENU: inflate
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        menu.setGroupVisible(R.id.deptRep_menu, false);
+        menu.setGroupVisible(R.id.storeclerk_menu, true);
+        menu.setGroupVisible(R.id.deptMng_menu, false);
+        menu.setGroupVisible(R.id.storeMng_menu, false);
+        return true;
+    }
+
+    //MENU: handle selection
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        if(item.getItemId() == R.id.logout) {
+            final SharedPreferences pref = getSharedPreferences("user_credentials", MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.clear();
+            editor.commit();
+            finish();
+            Intent intent = new Intent(this,LoginActivity.class);
+            startActivity(intent);
+        }
+        if(item.getItemId() == R.id.store_item) {
+            Intent intent = new Intent(this,ItemListing.class);
+            startActivity(intent);
+        }
+        if(item.getItemId() == R.id.store_home) {
+            Intent intent = new Intent(this,DisbursementActivity.class);
+            startActivity(intent);
+        }
+        return true;
     }
 }

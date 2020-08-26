@@ -2,7 +2,11 @@ package com.example.team5_luss;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -10,6 +14,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -107,9 +112,11 @@ public class RetrievalForm extends AppCompatActivity {
         collectionTimeEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(RetrievalForm.this, date, myCalendar
+                DatePickerDialog endDate = new DatePickerDialog(RetrievalForm.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+                endDate.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                endDate.show();
             }
         });
         //end of date picker
@@ -146,13 +153,22 @@ public class RetrievalForm extends AppCompatActivity {
                     Gson gson = new Gson();
                     retrievals = gson.fromJson(responseString, CustomRetrieval[].class);
 
-                    retrievalID = retrievals[0].getRetrievalID();
-                    System.out.println("Reached Here");
+                    if(retrievals!=null){
+                        retrievalID = retrievals[0].getRetrievalID();
+                        System.out.println("Reached Here");
+                    }
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            RetrievalAdapter adapter = new RetrievalAdapter(RetrievalForm.this,R.layout.retrieved_items,retrievals);
-                            listView.setAdapter(adapter);
+                            if(retrievals != null){
+                                RetrievalAdapter adapter = new RetrievalAdapter(RetrievalForm.this,R.layout.retrieved_items,retrievals);
+                                listView.setAdapter(adapter);
+                            }else{
+                                Toast.makeText(RetrievalForm.this, "There is not requests to be disbursed", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent();
+                                setResult(RESULT_OK,intent);
+                                finish();
+                            }
                         }
                     });
                 }
@@ -194,5 +210,41 @@ public class RetrievalForm extends AppCompatActivity {
                 }
             }
         }).start();
+    }
+
+    //MENU: inflate
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        menu.setGroupVisible(R.id.deptRep_menu, false);
+        menu.setGroupVisible(R.id.storeclerk_menu, true);
+        menu.setGroupVisible(R.id.deptMng_menu, false);
+        menu.setGroupVisible(R.id.storeMng_menu, false);
+        return true;
+    }
+
+    //MENU: handle selection
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        if(item.getItemId() == R.id.logout) {
+            final SharedPreferences pref = getSharedPreferences("user_credentials", MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.clear();
+            editor.commit();
+            finish();
+            Intent intent = new Intent(this,LoginActivity.class);
+            startActivity(intent);
+        }
+        if(item.getItemId() == R.id.store_item) {
+            Intent intent = new Intent(this,ItemListing.class);
+            startActivity(intent);
+        }
+        if(item.getItemId() == R.id.store_home) {
+            Intent intent = new Intent(this,DisbursementActivity.class);
+            startActivity(intent);
+        }
+        return true;
     }
 }

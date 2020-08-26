@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -33,7 +34,7 @@ public class DisbursementByRequestItemAdapter extends ArrayAdapter<CustomRequest
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        viewHolder holder;
+        final viewHolder holder;
         final CustomRequestDetail requestDetail = getItem(position);
 
 
@@ -51,6 +52,10 @@ public class DisbursementByRequestItemAdapter extends ArrayAdapter<CustomRequest
             holder.inStockQty = (TextView)convertView.findViewById(R.id.instockqyt);
             holder.requestedQty = (TextView)convertView.findViewById(R.id.reqQty);
             holder.fulfillQty= (EditText) convertView.findViewById(R.id.fulfillQty);
+
+            holder.minus=(Button) convertView.findViewById(R.id.minus);
+            holder.plus=(Button) convertView.findViewById(R.id.plus);
+
             convertView.setTag(holder);
         }else{
             holder =(DisbursementByRequestItemAdapter.viewHolder) convertView.getTag();
@@ -72,21 +77,51 @@ public class DisbursementByRequestItemAdapter extends ArrayAdapter<CustomRequest
         //holder.fulfillQty.setText(String.valueOf(0));
 
         final EditText fulfillQtyEdit = convertView.findViewById(R.id.fulfillQty);
+
+
+        holder.plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(fulfillQtyEdit.getText().toString().isEmpty()) {
+                    holder.fulfillQty.setText(String.valueOf(0));
+                }
+                    holder.fulfillQty.setText(Integer.toString(Integer.parseInt(holder.fulfillQty.getText().toString()) + 1));
+            }
+        });
+        holder.minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //int qty = Integer.parseInt(holder.fulfillQty.getText().toString());
+                if(fulfillQtyEdit.getText().toString().isEmpty()) {
+                    holder.fulfillQty.setText(String.valueOf(0));
+                }
+                holder.fulfillQty.setText(Integer.toString(Integer.parseInt(holder.fulfillQty.getText().toString()) - 1));
+            }
+        });
+
         holder.fulfillQty.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if(fulfillQtyEdit.getText().toString().isEmpty()){
+                    return;
+                }
             }
-
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                if(fulfillQtyEdit.getText().toString().isEmpty()){
+                    return;
+                }
+                requestDetail.setFulfillQty(Integer.parseInt(fulfillQtyEdit.getText().toString()));
             }
-
             @Override
             public void afterTextChanged(Editable s) {
+                if(fulfillQtyEdit.getText().toString().isEmpty()){
+                    return;
+                }
                 try {
-                    requestDetail.setFulfillQty(Integer.parseInt(fulfillQtyEdit.getText().toString()));
+                    if(s.length()> 0) {
+                        requestDetail.setFulfillQty(Integer.parseInt(fulfillQtyEdit.getText().toString()));
+                    }
                 } catch (NumberFormatException e) {
                 }
             }
@@ -98,17 +133,6 @@ public class DisbursementByRequestItemAdapter extends ArrayAdapter<CustomRequest
             fulfillQtyEdit.setFilters(new InputFilter[]{ new InputFilterMinMax(0,requestDetails[position].getInStockQty())});
         }
 
-
-
-
-
-
-
-//        if(inStockQty >= requestedQty) {
-//            holder.fulfillQty.setText(String.valueOf(requestedQty));
-//        } else{
-//            holder.fulfillQty.setText(String.valueOf(inStockQty));
-//        }
         return convertView;
     }
 
@@ -119,6 +143,9 @@ public class DisbursementByRequestItemAdapter extends ArrayAdapter<CustomRequest
         TextView inStockQty;
         TextView requestedQty;
         EditText fulfillQty;
+
+        Button minus;
+        Button plus;
 
     }
 

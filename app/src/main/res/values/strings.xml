@@ -54,4 +54,7 @@
     -->
     <string name="hello_world">Hello Square World!</string>
     <string name="logout">Logout</string>
+    <string name="CollectionHome">Home</string>
+    <string name="Home">Home</string>
+    <string name="itemlist">Inventory List</string>
 </resources>
