@@ -2,10 +2,14 @@ package com.example.team5_luss;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -516,5 +520,40 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
             }
         }
     }
+    //MENU: inflate
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        menu.setGroupVisible(R.id.deptRep_menu, false);
+        menu.setGroupVisible(R.id.storeclerk_menu, false);
+        menu.setGroupVisible(R.id.deptMng_menu, true);
+        menu.setGroupVisible(R.id.storeMng_menu, false);
+        return true;
     }
 
+    //MENU: handle selection
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        if(item.getItemId() == R.id.logout) {
+            final SharedPreferences pref = getSharedPreferences("user_credentials", MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.clear();
+            editor.commit();
+            finish();
+            Intent intent = new Intent(this,LoginActivity.class);
+            startActivity(intent);
+        }
+        if(item.getItemId() == R.id.dept_Mng_home) {
+            Intent intent = new Intent(this,RequestListActivity.class);
+            startActivity(intent);
+        }
+        if(item.getItemId() == R.id.dept_delegate) {
+            Intent intent = new Intent(this,DelegateActivity.class);
+            startActivity(intent);
+        }
+        return true;
+    }
+
+}
