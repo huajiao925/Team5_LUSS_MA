@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -48,7 +49,6 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.collection_points);
-
         current_cp = findViewById(R.id.current_cp);
 
         Button updateCPBtn = findViewById(R.id.updateBtn);
@@ -165,7 +165,7 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
                 }
             }
         }).start();
-
+        Toast.makeText(this, "Collection Point Updated", Toast.LENGTH_LONG).show();
     }
 
     @Override
