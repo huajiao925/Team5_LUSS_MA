@@ -80,11 +80,11 @@ public class RetrievalForm extends AppCompatActivity {
     }
 
     //TODO: LINK ADJUST BUTTON TO ADJUST VOUCHER
-    public void onClickAdjustBtn(){
+    /*public void onClickAdjustBtn(){
         adjustBtn = findViewById(R.id.adjustBtn);
         Intent intent = new Intent(this, AdjustVoucherCreate.class);
         startActivityForResult(intent, ADJUST_STOCK);
-    }
+    }*/
 
     public void getRetrievedQty(CustomRetrieval[] customRetrievals){
         for(int i = 0; i< customRetrievals.length; i++){
