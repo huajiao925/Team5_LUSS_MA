@@ -15,6 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity android:name=".LoginActivity"/>
         <activity android:name=".RetrievalForm"></activity>
         <activity android:name=".CollectionListActivity"></activity>
         <activity android:name=".ItemDetails"></activity>
@@ -28,8 +30,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"/>
-<!--        <activity android:name=".CollectionListActivity"/>-->
+
+        <activity android:name=".RequestListActivity"></activity>
+        <activity android:name=".RequestDetailActivity"></activity>
+        <activity android:name=".CollectionPointActivity"/>
 
     </application>
 
