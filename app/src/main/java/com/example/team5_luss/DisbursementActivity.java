@@ -150,11 +150,17 @@ public class DisbursementActivity extends AppCompatActivity {
             Intent intent = new Intent(this,LoginActivity.class);
             startActivity(intent);
         }
-        if(item.getItemId() == R.id.store_rep_home) {
+        if(item.getItemId() == R.id.store_item) {
+            Intent intent = new Intent(this,ItemListing.class);
+            startActivity(intent);
+        }
+        if(item.getItemId() == R.id.store_home) {
             Intent intent = new Intent(this,DisbursementActivity.class);
             startActivity(intent);
         }
         return true;
     }
+
+
 
 }
