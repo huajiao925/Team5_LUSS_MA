@@ -40,6 +40,7 @@ public class ItemListing extends AppCompatActivity {
     List<CustomItem> inventory = new ArrayList<CustomItem>();
     SearchView searchView;
     ListView listView;
+    String role;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -137,12 +138,22 @@ public class ItemListing extends AppCompatActivity {
     //MENU: inflate
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
+        //Shared Preferences:
+        final SharedPreferences pref = getSharedPreferences("user_credentials",MODE_PRIVATE);
+        role = pref.getString("role",null);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
-        menu.setGroupVisible(R.id.deptRep_menu, false);
-        menu.setGroupVisible(R.id.storeclerk_menu, true);
         menu.setGroupVisible(R.id.deptMng_menu, false);
-        menu.setGroupVisible(R.id.storeMng_menu, false);
+        menu.setGroupVisible(R.id.deptRep_menu, false);
+        if(role.equals("store_manager") || role.equals("store_supervisor")){
+            menu.setGroupVisible(R.id.storeMng_menu, true);
+            menu.setGroupVisible(R.id.storeclerk_menu, false);
+        }
+        else if(role.equals("store_clerk")){
+            menu.setGroupVisible(R.id.storeMng_menu, false);
+            menu.setGroupVisible(R.id.storeclerk_menu, true);
+        }
+
         return true;
     }
 
@@ -165,6 +176,10 @@ public class ItemListing extends AppCompatActivity {
         }
         if(item.getItemId() == R.id.store_home) {
             Intent intent = new Intent(this,DisbursementActivity.class);
+            startActivity(intent);
+        }
+        if(item.getItemId() == R.id.store_Mng_home) {
+            Intent intent = new Intent(this,AdjustVoucherListing.class);
             startActivity(intent);
         }
         if(item.getItemId() == R.id.delivery) {
