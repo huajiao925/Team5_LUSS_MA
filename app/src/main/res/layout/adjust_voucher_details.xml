@@ -248,8 +248,9 @@
 
         <Button
             android:id="@+id/reject"
-            android:layout_width="205dp"
+            android:layout_width="0dp"
             android:layout_height="45dp"
+            android:layout_weight="1"
             android:text="Reject"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -259,8 +260,9 @@
 
         <Button
             android:id="@+id/approve"
-            android:layout_width="207dp"
+            android:layout_width="0dp"
             android:layout_height="45dp"
+            android:layout_weight="1"
             android:text="Approve"
             app:layout_constraintTop_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
