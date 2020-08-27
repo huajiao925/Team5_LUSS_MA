@@ -61,11 +61,7 @@ public class DeliveryDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new DenyDelivery().execute();
-               /* if(webServiceMessage == "Success"){
-                    Intent intent1 = new Intent(DeliveryDetailActivity.this, DeliveryListActivity.class);
-                    startActivity(intent1);
-                    finish();
-                }*/
+                Toast.makeText(getBaseContext(), "Request has been denied", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -73,6 +69,7 @@ public class DeliveryDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new CompleteDelivery().execute();
+                Toast.makeText(getBaseContext(), "Request Completed", Toast.LENGTH_SHORT).show();
                 Intent intent1 = new Intent(DeliveryDetailActivity.this, DeliveryListActivity.class);
                 startActivity(intent1);
                 finish();
