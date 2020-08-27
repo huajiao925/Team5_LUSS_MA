@@ -173,7 +173,7 @@ public class RequestDetailActivity extends AppCompatActivity implements View.OnC
     }
 
     private void setUpRecyclerView() {
-        //RequestItemAdapter adapter = new RequestItemAdapter(this, (ArrayList<RequestDetails>) requestDetailList);
+        RequestItemAdapter adapter = new RequestItemAdapter(this, (ArrayList<RequestDetails>) requestDetailList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
     }
