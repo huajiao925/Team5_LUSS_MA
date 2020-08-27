@@ -511,7 +511,7 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
                 responseString = response.toString();
                 if(!responseString.equals("")) {
                     webServiceMessage = "Success";
-                    if (responseString.isEmpty()) {
+                    if (!responseString.isEmpty()) {
                         Gson gson = new Gson();
                         delegatedManager = gson.fromJson(responseString, DelegatedManager.class);
                     } else {
