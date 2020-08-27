@@ -34,12 +34,11 @@
     </group>
     <group android:id="@+id/storeMng_menu">
         <item
+            android:id="@+id/store_Mng_home"
+            android:title="@string/Home"/>
+        <item
             android:id="@+id/store_Mng_item"
             android:title="@string/itemlist"
-            />
-        <item
-            android:id="@+id/store_Mng_home"
-            android:title="@string/Home"
             />
     </group>
     <item
