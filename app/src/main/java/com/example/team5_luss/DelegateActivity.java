@@ -363,7 +363,7 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
 
             trustManager.trustAllCertificates();
            // depID = 1;  //To Delete
-            String check_API_URL = "https://10.0.2.2:44312/Delegate/isActiveDelegateByUserID/" + selectID+"/"+txtFromDate.getText()+"/"+txtToDate.getText();
+            String check_API_URL = "https://10.0.2.2:44312/Delegate/isActiveDelegateByDateNDepID/" + depID+"/"+txtFromDate.getText()+"/"+txtToDate.getText();
             try {
                 URL url = new URL(check_API_URL);
                 HttpURLConnection conn = null;
