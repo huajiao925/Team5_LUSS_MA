@@ -307,6 +307,11 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
             if (delegatedManager.DelegatedManagerID != 0) {
                 currentDelegateID = delegatedManager.getDelegatedManagerID();
                 ShowCurrentDelegate();
+                TextView title = findViewById(R.id.dlg_title);
+                if (title != null && !delegatedManager.isActive) {
+                    title.setText("Coming Delegate");
+                }
+
                 TextView name = findViewById(R.id.dlg_name);
                 if (name != null) {
                     name.setText(delegatedManager.User.FirstName + " " + delegatedManager.User.LastName);

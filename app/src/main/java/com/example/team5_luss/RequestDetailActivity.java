@@ -44,7 +44,7 @@ public class RequestDetailActivity extends AppCompatActivity implements View.OnC
     TextView reqByDetail;
     TextView reqComment;
     int requestID;
-    String comment="";
+    String comment="-";
     List<RequestDetails> requestDetailList = new ArrayList<RequestDetails>();
 
     @Override
@@ -82,6 +82,7 @@ public class RequestDetailActivity extends AppCompatActivity implements View.OnC
     public void onClick(View view) {
         reqComment=findViewById(R.id.editTextComment);
         comment=reqComment.getText().toString();
+        if(comment.isEmpty() || comment.equals("")) comment="-";
         switch (view.getId()) {
             case R.id.btnAccept:
                 API_URL="https://10.0.2.2:44312/request/ApproveRequestByDepHeadMB/"+requestID+"/1/"+ comment;

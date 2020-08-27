@@ -14,6 +14,9 @@ public class DelegatedManager {
     public String ToDate;
     @SerializedName("userID")
     public int UserID;
+    @SerializedName("isActive")
+    public boolean isActive;
+
     @SerializedName("user")
     public User User;
     @SerializedName("users")
