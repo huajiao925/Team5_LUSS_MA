@@ -152,9 +152,9 @@ public class ItemDetails extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         menu.setGroupVisible(R.id.deptRep_menu, false);
-        menu.setGroupVisible(R.id.storeclerk_menu, true);
+        menu.setGroupVisible(R.id.storeclerk_menu, false);
         menu.setGroupVisible(R.id.deptMng_menu, false);
-        menu.setGroupVisible(R.id.storeMng_menu, false);
+        menu.setGroupVisible(R.id.storeMng_menu, true);
         return true;
     }
 
