@@ -17,7 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -59,9 +61,11 @@ public class DeliveryDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new DenyDelivery().execute();
-                Intent intent1 = new Intent(DeliveryDetailActivity.this, DeliveryListActivity.class);
-                startActivity(intent1);
-                finish();
+               /* if(webServiceMessage == "Success"){
+                    Intent intent1 = new Intent(DeliveryDetailActivity.this, DeliveryListActivity.class);
+                    startActivity(intent1);
+                    finish();
+                }*/
             }
         });
 
@@ -81,7 +85,7 @@ public class DeliveryDetailActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... voids) {
             try {
-                String target = API_URL + "/get-by-request-mobile/" + 1;
+                String target = API_URL + "/get-by-request-mobile/" + requestID;
                 trustManager.trustAllCertificates();
                 URL url = new URL(target);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -137,22 +141,33 @@ public class DeliveryDetailActivity extends AppCompatActivity {
 
                 conn.setRequestMethod("GET");
                 conn.connect();
-                int responsecode = conn.getResponseCode();
-                String inline = "";
-                if (responsecode != 200) {
-                    throw new RuntimeException(String.valueOf(responsecode));
-                } else {
-                    Scanner sc = new Scanner(url.openStream());
-                    while (sc.hasNext()) {
-                        inline += sc.nextLine();
-                    }
+                InputStream in = conn.getInputStream();
+                BufferedInputStream bufferedInputStream = new BufferedInputStream(in);
+                StringBuffer response = new StringBuffer();
+                int data=bufferedInputStream.read();
+                while (data!=-1){
+                    char current = (char) data;
+                    response.append(current);
+                    data=bufferedInputStream.read();
                 }
+                String x = response.toString();
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
             webServiceMessage = "Success";
             return webServiceMessage;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if(webServiceMessage == "Success"){
+                Intent intent1 = new Intent(DeliveryDetailActivity.this, DeliveryListActivity.class);
+                startActivity(intent1);
+                finish();
+            }
+
         }
     }
 
@@ -167,16 +182,16 @@ public class DeliveryDetailActivity extends AppCompatActivity {
 
                 conn.setRequestMethod("GET");
                 conn.connect();
-                int responsecode = conn.getResponseCode();
-                String inline = "";
-                if (responsecode != 200) {
-                    throw new RuntimeException(String.valueOf(responsecode));
-                } else {
-                    Scanner sc = new Scanner(url.openStream());
-                    while (sc.hasNext()) {
-                        inline += sc.nextLine();
-                    }
+                InputStream in = conn.getInputStream();
+                BufferedInputStream bufferedInputStream = new BufferedInputStream(in);
+                StringBuffer response = new StringBuffer();
+                int data=bufferedInputStream.read();
+                while (data!=-1){
+                    char current = (char) data;
+                    response.append(current);
+                    data=bufferedInputStream.read();
                 }
+                String x = response.toString();
 
             } catch (IOException e) {
                 e.printStackTrace();
