@@ -485,7 +485,7 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
 
             trustManager.trustAllCertificates();
            // depID = 1;  //To Delete
-            String delete_API_URL = "https://10.0.2.2:44312/Delegate/DeleteDelegate/" + currentDelegateID;
+            String delete_API_URL = "https://10.0.2.2:44312/Delegate/DeleteDelegateMB/" + currentDelegateID;
 
             try {
                 URL url = new URL(delete_API_URL);
@@ -504,21 +504,25 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
                     data = bufferedInputStream.read();
                 }
                 responseString = response.toString();
-                if(responseString.isEmpty()) {
-                    Gson gson = new Gson();
-                    delegatedManager = gson.fromJson(responseString, DelegatedManager.class);
+                if(!responseString.equals("")) {
+                    webServiceMessage = "Success";
+                    if (responseString.isEmpty()) {
+                        Gson gson = new Gson();
+                        delegatedManager = gson.fromJson(responseString, DelegatedManager.class);
+                    } else {
+                        delegatedManager = new DelegatedManager();
+                    }
                 }
                 else
                 {
-                    delegatedManager=new DelegatedManager();
+                    webServiceMessage = "fail";
                 }
-
 
 
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            webServiceMessage = "Success";
+
             return webServiceMessage;
 
         }
@@ -528,7 +532,6 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
             super.onPostExecute(s);
             if (webServiceMessage.equals("Success")) {
                 ShowCheckBTN();
-                selectID = "";
                 txtFromDate.setText("");
                 txtToDate.setText("");
                 Toast.makeText(context, "Remove Successfully!", Toast.LENGTH_SHORT).show();
