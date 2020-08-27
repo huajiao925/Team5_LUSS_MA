@@ -44,6 +44,7 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
     String[] cp_list = new String[collectionNames.size()];
     Request[] collectionTimes = new Request[]{};
     int deptID;
+    String responseString;
     private String webServiceMessage = "Fail";
 
 
@@ -84,18 +85,19 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
 
                     conn.setRequestMethod("GET");
                     conn.connect();
-                    int responsecode = conn.getResponseCode();
-                    String inline = "";
-                    if(responsecode !=200){
-                        throw new RuntimeException(String.valueOf(responsecode));
-                    }else{
-                        Scanner sc = new Scanner(url.openStream());
-                        while (sc.hasNext()){
-                            inline += sc.nextLine();
-                        }
+                    InputStream in = conn.getInputStream();
+                    BufferedInputStream bufferedInputStream = new BufferedInputStream(in);
+                    StringBuffer response = new StringBuffer();
+                    int data=bufferedInputStream.read();
+                    while (data!=-1){
+                        char current = (char) data;
+                        response.append(current);
+                        data=bufferedInputStream.read();
                     }
+                    responseString = response.toString();
+
                     Gson gson = new Gson();
-                    collectionTimes= gson.fromJson(inline, Request[].class);
+                    collectionTimes= gson.fromJson(responseString, Request[].class);
 
                     runOnUiThread(new Runnable() {
                         @Override
