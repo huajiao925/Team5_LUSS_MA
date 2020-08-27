@@ -8,14 +8,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+
+import Model.ViewModel.CustomRequestDetail;
 import Model.ViewModel.CustomRetrieval;
 
 public class DeliveryDetailAdapter extends RecyclerView.Adapter<DeliveryDetailAdapter.DeliveryDetailViewHolder> {
 
     private Activity activity;
-    public static ArrayList<CustomRetrieval> itemList = new ArrayList<CustomRetrieval>();
+    public static ArrayList<CustomRequestDetail> itemList = new ArrayList<CustomRequestDetail>();
 
-    public DeliveryDetailAdapter(Activity activity, ArrayList<CustomRetrieval> itemList) {
+    public DeliveryDetailAdapter(Activity activity, ArrayList<CustomRequestDetail> itemList) {
         this.activity = activity;
         this.itemList = itemList;
     }
@@ -30,13 +32,13 @@ public class DeliveryDetailAdapter extends RecyclerView.Adapter<DeliveryDetailAd
 
     @Override
     public void onBindViewHolder(@NonNull DeliveryDetailViewHolder holder, int position) {
-        final CustomRetrieval item = itemList.get(position);
+        final CustomRequestDetail item = itemList.get(position);
         holder.itemCode.setText(item.getItemCode());
         holder.itemName.setText(item.getItemName());
-        holder.UOM.setText(item.getUOM());
-        holder.requestedQty.setText(Integer.toString(item.getRequestedQty()));
-        holder.fullfilledQty.setText(Integer.toString(item.getTotalQty()));
-        holder.accptQty.setText(Integer.toString(item.getAcceptedQty()));
+        holder.UOM.setText(item.getUom());
+        holder.requestedQty.setText(Integer.toString(item.getRequestQty()));
+        holder.fullfilledQty.setText(Integer.toString(item.getFulfillQty()));
+        holder.accptQty.setText(Integer.toString(item.getReceivedQty()));
     }
 
     @Override

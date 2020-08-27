@@ -18,14 +18,30 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
             <TextView
-                android:id="@+id/retrievalID"
+                android:id="@+id/rqstID_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
+                android:text="Request Id: " />
+
+            <TextView
+                android:id="@+id/rqstID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/rqstID_text"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:text="5" />
+            <TextView
+                android:id="@+id/retrievalID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:layout_below="@id/rqstID"
                 android:text="Retreival Id: " />
 
             <TextView
@@ -33,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/retrievalID"
-                android:layout_marginTop="20dp"
+                android:layout_below="@id/rqstID"
                 android:layout_weight="1"
                 android:text="1" />
 

@@ -3,9 +3,7 @@
     package="com.example.team5_luss">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
     <uses-feature android:name="android.hardware.type.watch" />
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -19,11 +17,7 @@
         <activity android:name=".DisbursementActivity"/>
         <activity android:name=".RetrievalForm"></activity>
         <activity android:name=".CollectionListActivity"></activity>
-        <activity android:name=".ItemListing">
-            <meta-data
-                android:name="android.appcompat.searchable"
-                android:resource="@xml/searchable"/>
-        </activity>
+        <activity android:name=".ItemListing"></activity>
         <activity android:name=".ItemDetails"></activity>
         <activity android:name=".AdjustVoucherDetails"></activity>
         <activity android:name=".AdjustVoucherListing"></activity>
@@ -35,7 +29,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".RequestListActivity"></activity>
         <activity android:name=".RequestDetailActivity"></activity>
         <activity android:name=".DeliveryListActivity"></activity>

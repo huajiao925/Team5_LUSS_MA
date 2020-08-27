@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,18 +25,19 @@ import java.util.List;
 import java.util.Scanner;
 
 import Model.ViewModel.CustomRequest;
+import Model.ViewModel.CustomRequestDetail;
 import Model.ViewModel.CustomRetrieval;
 
 public class DeliveryDetailActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     private String webServiceMessage = "Fail";
-    String API_URL = "https://10.0.2.2:44312/Request";
-    CustomRetrieval[] itemList = new CustomRetrieval[]{};
-    List<CustomRetrieval> items = new ArrayList<>();
+    String API_URL = "https://10.0.2.2:44312/RequestDetails";
+    String API_URL_ACTION = "https://10.0.2.2:44312/Request";
+    CustomRequestDetail[] itemList = new CustomRequestDetail[]{};
+    List<CustomRequestDetail> items = new ArrayList<>();
     int userID;
-    int retrievalID;
-    int requestIDs;
+    int requestID;
     Button notTally;
     Button complete;
 
@@ -48,10 +50,8 @@ public class DeliveryDetailActivity extends AppCompatActivity {
         final SharedPreferences pref = getSharedPreferences("user_credentials",MODE_PRIVATE);
         userID = pref.getInt("userID", 0);
         Intent intent = getIntent();
-        retrievalID =intent.getIntExtra("retrievalID",0);
-        requestIDs = intent.getIntExtra("requestIDs",0);
-
-        new GetRetrievalDetailsAsync().execute();
+        requestID = intent.getIntExtra("requestID",0);
+        new GetRequestDetailsAsync().execute();
 
         notTally = findViewById(R.id.notTally);
         complete = findViewById(R.id.complete);
@@ -77,11 +77,11 @@ public class DeliveryDetailActivity extends AppCompatActivity {
 
     }
 
-    private class GetRetrievalDetailsAsync extends AsyncTask<Void, Void, String> {
+    private class GetRequestDetailsAsync extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... voids) {
             try {
-                String target = API_URL + "/GetItemByRetrieval/" + 6;//retrievalID;
+                String target = API_URL + "/get-by-request-mobile/" + 1;
                 trustManager.trustAllCertificates();
                 URL url = new URL(target);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -99,7 +99,7 @@ public class DeliveryDetailActivity extends AppCompatActivity {
                     }
                 }
                 Gson gson = new Gson();
-                itemList = gson.fromJson(inline,CustomRetrieval[].class);
+                itemList = gson.fromJson(inline,CustomRequestDetail[].class);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -120,7 +120,7 @@ public class DeliveryDetailActivity extends AppCompatActivity {
         }
 
         private void setUpRecyclerView() {
-            DeliveryDetailAdapter adapter = new DeliveryDetailAdapter(DeliveryDetailActivity.this, (ArrayList<CustomRetrieval>) items);
+            DeliveryDetailAdapter adapter = new DeliveryDetailAdapter(DeliveryDetailActivity.this, (ArrayList<CustomRequestDetail>) items);
             recyclerView.setLayoutManager(new LinearLayoutManager(DeliveryDetailActivity.this));
             recyclerView.setAdapter(adapter);
         }
@@ -130,7 +130,7 @@ public class DeliveryDetailActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... voids) {
             try {
-                String target = API_URL + "/deny/" + 1; //requstID
+                String target = API_URL_ACTION + "/deny/" + requestID;
                 trustManager.trustAllCertificates();
                 URL url = new URL(target);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -160,7 +160,7 @@ public class DeliveryDetailActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... voids) {
             try {
-                String target = API_URL + "/complete/" + 1 + "/" + userID; //requestID
+                String target = API_URL_ACTION + "/complete/" + requestID + "/" + userID;
                 trustManager.trustAllCertificates();
                 URL url = new URL(target);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -184,6 +184,14 @@ public class DeliveryDetailActivity extends AppCompatActivity {
             webServiceMessage = "Success";
             return webServiceMessage;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent1 = new Intent(DeliveryDetailActivity.this, DeliveryListActivity.class);
+        startActivity(intent1);
+        finish();
     }
 
     //MENU: inflate

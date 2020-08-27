@@ -14,6 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import Model.Request;
 import Model.ViewModel.CustomRequest;
@@ -38,6 +42,8 @@ public class DeliveryListAdapter extends RecyclerView.Adapter<DeliveryListAdapte
     @Override
     public void onBindViewHolder(@NonNull DeliveryListViewHolder holder, int position) {
         final CustomRequest item = itemList.get(position);
+
+        holder.requestID.setText(Integer.toString(item.getRequestID()));
         holder.retrievalID.setText(Integer.toString(item.getRetrievalID()));
         holder.departmentName.setText(item.getDepartmentName());
         holder.deliveryDate.setText(item.getCollectionTime().substring(0,10));
@@ -46,8 +52,7 @@ public class DeliveryListAdapter extends RecyclerView.Adapter<DeliveryListAdapte
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity, DeliveryDetailActivity.class);
-                intent.putExtra("retrievalID", item.getRetrievalID());
-                intent.putExtra("requestIDs", item.getRequestID());
+                intent.putExtra("requestID", item.getRequestID());
                 activity.startActivity(intent);
                 activity.finish();
             }
@@ -64,6 +69,7 @@ public class DeliveryListAdapter extends RecyclerView.Adapter<DeliveryListAdapte
     public class DeliveryListViewHolder extends RecyclerView.ViewHolder {
 
         public TextView retrievalID;
+        public TextView requestID;
         public TextView deliveryDate;
         public TextView departmentName;
         public TextView collectionPoint;
@@ -71,7 +77,7 @@ public class DeliveryListAdapter extends RecyclerView.Adapter<DeliveryListAdapte
 
         public DeliveryListViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            requestID = itemView.findViewById(R.id.rqstID);
             retrievalID = itemView.findViewById(R.id.rtvId);
             deliveryDate = itemView.findViewById(R.id.dlvdate);
             departmentName = itemView.findViewById(R.id.deptName);

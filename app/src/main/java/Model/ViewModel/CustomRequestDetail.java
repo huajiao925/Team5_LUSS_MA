@@ -6,11 +6,19 @@ public class CustomRequestDetail {
     public int itemID;
     public int requestID;
     public int fulfillQty;
-    //public int receivedQty;
+    public int receivedQty;
     public String itemCode;
     public String itemName;
     public String uom;
     public int inStockQty;
+
+    public int getReceivedQty() {
+        return receivedQty;
+    }
+
+    public void setReceivedQty(int receivedQty) {
+        this.receivedQty = receivedQty;
+    }
 
     public int getRequestDetailID() {
         return requestDetailID;
