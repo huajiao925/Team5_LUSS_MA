@@ -21,7 +21,9 @@ import androidx.fragment.app.DialogFragment;
 
 import com.google.gson.Gson;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -187,26 +189,24 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
             trustManager.trustAllCertificates();
 
             try {
-                String target = url + "/" + deptID;
+                String target = url + "/ByDeptID/" + deptID;
                 trustManager.trustAllCertificates();
                 URL url = new URL(target);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                 conn.setRequestMethod("GET");
                 conn.connect();
-                int responsecode = conn.getResponseCode();
-                String inline = "";
-                if(responsecode !=200){
-                    throw new RuntimeException(String.valueOf(responsecode));
-                }else{
-                    Scanner sc = new Scanner(url.openStream());
-                    while (sc.hasNext()){
-                        inline += sc.nextLine();
-                    }
+                InputStream in = conn.getInputStream();
+                BufferedInputStream bufferedInputStream = new BufferedInputStream(in);
+                StringBuffer response = new StringBuffer();
+                int data=bufferedInputStream.read();
+                while (data!=-1){
+                    char current = (char) data;
+                    response.append(current);
+                    data=bufferedInputStream.read();
                 }
-                Gson gson = new Gson();
-                collectionPoint = gson.fromJson(inline,CollectionPoint.class);
-                current_cp.setText(collectionPoint.Location + " " + collectionPoint.Description);
+                String x = response.toString();
+                current_cp.setText(x);
 
             } catch (IOException ex) {
                 ex.printStackTrace();
