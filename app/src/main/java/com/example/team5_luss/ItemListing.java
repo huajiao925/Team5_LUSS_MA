@@ -116,7 +116,9 @@ public class ItemListing extends AppCompatActivity {
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                     System.out.println(items[i].getItemID());
-                                    goToDetailsPage(items[i].getItemID());
+                                    //goToDetailsPage(items[i].getItemID());
+                                    CustomItem item = adapter.getItem(i);
+                                    goToDetailsPage(item.getItemID());
                                 }
                             });
                         }
