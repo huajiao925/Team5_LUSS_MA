@@ -15,8 +15,8 @@ public class CustomAdjustmentVoucher {
     public AdjustmentVoucherStatus.AdjustmentStatus Status;
     @SerializedName("totalCost")
     public int TotalCost;
-/*    @SerializedName("issuedDate")
-    public LocalDateTime IssuedDate;*/
+    @SerializedName("issuedDate")
+    public String IssuedDate;
     @SerializedName("voucherNo")
     public String VoucherNo;
     @SerializedName("comment")
@@ -84,15 +84,13 @@ public class CustomAdjustmentVoucher {
         TotalCost = totalCost;
     }
 
-/*    public LocalDateTime getIssuedDate() {
+    public String getIssuedDate() {
         return IssuedDate;
     }
 
-    public void setIssuedDate(LocalDateTime issuedDate) {
+    public void setIssuedDate(String issuedDate) {
         IssuedDate = issuedDate;
-    }*/
-
-//to be added back
+    }
 
     public String getVoucherNo() {
         return VoucherNo;
