@@ -39,6 +39,7 @@ public class ItemDetails extends AppCompatActivity {
     TextView reorderLevel;
     TextView reorderQty;
     CustomItem item;
+    String role;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -149,12 +150,21 @@ public class ItemDetails extends AppCompatActivity {
     //MENU: inflate
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
+        //Shared Preferences:
+        final SharedPreferences pref = getSharedPreferences("user_credentials",MODE_PRIVATE);
+        role = pref.getString("role",null);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         menu.setGroupVisible(R.id.deptRep_menu, false);
-        menu.setGroupVisible(R.id.storeclerk_menu, false);
         menu.setGroupVisible(R.id.deptMng_menu, false);
-        menu.setGroupVisible(R.id.storeMng_menu, true);
+        if(role.equals("store_manager") || role.equals("store_supervisor")){
+            menu.setGroupVisible(R.id.storeMng_menu, true);
+            menu.setGroupVisible(R.id.storeclerk_menu, false);
+        }
+        else if(role.equals("store_clerk")){
+            menu.setGroupVisible(R.id.storeMng_menu, false);
+            menu.setGroupVisible(R.id.storeclerk_menu, true);
+        }
         return true;
     }
 
