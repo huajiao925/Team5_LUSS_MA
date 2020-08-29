@@ -134,6 +134,7 @@ public class DisbursementActivity extends AppCompatActivity {
         menu.setGroupVisible(R.id.storeclerk_menu, true);
         menu.setGroupVisible(R.id.deptMng_menu, false);
         menu.setGroupVisible(R.id.storeMng_menu, false);
+        menu.setGroupVisible(R.id.deptdlgt_menu, false);
         return true;
     }
 

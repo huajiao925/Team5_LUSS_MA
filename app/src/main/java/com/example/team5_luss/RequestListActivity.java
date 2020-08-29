@@ -51,7 +51,9 @@ public class RequestListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     List<Request> requestArrList = new ArrayList<Request>();
     Context context;
-     int depID;
+    int depID;
+    String role;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,12 +144,23 @@ public class RequestListActivity extends AppCompatActivity {
     //MENU: inflate
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
+        //Shared Preferences:
+        SharedPreferences pref = getSharedPreferences("user_credentials",MODE_PRIVATE);
+        role = pref.getString("role",null);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         menu.setGroupVisible(R.id.deptRep_menu, false);
         menu.setGroupVisible(R.id.storeclerk_menu, false);
-        menu.setGroupVisible(R.id.deptMng_menu, true);
         menu.setGroupVisible(R.id.storeMng_menu, false);
+
+        if(role.equals("dept_delegate")){
+            menu.setGroupVisible(R.id.deptdlgt_menu, true);
+            menu.setGroupVisible(R.id.deptMng_menu, false);
+        }
+        else if(role.equals("dept_head")){
+            menu.setGroupVisible(R.id.deptdlgt_menu, false);
+            menu.setGroupVisible(R.id.deptMng_menu, true);
+        }
         return true;
     }
 
@@ -164,7 +177,7 @@ public class RequestListActivity extends AppCompatActivity {
             Intent intent = new Intent(this,LoginActivity.class);
             startActivity(intent);
         }
-        if(item.getItemId() == R.id.dept_Mng_home) {
+        if(item.getItemId() == R.id.dept_Mng_home || item.getItemId() == R.id.dept_dlgt_home) {
             Intent intent = new Intent(this,RequestListActivity.class);
             startActivity(intent);
         }

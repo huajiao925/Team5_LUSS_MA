@@ -561,6 +561,7 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
         menu.setGroupVisible(R.id.storeclerk_menu, false);
         menu.setGroupVisible(R.id.deptMng_menu, true);
         menu.setGroupVisible(R.id.storeMng_menu, false);
+        menu.setGroupVisible(R.id.deptdlgt_menu, false);
         return true;
     }
 

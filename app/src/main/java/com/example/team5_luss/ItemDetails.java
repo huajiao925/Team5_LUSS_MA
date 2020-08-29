@@ -157,6 +157,7 @@ public class ItemDetails extends AppCompatActivity {
         inflater.inflate(R.menu.menu_main, menu);
         menu.setGroupVisible(R.id.deptRep_menu, false);
         menu.setGroupVisible(R.id.deptMng_menu, false);
+        menu.setGroupVisible(R.id.deptdlgt_menu, false);
         if(role.equals("store_manager") || role.equals("store_supervisor")){
             menu.setGroupVisible(R.id.storeMng_menu, true);
             menu.setGroupVisible(R.id.storeclerk_menu, false);

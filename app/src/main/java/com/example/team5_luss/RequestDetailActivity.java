@@ -39,6 +39,7 @@ public class RequestDetailActivity extends AppCompatActivity implements View.OnC
     RecyclerView recyclerView;
     List<RequestDetails> requestDetailItemArrList = new ArrayList<RequestDetails>();
 
+    String role;
     TextView reqIDDetail;
     TextView reqDateDetail;
     TextView reqByDetail;
@@ -181,12 +182,24 @@ public class RequestDetailActivity extends AppCompatActivity implements View.OnC
     //MENU: inflate
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
+        //Shared Preferences:
+        SharedPreferences pref = getSharedPreferences("user_credentials",MODE_PRIVATE);
+        role = pref.getString("role",null);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         menu.setGroupVisible(R.id.deptRep_menu, false);
         menu.setGroupVisible(R.id.storeclerk_menu, false);
-        menu.setGroupVisible(R.id.deptMng_menu, true);
         menu.setGroupVisible(R.id.storeMng_menu, false);
+
+        if(role.equals("dept_delegate")){
+            menu.setGroupVisible(R.id.deptdlgt_menu, true);
+            menu.setGroupVisible(R.id.deptMng_menu, false);
+        }
+        else if(role.equals("dept_head")){
+            menu.setGroupVisible(R.id.deptdlgt_menu, false);
+            menu.setGroupVisible(R.id.deptMng_menu, true);
+        }
+
         return true;
     }
 
@@ -195,7 +208,9 @@ public class RequestDetailActivity extends AppCompatActivity implements View.OnC
     public boolean onOptionsItemSelected(MenuItem item){
 
         if(item.getItemId() == R.id.logout) {
-            final SharedPreferences pref = getSharedPreferences("user_credentials", MODE_PRIVATE);
+            SharedPreferences pref = getSharedPreferences("user_credentials",MODE_PRIVATE);
+            role = pref.getString("role",null);
+            pref = getSharedPreferences("user_credentials", MODE_PRIVATE);
             SharedPreferences.Editor editor = pref.edit();
             editor.clear();
             editor.commit();
@@ -203,7 +218,7 @@ public class RequestDetailActivity extends AppCompatActivity implements View.OnC
             Intent intent = new Intent(this,LoginActivity.class);
             startActivity(intent);
         }
-        if(item.getItemId() == R.id.dept_Mng_home) {
+        if(item.getItemId() == R.id.dept_Mng_home || item.getItemId() == R.id.dept_dlgt_home) {
             Intent intent = new Intent(this,RequestListActivity.class);
             startActivity(intent);
         }

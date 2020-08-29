@@ -18,6 +18,12 @@
             android:title="@string/assignDelegate"
             />
     </group>
+    <group android:id="@+id/deptdlgt_menu">
+        <item
+            android:id="@+id/dept_dlgt_home"
+            android:title="@string/Home"
+            />
+    </group>
     <group android:id="@+id/storeclerk_menu">
         <item
             android:id="@+id/store_home"

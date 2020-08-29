@@ -20,6 +20,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
+import Model.Request;
 import Model.User;
 
 public class LoginActivity extends AppCompatActivity{
@@ -125,7 +126,7 @@ public class LoginActivity extends AppCompatActivity{
             case "store_supervisor": intent = new Intent(this, AdjustVoucherListing.class);break;
             case "store_manager":  intent = new Intent(this, AdjustVoucherListing.class);break;
             case "dept_rep": intent = new Intent(this, CollectionPointActivity.class);break;
-            case "dept_delegate":  intent = new Intent(this, DelegateActivity.class);break;
+            case "dept_delegate":  intent = new Intent(this, RequestListActivity.class);break;
             case "dept_head":  intent = new Intent(this, RequestListActivity.class);break;
             default:
                 throw new IllegalStateException("Unexpected value: " + loginUser.getRole());

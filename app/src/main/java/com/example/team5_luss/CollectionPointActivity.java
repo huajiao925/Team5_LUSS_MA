@@ -279,6 +279,7 @@ public class CollectionPointActivity extends AppCompatActivity implements Collec
         menu.setGroupVisible(R.id.storeclerk_menu, false);
         menu.setGroupVisible(R.id.deptMng_menu, false);
         menu.setGroupVisible(R.id.storeMng_menu, false);
+        menu.setGroupVisible(R.id.deptdlgt_menu, false);
         return true;
     }
 
