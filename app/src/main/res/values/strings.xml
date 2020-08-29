@@ -60,4 +60,5 @@
     <string name="ReceiveTitel">Delivery List</string>
     <string name="DeliveryDetailTitle">Delivery Confirmation</string>
     <string name="delivery">Delivery Confirmation</string>
+    <string name="collectionhinttext">Please select the date below for collection</string>
 </resources>

@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
 
     <LinearLayout
@@ -147,13 +146,13 @@
                     android:layout_weight="1"
                     android:orientation="horizontal">
                     <RadioButton android:id="@+id/btnAdd"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="Add"/>
                     <RadioButton android:id="@+id/btnDeduct"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:text="deduct"/>
+                        android:text="Deduct"/>
                 </RadioGroup>
 
                 <EditText
@@ -193,7 +192,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/rqt_detail_comment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:layout_below="@id/adjust_detail_head"
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
@@ -216,8 +215,9 @@
                 <EditText
                     android:id="@+id/reason"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:layout_below="@id/reasonHeader"
+                    android:layout_height="200dp"
+                    android:ems="100"
                     android:gravity="start|top"
                     android:inputType="textMultiLine"
                     android:text=" "/>
