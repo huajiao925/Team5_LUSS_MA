@@ -135,38 +135,6 @@
                 android:textColor="@color/contentTextColor"
                 android:textSize="20sp" />
 
-            <!--            <TextView-->
-            <!--                android:id="@+id/textView"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:textSize="18sp"-->
-            <!--                android:layout_marginTop="60dp"-->
-            <!--                android:layout_marginLeft="20dp"-->
-            <!--                android:textColor="@color/contentTextColor"-->
-            <!--                android:text="Start Date: " />-->
-
-            <!--            <TextView-->
-            <!--                android:id="@+id/textView2"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:textSize="18sp"-->
-            <!--                android:layout_marginTop="20dp"-->
-            <!--                android:layout_marginLeft="20dp"-->
-            <!--                android:textColor="@color/contentTextColor"-->
-            <!--                android:layout_below="@id/textView"-->
-            <!--                android:text="End Date: " />-->
-
-            <!--            <TextView-->
-            <!--                android:id="@+id/textView3"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:textSize="18sp"-->
-            <!--                android:layout_marginTop="20dp"-->
-            <!--                android:layout_marginLeft="20dp"-->
-            <!--                android:textColor="@color/contentTextColor"-->
-            <!--                android:layout_below="@id/textView2"-->
-            <!--                android:text="Delegate: " />-->
-
             <EditText
                 android:id="@+id/fromDate"
                 android:layout_width="200dp"
@@ -242,26 +210,6 @@
                     android:padding="5dp" />
             </LinearLayout>
 
-
-            <!--            <EditText-->
-            <!--                android:id="@+id/toDate"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:ems="10"-->
-            <!--                android:layout_toRightOf="@id/textView2"-->
-            <!--                android:layout_alignTop="@id/textView2"-->
-            <!--                android:inputType="date" />-->
-
-            <!--            <Button-->
-            <!--                android:id="@+id/pick_dlg"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="30dp"-->
-            <!--                android:background="@color/colorDivision"-->
-            <!--                android:layout_toRightOf="@id/textView3"-->
-            <!--                android:layout_alignTop="@id/textView3"-->
-            <!--                android:layout_marginBottom="30dp"-->
-            <!--                android:text="Check" />-->
-
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
@@ -296,7 +244,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/app_color_theme_2"
+        android:background="@color/themeColor"
         android:text="@string/checkBtn"
         android:textColor="@color/whiteTextColor" />
 

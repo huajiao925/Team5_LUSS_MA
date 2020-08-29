@@ -80,11 +80,21 @@
                 android:textColor="@color/contentTextColor"
                 android:textSize="20sp" />
 
+            <TextView
+                android:id="@+id/hintword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/CollectionList"
+                android:text="@string/collectionhinttext"
+                android:textColor="@color/contentTextColor"
+                android:textSize="10sp" />
+
             <ListView
                 android:id="@+id/lv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/CollectionList"
+                android:layout_below="@id/hintword"
                 />
 
         </RelativeLayout>

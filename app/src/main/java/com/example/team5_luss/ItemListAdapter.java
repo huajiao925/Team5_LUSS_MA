@@ -136,10 +136,10 @@ public class ItemListAdapter extends ArrayAdapter<CustomItem> implements Filtera
         return items.size();
     }
 
-    //@Override
-    /*public Object getItem(int position) {
+   @Override
+    public CustomItem getItem(int position) {
         return items.get(position);
-    }*/
+    }
 
     @Override
     public long getItemId(int position) {

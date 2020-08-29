@@ -117,6 +117,7 @@ public class AdjustVoucherDetails extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            txtDateIssue.setText(CodeSetting.convertDateString(voucher.getIssuedDate()));
                             txtItemCode.setText(voucher.getItemCode());
                             txtVoucherNo.setText(voucher.getVoucherNo());
                             txtCategory.setText(voucher.getCategoryName());
