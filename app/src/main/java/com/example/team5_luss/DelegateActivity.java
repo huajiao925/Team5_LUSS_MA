@@ -62,6 +62,7 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
     EditText txtFromDate, txtToDate;
     private int mYear, mMonth, mDay, mHour, mMinute;
     String selectID;int currentDelegateID;
+    DatePickerDialog endDatePickerDialog,datePickerDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -207,17 +208,19 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
 
                     }
                 }, mYear, mMonth, mDay);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
         datePickerDialog.show();
     }
     public  void  ShowToDatePicker(){
         // Get Current Date
+
         final Calendar c_end = Calendar.getInstance();
         mYear = c_end.get(Calendar.YEAR);
         mMonth = c_end.get(Calendar.MONTH);
         mDay = c_end.get(Calendar.DAY_OF_MONTH);
 
 
-        DatePickerDialog endDatePickerDialog = new DatePickerDialog(this,
+         endDatePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
 
                     @Override
@@ -245,6 +248,7 @@ public class DelegateActivity extends AppCompatActivity implements AdapterView.O
 
                     }
                 }, mYear, mMonth, mDay);
+        endDatePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
         endDatePickerDialog.show();
     }
     public class GetCurrentDelegateAsync extends AsyncTask<Void, Void, String> {
