@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -142,6 +143,7 @@ public class ItemDetails extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ON_ACTION_RETURN) {
             if (resultCode == RESULT_OK) {
+                Toast.makeText(ItemDetails.this,"Adjustment Voucher has been submitted", Toast.LENGTH_LONG).show();
                 loadItemDetails(itemId);
             }
         }
