@@ -20,8 +20,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -93,18 +95,18 @@ public class CollectionListActivity extends AppCompatActivity {
 
                 conn.setRequestMethod("GET");
                 conn.connect();
-                int responsecode = conn.getResponseCode();
-                String inline = "";
-                if (responsecode != 200) {
-                    throw new RuntimeException(String.valueOf(responsecode));
-                } else {
-                    Scanner sc = new Scanner(url.openStream());
-                    while (sc.hasNext()) {
-                        inline += sc.nextLine();
-                    }
+                InputStream in = conn.getInputStream();
+                BufferedInputStream bufferedInputStream = new BufferedInputStream(in);
+                StringBuffer response = new StringBuffer();
+                int data=bufferedInputStream.read();
+                while (data!=-1){
+                    char current = (char) data;
+                    response.append(current);
+                    data=bufferedInputStream.read();
                 }
+                String x = response.toString();
                 Gson gson = new Gson();
-                itemList = gson.fromJson(inline,CustomRetrieval[].class);
+                itemList = gson.fromJson(x,CustomRetrieval[].class);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -137,24 +139,23 @@ public class CollectionListActivity extends AppCompatActivity {
         protected String doInBackground(Void... voids) {
             try {
                 if(acceptedQty != null){
-
-                String target = API_URL_POST + "/Mobile_GetAccptQty/" + acceptedQty + "/" + retrievalID;
+                String target = API_URL_POST + "/Mobile_GetAccptQty/" + acceptedQty + "/" + retrievalID + "/" + deptID;
                 trustManager.trustAllCertificates();
                 URL url = new URL(target);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.connect();
-
-                int responsecode = conn.getResponseCode();
-                String inline = "";
-                if (responsecode != 200) {
-                    throw new RuntimeException(String.valueOf(responsecode));
-                } else {
-                    Scanner sc = new Scanner(url.openStream());
-                    while (sc.hasNext()) {
-                        inline += sc.nextLine();
-                    }
+                InputStream in = conn.getInputStream();
+                BufferedInputStream bufferedInputStream = new BufferedInputStream(in);
+                StringBuffer response = new StringBuffer();
+                int data=bufferedInputStream.read();
+                while (data!=-1){
+                    char current = (char) data;
+                    response.append(current);
+                    data=bufferedInputStream.read();
                 }
+                String x = response.toString();
+                System.out.println(x);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
