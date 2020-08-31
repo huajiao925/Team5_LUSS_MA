@@ -4,7 +4,7 @@ Developed By SA50_Team5
 This mobile APP is developed for Logic University to perform daily operation including:
 1. login/logout
 2. DeparmentHead: to approve/reject department requests; to assign/remove delegate; 
-3. DeparmtentRepresentative: to collect department stationery;
+3. DeparmtentRepresentative: to collect department stationery; to update collection point;
 4. StoreManager/Supervisor: to view item info; to approve/reject adjustment vouchers;
 5. StoreClerk: to manage disbursement; adjust stock; confirm delivery
 
